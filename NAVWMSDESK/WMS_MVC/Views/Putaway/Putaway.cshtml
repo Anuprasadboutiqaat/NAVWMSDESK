@@ -1,0 +1,254 @@
+﻿
+ @{
+     Layout = "~/Views/Shared/_NavLayout.cshtml";
+     ViewBag.Header = "Putaway Request"; 
+  }
+
+@model NAVWMSDESK.ViewModel.Putaway.PutawayViewModel
+
+<body class="nav-md dashboard">
+    <div class="top_nav">
+        
+        </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel" style="">
+                        <div class="x_content">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <span class="sectionhead">From</span>
+                                        <div class="form-group">
+                                            <div @*class="input-group date"*@ id="myDatepicker">
+                                                @Html.TextBoxFor(m => m.DATE1, new { @class = "form-control required selector  ", @placeholder = "FROM  DATE " })
+                                                @*<span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="sectionhead">To</span>
+                                        <div class="form-group">
+                                            <div @*class="input-group date"*@ id="myDatepicker2">
+                                                @Html.TextBoxFor(m => m.DATE2, new { @class = "form-control required selector  ", @placeholder = "TO DATE " })
+                                                @*<span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>*@
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="col-sm-4">
+                                        <span class="sectionhead">Status</span>
+
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(m => m.STATUS, ViewData["STATUS"] as SelectList, "STATUS", new { @class = "form-control required clr " })
+                                        </div>
+                                    </div>*@
+                                    <div class="col-sm-4">
+                                        <div class="" style="margin-top: 6%;">
+
+                                            <button type="submit" id="btnSave" class="btn btn-primary savebtn" style="width: 80px;background: #ac9231;text-align:center;height: 30px;margin-right: 2%;" name="Command" value="SUBMIT">SHOW</button>
+                                            <button type="submit" id="btnReset" class="btn btn-primary resetbtn" style="width: 80px;background: lightblue;text-align:center;height: 30px;margin-right: 3%;" name="Command1" value="SUBMIT1">RESET</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="table-container" id="grid">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+</body>
+<script>
+    $(document).ready(function () {
+
+        $("#DATE1").val(custgetActualDate(-37));
+        $("#DATE2").val(getActualDate());
+
+        $(".selector").datepicker({
+            dateFormat: "yy-mm-dd",
+            orientation: "top",
+            autoclose: true
+        });
+  
+        GetDetails();
+    });
+
+    function getsession() {
+
+        var xgrid = $("#grid").data("kendoGrid");
+
+        //once triggered this will called whenever a cell in grid is clicked. how to overcome this issue?
+        $(xgrid.tbody).on("click", "td", function (e) {
+            var row = $(this).closest("tr");
+
+            var item = xgrid.dataItem(row);
+
+            localStorage.setItem("Docno", item.DOCNO);
+            
+        });
+
+    }
+
+    function GetDetails() {
+        var DATE1 = $("#DATE1").val();
+        var DATE2 = $("#DATE2").val();
+        var ZONEID = '@Request.RequestContext.HttpContext.Session["STOREID"]';  
+   $("#grid").kendoGrid({
+       height: 400,
+
+       columns: [
+                    //{ field: "DOCNO", title: "DOCNO", width: "10%", attributes: { style: "text-align: center;" }, headerAttributes: { style: "text-align: center" }, template: '<a href="Putaway_Assignment?d=# if (typeof(DOCNO) === "undefined"){# -1 #} else {##= DOCNO##}#" onclick="(this.href)" class="k-Linkbutton link" style="color: blue;">#= DOCNO #</a>' },
+                   { field: "DOCNO", title: "DOCNO", width: "10%", attributes: { style: "text-align: center;" }, headerAttributes: { style: "text-align: center" }, template: '<a href="Putaway_Assignment" onclick="getsession()" class="k-Linkbutton link" style="color: blue;">#= DOCNO #</a>' },
+                   { field: "DOCDATE", title: "DATE", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" }, format: "{0:dd-MMM-yyyy}" },
+                   { field: "NOOFPUTS", title: "NOOFPUTS", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                   { field: "PUTQTY", title: "PUTQTY", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                   { field: "SCANQTY", title: "SCANQTY", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                   {
+                            field: "PUTSTATUS",
+                            title: "STATUS",
+                            filterable: {
+                            cell: {
+                                     template: function (args) {
+                                     args.element.kendoDropDownList({
+                                         dataTextField: "title",
+                                         dataValueField: "title",
+                                         optionLabel: "SELECT",
+                                         valuePrimitive: true,
+                                         autoBind: false,
+                                         dataSource: new kendo.data.DataSource({
+                                         data: [
+
+                                                 { title: "OPEN" },
+                                                 { title: "INPROGRESS" },
+                                                 { title: "COMPLETE" }
+                                                
+                                                    ]
+                                         }),
+                                            requestEnd: function (e) {
+
+                                             $(args).value("OPEN");
+                                         }
+
+
+                                     });
+
+                                 },
+                                 showOperators: false
+                             }
+                         }, width: "15%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" }
+                     },
+
+       ],
+       dataSource: {
+                        type: "aspnetmvc-ajax",
+                        transport: {
+                                    read: {
+                                    url: "GetPutaway",
+                                    data: { DATE1: DATE1, DATE2: DATE2, ZONEID: ZONEID }
+                                    }
+                        },
+                       pageSize: 15,
+                       schema: {
+                                    data: "Data",
+                                    total: function (response) {
+                                   return response.Total;
+                                },
+                       model: {
+                                   id: "SRNO",
+                                   fields: {
+                                   SRNO: { type: "number" },
+                                   DOCNO: { type: "string" },
+                                   NOOFPUTS: { type: "string" },                                                    
+                                   DOCDATE: { type: "date" },
+                                   PUTQTY: { type: "number" },
+                                   SCANQTY: { type: "number" },
+                                   PUTSTATUS: { type: "string" }                           
+                               }
+                           }
+                       },
+                       serverPaging: true,
+                       serverSorting: true,
+                       serverFiltering: true,
+       },
+       sortable: {
+                        mode: "single"
+       },
+       pageable: true,
+       filterable: { mode: "row" }
+   })
+    }
+
+   $(".savebtn").click(function () {
+
+       var STATUS = $('#STATUS').val();      
+       var ZONEID = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+       var DATE1 = $('#DATE1').val();
+       var DATE2 = $('#DATE2').val();
+       changegrid("GetPutaway", DATE1, DATE2, ZONEID)
+
+   });
+   $(".resetbtn").click(function () {
+       $('.clr').val("");
+       $("#DATE1").val(custgetActualDate(-7));
+       $("#DATE2").val(getActualDate());
+       $("#grid").data("kendoGrid").dataSource.data([]);
+       GetDetails();
+
+   });
+   function changegrid(cntrlrname, DATE1, DATE2, ZONEID) {
+
+       var newDs = new kendo.data.DataSource({
+           //autoSync: true,
+           type: "aspnetmvc-ajax",
+           transport: {
+
+               read: {
+                   url: cntrlrname,
+                   data: { DATE1: DATE1, DATE2: DATE2, ZONEID: ZONEID }
+               },
+
+           },
+           pageSize: 10,
+           batch: false,
+           //"autoSync='true'"
+           schema: {
+               data: "Data",
+               total: function (response) {
+                   return response.Total;
+               },
+               model: {
+                   id: "SRNO",
+                   fields: {
+
+                       SRNO: { type: "number" },
+                       DOCNO: { type: "string" },
+                       NOOFPUTS: { type: "string" },
+                       DOCDATE: { type: "date" },
+                       PUTQTY: { type: "number" },
+                       SCANQTY: { type: "number" },
+                       PUTSTATUS: { type: "string" }
+
+                   }
+               }
+
+           },
+        
+           serverPaging: true,
+           serverSorting: true,
+           serverFiltering: true,
+
+       });
+
+       var grid = $("#grid").data("kendoGrid");
+       grid.setDataSource(newDs);
+
+   }
+   
+</script>

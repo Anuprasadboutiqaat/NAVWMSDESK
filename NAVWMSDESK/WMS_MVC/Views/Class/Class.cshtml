@@ -1,0 +1,86 @@
+﻿
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="kendo">
+    <div id="grid"></div>
+</div>
+<script>
+    $("#grid").kendoGrid({
+        //height: 400,
+        columns: [
+                            { field: "CLASSID", title: "CLASSID",hidden:true, width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "CLSNAME", title: "CLASS", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "CLSFLAG", title: "FLAG", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "CLSSTATUS", title: "STATUS", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { command: ["edit", "destroy"], width: 180, title: "ACTION", }
+        ],
+         toolbar: ["create"],
+       // toolbar: kendo.template($("#searchtemplate").html()),
+        dataSource: {
+            pageSize: 15,
+            type: "webapi",
+            transport: {
+                idField: "CLASSID",
+                read: {
+                    url: "http://localhost:4800/api/Class/GetClass",
+                },
+                create: {
+                    url: "http://localhost:4800/api/Class/PostWMS_CLASS_EDITOR",
+                    type: "POST"
+                },
+                update: {
+                    url: "http://localhost:4800/api/Class/PutWMS_CLASS_EDITOR/{0}",
+                    type: "PUT"
+                },
+                destroy: {
+                    url: "http://localhost:4800/api/Class/DeleteWMS_CLASS_EDITOR/{0}",
+                    type: "DELETE"
+                }
+			},
+            schema: {
+                            data: "Data",
+                            total: function (response) {
+                                return response.Total;
+                            },
+                errors: "Errors",
+                model: {
+                    id: "CLASSID",
+					fields: {
+						CLASSID: { type: "number"},
+						CLSNAME: { type: "string"},
+						CLSFLAG: { type: "string"},
+						CLSSTATUS: { type: "number"}
+					}
+                }
+
+            },
+
+            serverPaging: true,
+            serverSorting: true,
+            serverFiltering: true,
+            serverGrouping: true,
+            serverAggregates: true,
+        },
+        pageable: {
+                    input: true,
+                    numeric: false
+                },
+        editable: "inline",
+        scrollable: true
+    })
+
+</script>
+<script type="text/x-kendo-template" id="searchtemplate">
+    <div class="toolbar">
+        <div class="col-sm-11">
+            <a class="k-button k-button-icontext k-grid-add" href="\#"><span class="k-icon k-i-add"></span>AddDetails</a>
+        </div>
+        @*<div class="">
+                <button type="button" id="refresh" class="btn btn-primary btn-sm prview" style="height:30px;margin-left: 0px;"><span class="glyphicon glyphicon-refresh" style="margin-right: 0px;"></span></button>
+            </div>*@
+    </div>
+</script>
+

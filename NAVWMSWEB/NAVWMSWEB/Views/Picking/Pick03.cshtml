@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "Pick03";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__localhost">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Putaway Confirm</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" crossorigin="anonymous">
+    <link href="~/Content/style.css" rel="stylesheet">
+    <link href="~/Content/fontawesome/webfont_css/css/fontawesome-all.css" rel="stylesheet">
+
+</head>
+<body data-gr-c-s-loaded="true" class="landingpage putaway">
+    <div class="container">
+        <div class="pageheader">
+            <a href="#" class="btn-back" id="btnBack"><i class="far fa-arrow-alt-circle-left"></i></a>
+            <span id="pickno" class="put2pageheader"></span>
+
+        </div>
+        <div class="welcomeheader">
+            <ul>
+                <li>Hi: <span id="username"></span></li>
+                <li>WH ID: <span id="whid"></span></li>
+            </ul>
+        </div>
+        <div class="form-container landing col-mds-offset-4">
+            <div class="table-container spacer-small">
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="25%">ITEM NO</td>
+                        <td width="5%"><strong>:</strong></td>
+                        <td width="40%"><strong><span id="itemno"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <span id="desc1">
+                            </span>
+                        </td>
+                    </tr>
+                    @*<tr>
+                        <td width="25%">PICK-QTY</td>
+                        <td width="5%"><strong>:</strong></td>
+                        <td width="40%"><strong><span id="putqty"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td width="25%">SCAN-QTY</td>
+                        <td width="5%"><strong>:</strong></td>
+                        <td width="40%"><strong><span id="scanqty"></span></strong></td>
+                    </tr>*@
+                </table>
+            </div>
+            <div class="table-head" style="display:inline-block;">Suggested</div>
+            
+            <div class="table-container spacer-small">
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="25%">BIN NO</td>
+                        <td width="5%"><strong>:</strong></td>
+                        <td width="40%"><strong><span id="sysbin"></span></strong></td>
+                    </tr>
+                    <tr>
+                        <td width="25%">BARCODE</td>
+                        <td width="5%"><strong>:</strong></td>
+                        <td width="40%"><strong><span id="sysbcode"></span></strong></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-head" style="display:inline-block;">Confirm</div>
+            <div class="table-checkbox"><input id="checkBox" type="checkbox"><label style="font-family:Verdana; font-size:9pt; font-weight:bold">EANCODE</label></div>
+            <div class="table-container spacer-small">
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="35%">BIN NO</td>
+                        <td width="5%"><strong>:</strong></td>
+                        <td width="40%">
+                            <strong>
+                                <input type="text" id="sbinno" />
+                            </strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="35%">BARCODE</td>
+                        <td width="5%"><strong>:</strong></td>
+                        <td width="40%">
+                            <strong>
+                                <input type="text" id="sbarcode" />
+                            </strong>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <span id="err" style="color:red; font-weight:bold;"></span>
+            <input type="button" id="btnConfirm" class="btn btn-lg btn-primary btn-block spacer-small" required="" value="Confirm">
+            <input type="button" id="btnReset" class="btn btn-lg btn-primary white btn-block" required="" value="Reset">
+            <div class="row spacer"></div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            setDefaultValues();
+        });
+        function setDefaultValues()
+        {
+            $.urlParam = function (name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if (results == null) {
+                    return null;
+                }
+                else {
+                    return decodeURI(results[1]) || 0;
+                }
+            }
+            var usrid = '@Request.RequestContext.HttpContext.Session["USERID"]';
+            var tknid = '@Request.RequestContext.HttpContext.Session["TOKENID"]';
+            var usrname = '@Request.RequestContext.HttpContext.Session["USERNAME"]';
+            var whid = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+
+            var pickno = $.urlParam('ptn');
+            var itemno = $.urlParam('itmno');
+            var desc = $.urlParam('desc');
+            var binno= $.urlParam('binno');
+            var tt = 4;
+            $('#pickno').text(pickno);
+            $('#username').text(usrname);
+            $('#whid').text(whid);
+
+            var splitted = itemno.split("_");
+            
+            $('#itemno').text(splitted[0]);
+            $('#desc1').text(desc);
+            
+            $('#sysbcode').text(itemno);
+            $('#sysbin').text(binno);
+            $('#sbinno').focus();
+        }
+
+        function iConfirm(userid, tknid, tt, pickno, barcode, sbcode, itemno, binno, Tag) {
+            $.ajax({
+                type: 'POST',
+                url: 'http://192.168.8.235/navwmsapi/api/NAVWMS/pik01',
+                dataType: 'json',
+                data: { Status: tt, userID: userid, TokenID: tknid, PickNo: pickno, Tag: Tag, BinNo: binno, Barcode: barcode, SBcode: sbcode, ItemNo: itemno },
+                success: function (result) {
+                    $.each(result.result, function (i, data1) {
+
+                        $('#sbinno').val($('#sysbin').text());
+                        $('#sbarcode').val('');
+                        $('#sbarcode').focus();
+                        window.location = "/navwmsweb/pick/pick02?ptn=" + pickno;
+                        return;
+                });
+                },
+                error: function (xhr, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    $('#err').text(err.message);
+                }
+            });
+        }
+
+        $("#btnConfirm").click(function () {
+
+            var itemno = $('#itemno').text();
+            var pt = $('#pickno').text();
+            var binno = $('#sbinno').val();
+            var sbcode = $('#sysbcode').text();
+          
+            var barcode=    $('#sbarcode').val();
+            var usrid = '@Request.RequestContext.HttpContext.Session["USERID"]';
+            var tknid = '@Request.RequestContext.HttpContext.Session["TOKENID"]';
+            var chk = 0;
+            if ($('#checkBox').is(":checked")) {
+                chk = 1;
+            }
+            iConfirm(usrid, tknid, 4, pt, barcode, sbcode, itemno, binno, chk);
+
+            return;
+        });
+
+        $("#btnReset").click(function () {
+
+            $('#sbinno').val($('#sysbin').text());
+            $('#sbarcode').val('');
+            $('#err').text('');
+            return;
+        });
+
+        $("#btnBack").click(function () {
+            var pt = $('#pickno').text();
+            window.location = "/navwmsweb/pick/pick02?ptn="+ pt;
+            return;
+        });
+
+    </script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,234 @@
+﻿@{
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+    ViewBag.Header = "Movement Document List";
+}
+@model NAVWMSDESK.ViewModel.Movement.MovementViewModel
+
+<body class="nav-md dashboard">
+    <div class="top_nav">
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="">
+            <div class="x_content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="sectionhead">From</span>
+                            <div class="form-group">
+                                <div @*class="input-group date"*@ id="myDatepicker">
+                                    @Html.TextBoxFor(m => m.DATE1, new { @class = "form-control required selector  ", @placeholder = "FROM  DATE " })
+                                    @*<span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="sectionhead">To</span>
+                            <div class="form-group">
+                                <div @*class="input-group date"*@ id="myDatepicker2">
+                                    @Html.TextBoxFor(m => m.DATE2, new { @class = "form-control required selector  ", @placeholder = "TO DATE " })
+                                    @*<span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                                <span class="sectionhead">Status</span>
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.MOVSTATUS, ViewData["STATUS"] as SelectList, "STATUS", new { @class = "form-control required clr " })
+                                </div>
+                            </div>
+                        <div class="col-sm-4">
+                            <div class="" style="margin-top: 6%;">
+
+                                <button type="submit" id="btnSave" class="btn btn-primary savebtn" style="width: 80px;background: #ac9231;text-align:center;height: 30px;margin-right: 2%;" name="Command" value="SUBMIT">SHOW</button>
+                                <button type="submit" id="btnReset" class="btn btn-primary resetbtn" style="width: 80px;background: lightblue;text-align:center;height: 30px;margin-right: 3%;" name="Command1" value="SUBMIT1">RESET</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="table-container" id="grid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+    $(document).ready(function () {
+
+        $("#DATE1").val(custgetActualDate(-37));
+        $("#DATE2").val(getActualDate());
+
+        $(".selector").datepicker({
+            dateFormat: "yy-mm-dd",
+            orientation: "top",
+            autoclose: true
+        });
+
+        // Grid data
+        GetDetails();
+
+        $("#MOVSTATUS").change(function () {
+            var STATUSval = $('#MOVSTATUS').val();
+            if (STATUSval != "") {
+                updateSearchFilters("grid", "MOVSTATUS", "eq", STATUSval)
+            }
+            else {
+                updateSearchFilters("grid", "MOVSTATUS", "isnotnull", "")
+            }
+
+        });
+
+    });
+
+    function GetDetails() {
+        var DATE1 = $("#DATE1").val();
+        var DATE2 = $("#DATE2").val();
+        var WHNO = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+        $("#grid").kendoGrid({
+            height: 400,
+            columns: [
+                        { field: "DOCNO", title: "DOC NO", width: "10%", attributes: { style: "text-align: center;" }, headerAttributes: { style: "text-align: center" }, },
+                        { field: "DOCDATE", title: "DATE", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" }, format: "{0:dd-MMM-yyyy}" },
+                        { field: "QTY", title: "QUANTITY", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                        { field: "WAREHOUSENO", title: "WAREHOUSE NO", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                        { field: "MOVSTATUS", title: "STATUS", filterable: {
+                                cell: {
+                                    template: function (args) {
+                                        args.element.kendoDropDownList({
+                                            dataTextField: "title", dataValueField: "title",
+                                            optionLabel: "SELECT",
+                                            valuePrimitive: true,
+                                            autoBind: false,
+                                            dataSource: new kendo.data.DataSource({
+                                                data: [{ title: "PICKED" },
+                                                        { title: "GETSUGBIN" },
+                                                        { title: "PUTINPRO" },
+                                                        { title: "COMPLETED" }]
+                                            }),
+                                            requestEnd: function (e) {
+                                                $(args).value("PICKED");
+                                            }
+                                        });
+                                    },
+                                    showOperators: false
+                                 }
+                            }, width: "15%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" }
+                        },
+                        { field: "USERID", title: "USER", editor: UserDrpEditor, template: "#=USERNAME#", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                        //{ field: "USERID", hidden:true,  width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                        { command: ["edit"], width: 150 }
+
+
+            ],
+            dataSource: {
+                type: "aspnetmvc-ajax",
+                transport: {
+                    read: {
+                        url: "GetMovement",
+                        data: { DATE1: DATE1, DATE2: DATE2, WHNO: WHNO }
+                    },
+                    update: {
+                        url: "UpdateMovement",
+                        complete: function (e) {
+                            $("#grid").data("kendoGrid").dataSource.read();
+                        },
+
+                    }
+                },
+                pageSize: 30,
+                schema: {
+                    data: "Data",
+                    total: function (response) {
+                        return response.Total;
+                    },
+                    model: {
+                        id: "SRNO",
+                        fields: {
+                            SRNO: { type: "number" },
+                            DOCNO: { type: "string", editable: false },
+                            DOCDATE: { type: "date", editable: false },
+                            QTY: { type: "int", editable: false },
+                            USERID: { type: "number" },
+                            USERNAME: { type: "string" },
+                            MOVSTATUS: { type: "string", editable: false },
+                            WAREHOUSENO: { type: "string", editable: false }
+                        }
+                    }
+                },
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+            },
+            sortable: {
+                mode: "single"
+            },
+            editable: "inline",
+            //edit: onEdit,
+            pageable: true,
+            filterable: { mode: "row" }
+        })
+    }
+
+    function UserDrpEditor(container, options) {
+
+        $('<input id="UserDropDownList" required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+
+                dataTextField: "USERNAME",
+                dataValueField: "USERID",
+                
+                autoBind: false,
+                dataSource: {
+                    type: "json",
+                    transport: {
+                        read: {
+                            url: "GetUser",
+                                
+                        }
+                    }
+                }
+            });
+    }
+
+    function updateSearchFilters(grid, field, operator, value) {
+
+        var newFilter = { field: field, operator: operator, value: value };
+        var dataSource = $("#" + grid).data("kendoGrid").dataSource;
+        var filters = null;
+
+        if (dataSource.filter() != null) {
+
+            filters = dataSource.filter().filters;
+
+        }
+        if (filters == null) {
+            filters = [newFilter];
+        }
+        else {
+            var isNew = true;
+            var index = 0;
+            for (index = 0; index < filters.length; index++) {
+                if (filters[index].field == field) {
+                    isNew = false;
+                    break;
+                }
+            }
+            if (isNew) {
+                filters.push(newFilter);
+            }
+            else {
+                filters[index] = newFilter;
+            }
+        }
+        dataSource.filter(filters);
+    }   
+
+    </script>
+
+</body>

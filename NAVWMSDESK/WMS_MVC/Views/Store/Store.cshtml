@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Store";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="kendo">
+    <div id="grid"></div>
+</div>
+<script>
+    $("#grid").kendoGrid({
+        //height: 400,
+        columns: [
+                            { field: "SRNO", title: "SRNO", hidden: true, width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "STOREID", title: "STOREID", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "STORETAG", title: "STORETAG", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "STORENAME", title: "STORENAME", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "EXCHRATE", title: "EXCHRATE", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "ERPSTOREID", title: "ERPSTOREID", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "STATUS", title: "STATUS", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { command: ["edit", "destroy"], width: 180, title: "ACTION", }
+        ],
+         toolbar: ["create"],
+       // toolbar: kendo.template($("#searchtemplate").html()),
+        dataSource: {
+            pageSize: 15,
+            type: "webapi",
+            transport: {
+                idField: "SRNO",
+                read: {
+                    url: "http://localhost:4800/api/STORE/GetSTORE",
+                },
+                create: {
+                    url: "http://localhost:4800/api/STORE/PostWMS_STORE_EDITOR",
+                    type: "POST"
+                },
+                update: {
+                    url: "http://localhost:4800/api/STORE/PutWMS_STORE_EDITOR/{0}",
+                    type: "PUT"
+                },
+                destroy: {
+                    url: "http://localhost:4800/api/STORE/DeleteWMS_STORE_EDITOR/{0}",
+                    type: "DELETE"
+                }
+			},
+            schema: {
+                            data: "Data",
+                            total: function (response) {
+                                return response.Total;
+                            },
+                errors: "Errors",
+                model: {
+                    id: "SRNO",
+					fields: {
+					    SRNO: { type: "number" },
+					    STOREID: { type: "string" },
+					    STORETAG: { type: "string" },
+					    STORENAME: { type: "string" },
+					    EXCHRATE: { type: "string" },
+					    ERPSTOREID: { type: "string" },
+					    STATUS: { type: "string" },
+					  
+					}
+                }
+
+            },
+
+            serverPaging: true,
+            serverSorting: true,
+            serverFiltering: true,
+            serverGrouping: true,
+            serverAggregates: true,
+        },
+        pageable: {
+                    input: true,
+                    numeric: false
+                },
+        editable: "inline",
+        scrollable: true
+    })
+
+</script>
+

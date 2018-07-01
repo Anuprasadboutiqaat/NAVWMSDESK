@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "Pick02";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__localhost">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WMS - Landing</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" crossorigin="anonymous">
+    <link href="~/Content/style.css" rel="stylesheet">
+    <link href="~/Content/fontawesome/webfont_css/css/fontawesome-all.css" rel="stylesheet">
+    <style>
+        .blue{
+            background-color:blue;
+        }
+        .bakclr{
+            display: inline-block;
+             border-radius: 30px;
+             font-weight:bold;
+             color:white;
+              padding: 7px 7px;
+            background-color:#2E8B57;
+        }
+
+    </style>
+</head>
+<body data-gr-c-s-loaded="true" class="landingpage putaway">
+    <div class="container">
+        <div class="row">
+            <div class="innerheader">
+                <div class="logo">
+                    <img id="btnHome" class="img-responsive" alt="WMS" src="../assets/images/wms_logo_login-page.png">
+                </div>
+            </div>
+        </div>
+        <div class="pageheader">
+
+            <span id="pickno" class="put2pageheader"></span>
+
+            <a href="/navwmsweb/pick/pick01" class="btn-back" id="btnBack"><i class="far fa-arrow-alt-circle-left"></i></a>
+            <div class="filter">
+                <select class="dropdownmenu" id="ddlFilter" name="ddlFilter">
+                    <option value="-1" selected>All</option>
+                    <option value="0">Open</option>
+                    <option value="1">Picked</option>
+                    <option value="2">Posted</option>
+                </select>
+            </div>
+        </div>
+        <div class="welcomeheader">
+            <ul>
+                <li>Hi: <span id="username"></span></li>
+                <li>WH ID: <span id="whid"></span></li>
+            </ul>
+        </div>
+        <div class="form-container landing col-mds-offset-4">
+            <div id="datarow">
+
+            </div>
+            @*<div class="table-container spacer-small"><table cellspacing="0" cellpadding="0" id="AA">
+                    <tbody id="datarow">
+                        For Display table
+                    </tbody>
+                </table>
+            </div>*@
+        </div>
+    </div>
+    <script>
+
+        $(document).ready(function () {
+
+            var pickno = null;
+            $.urlParam = function (name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                if (results == null) {
+                    return null;
+                }
+                else {
+                    return decodeURI(results[1]) || 0;
+                }
+            }
+            var usrid = '@Request.RequestContext.HttpContext.Session["USERID"]';
+            var tknid = '@Request.RequestContext.HttpContext.Session["TOKENID"]';
+            var usrname = '@Request.RequestContext.HttpContext.Session["USERNAME"]';
+            var whid = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+            pickno = $.urlParam('ptn');
+            var tt = 3;
+
+            $('#pickno').text(pickno);
+            $('#username').text(usrname);
+            $('#whid').text(whid);
+            GetDataFilter1(usrid, tknid, tt, -1, pickno);
+        });
+
+        $("#ddlFilter").change(function () {
+            var pickno = $.urlParam('ptn');
+            var usrid = '@Request.RequestContext.HttpContext.Session["USERID"]';
+            var tknid = '@Request.RequestContext.HttpContext.Session["TOKENID"]';
+            var tt = 3;
+            var filt = $('#ddlFilter').val()
+            GetDataFilter1(usrid, tknid, tt, filt, pickno);
+        });
+
+        function GetDataFilter1(userid, tknid, tt, filter, pickno) {
+            
+            try {
+                $("#datarow").empty();
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://192.168.8.235/navwmsapi/api/NAVWMS/pik01',
+                    dataType: 'json',
+                    data: { Status: tt, userID: userid, TokenID: tknid, PickNo: pickno,Tag:0 },
+                    success: function (result) {
+                        $.each(result.result, function (i, data1) {
+                            var para1 = data1.BARCODE;//+ "','" + data1.DESCRIPTION + "','" + data1.QTY + "','" + data1.BINNO;
+                            var para2 = data1.DESCRIPTION;
+                            var para3 =  data1.QTY;
+                            var para4 = data1.BINNO;
+                            var clrchng;
+                            var bakclr;
+                            if (parseInt(filter) >= 0) {
+                                if (data1.PICKSTATUS == 2)
+                                { showstatus = "Posted";
+                                bakclr = "bakclr";
+                                }
+                                else if (data1.PICKSTATUS== 1) {
+                                    showstatus = "Picked";
+                                    bakclr = "bakclr";
+                                }
+                                else if (data1.PICKSTATUS == 0) {
+                                    showstatus = "Open";
+                                    clrchng = "blue"
+                                }
+
+                                if (data1.PICKSTATUS == filter) {
+
+                                    //var html1 = "<tr class='" + clrchng + "'><td>Barcode</td><td> <strong>:</strong></td><td> <a href='#' style='text-decoration: underline;color: blue;text-align: left;' onclick=movenext('" + para1 + "','" + para2 + "','" + para3 + "','" + para4 + "') >" + data1.BARCODE + "</a></td></tr>";
+                                    var html1 = "<div class='table-container spacer-small'><table cellspacing='0' cellpadding='0' id='AA'><tr><td>Barcode</td><td> <strong>:</strong></td><td> <a href='#' style='text-decoration: underline;color: blue;text-align: left;' onclick=movenext('" + para1 + "','" + para2 + "','" + para3 + "','" + para4 + "') >" + data1.BARCODE + "</a></td></tr>";
+                                    html1 = html1 + "<tr><td>Description</td><td> <strong>:</strong></td><td>" + data1.DESCRIPTION + "</td></tr> ";
+                                    //html1 = html1 + "<tr><td>QTY</td><td> <strong>:</strong></td><td>" + data1.QTY + "</td> <tr>";
+                                    html1 = html1 + "<tr><td>BinNo</td><td> <strong>:</strong></td><td>" + data1.BINNO + "</td> <tr>";
+                                    html1 = html1 + "<tr><td>Status</td><td> <strong>:</strong></td><td><span class='" + bakclr + "'>" + showstatus + "</span></td> <tr></table></div>";
+                                    $("#datarow").append(html1);
+                                }
+                            }
+                            else {
+                                if (data1.PICKSTATUS == 2)
+                                { showstatus = "Posted"; bakclr = "bakclr" } else if (data1.PICKSTATUS == 1) { showstatus = "Picked"; bakclr = "bakclr" } else { showstatus = "Open"; clrchng = "blue"; }
+
+                               
+                                var html1 = "<div class='table-container spacer-small'><table cellspacing='0' cellpadding='0' id='AA'><tr><td>Barcode</td><td> <strong>:</strong></td><td> <a href='#' style='text-decoration: underline;color: blue;text-align: left;' onclick=movenext('" + para1 + "','" + para2 + "','" + para3 + "','" + para4 + "')>" + data1.BARCODE + "</a></td></tr>";
+                                html1 = html1 + "<tr> <td>Description</td><td> <strong>:</strong></td><td>" + data1.DESCRIPTION + "</td></tr> ";
+                                //html1 = html1 + "<tr><td>QTY</td><td> <strong>:</strong></td><td>" + data1.QTY + "</td> <tr>";
+                                html1 = html1 + "<tr><td>BinNo</td><td> <strong>:</strong></td><td>" + data1.BINNO + "</td> <tr>";
+                                html1 = html1 + "<tr><td>Status</td><td> <strong>:</strong></td><td><span class='" + bakclr + "'>" + showstatus + "</span></td> <tr></table></div>";
+                                $("#datarow").append(html1);
+                            }
+                        });
+                    },
+                    error: function (ex) {
+                        alert("Data not found/ Token Expired" + ex.message)
+                    }
+                });
+            }
+            catch (ex)
+            {
+                alert(ex.message)
+            }
+        }
+        function movenext(itemno, desc, qty, binno) {
+            try {
+            var putno = $.urlParam('ptn');
+            window.location = "/navwmsweb/pick/pick03?ptn=" + putno + "&itmno=" + itemno + "&desc=" + desc + "&binno=" + binno;
+            }
+            catch (ex) {
+                alert(ex.message)
+            }
+        }
+        function myaction(pt) {
+            alert(pt)
+        }
+        $("#btnHome").click(function () {
+            window.location = "/navwmsweb/home/index"
+            return;
+        });
+
+    </script>
+
+</body>
+</html>
+
+

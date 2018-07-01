@@ -1,0 +1,267 @@
+﻿@model NAVWMSDESK.ViewModel.Cyclecount.CyclecountViewModel
+@{
+    ViewBag.Header = "Cyclecount Request";
+
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+
+<body class="nav-md dashboard">
+    <div class="top_nav">
+
+    </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel" style="">
+                <div class="x_content">
+                    <form action="FileUpload" method="post" enctype="multipart/form-data">
+
+                        @*<div class="container">
+
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <span class="sectionhead">DATE</span>
+                                    <div class="form-group">
+                                        <div>
+                                            @Html.TextBoxFor(m => m.DATE1, new { @class = "form-control required selector  ", @placeholder = "FROM  DATE " })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <span class="sectionhead">ZONEID</span>
+                                    <div class="form-group">
+                                        <div>
+                                            @Html.TextBoxFor(m => m.ZONEID, new { @class = "form-control required clr Zone", @placeholder = "ZONE" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <span class="sectionhead">BINNO</span>
+                                    <div class="form-group">
+                                        <div>
+                                            @Html.TextBoxFor(m => m.BINNO, new { @class = "form-control required clr ", @placeholder = "BIN NO" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="" style="margin-top: 6%;">
+                                        <button type="submit" id="btnSave" class="btn btn-primary BtnSave" style="width: 80px;background: #ac9231;text-align:center;height: 30px;margin-right: 2%;    font-size: 12px;" name="Command" value="SUBMIT">CONFIRM</button>
+                                        <button type="button" id="btnReset" class="btn btn-primary BtnReset" style="width: 80px;background: lightblue;text-align:center;height: 30px;margin-right: 3%;    font-size: 12px;" name="Command1" value="SUBMIT1">RESET</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="table-container" id="grid">
+                                </div>
+                            </div>
+                        </div>*@
+
+                        <div class="container" style="height:200px;padding-top:60px">
+                            <div class="row">
+                                <div class="col-sm-1" style="margin-top:2%">
+
+                                    @Html.RadioButtonFor(m => m.ZONENBIN, "ZONE")
+                                    <span class="sectionhead" style="padding-left:10px">ZONE</span>
+
+                                </div>
+                                        
+                                <div class="col-sm-2" style="margin-top:2%">
+
+                                    @Html.RadioButtonFor(m => m.ZONENBIN, "ZONENBIN")
+                                    <span class="sectionhead" style="padding-left:10px">ZONE & BIN</span>
+
+
+                                </div>
+                                <div class="col-sm-3" id="zonediv" style="display:none">
+                                    <span class="sectionhead">ZONEID</span>
+                                    <div class="form-group">
+                                        <div>
+                                            @Html.TextBoxFor(m => m.ZONEID, new { @class = "form-control required clr Zone", @placeholder = "ZONE" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+
+                                    <span class="sectionhead">Filename:</span>
+                                    <div class="form-group">
+                                        <div>
+                                            <input type="file" name="file" id="FileUpload" class="form-control" onChange="validate(this.value)"/>
+                                            <input type="text" style="display:none;" id="userhold">
+                                            @Html.HiddenFor(m => m.USERHOLD, new { @class = "form-control required clr " })
+                                            @Html.HiddenFor(m => m.WHNO, new { @class = "form-control required clr " })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="" style="margin-top: 5%;">
+                                        <input type="submit" id="Upload" class="btn btn-default" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+</body>
+<script>
+    $(document).ready(function () {
+        var chk = '@ViewData["insert"]';
+        if (chk == "1") {
+            toastr.success('Updated Successfully');
+
+        }
+        SetDefaultValues();
+        CapitalLetters();
+
+    });
+
+    $(".BtnSave").click(function () {
+
+        if ($('#ZONEID').val().length >0)
+        {
+            var USER = '@Request.RequestContext.HttpContext.Session["USERID"]';
+            var head = {
+                ZONEID: $('#ZONEID').val(),
+                BINNO: $('#BINNO').val(),
+                DATE1: $('#DATE1').val(),
+                USER: USER,
+            };
+            $.ajax({
+                type: "POST",
+                url: "Cyclecounts/Cyclecount",
+                data: JSON.stringify({ header: head }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result == 1) {
+
+                        toastr.success('Updated Successfully');
+                        ResetControls();
+                    }
+                    else {
+                        toastr.error('TryAgain Later');
+                        ResetControls();
+                    }
+                    return false;
+                }
+            });
+
+        }
+        else
+        {
+            toastr.info("ZoneId is required")
+        }
+        //$.post("Cyclecounts/Cyclecount", { header: head });
+
+    });
+
+    $(".Zone").change(function () {
+        var zone = $('.Zone').val();
+        var myArray = zone.split(',');
+        if (myArray.length === 1) {
+            $('#BINNO').prop("disabled", false);
+            $('#BINNO').focus();
+        }
+        else {
+            $('#ZONEID').focus();
+            $('#BINNO').prop("disabled", true);
+        }
+    });
+
+    $(".BtnReset").click(function () {
+        ResetControls();
+    });
+
+    function SetDefaultValues() {
+        var USER = '@Request.RequestContext.HttpContext.Session["USERID"]';
+        var WHNO = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+        
+        $('#USERHOLD').val(USER);
+        $('#WHNO').val(WHNO);
+        
+
+        $('#BINNO').prop("disabled", true);
+        $('#DATE1').prop("readonly", true);
+        $("#DATE1").val(getActualDate());
+        $(".selector").datepicker({
+            dateFormat: "yy-mm-dd",
+            orientation: "top",
+            autoclose: true
+        });
+
+        $("#FileUpload").click(function () {
+            if ($("input[name='ZONENBIN']:checked").length > 0) {
+                return true;
+            }
+            else {
+                toastr.warning('Select upload format');
+
+                return false;
+            }
+        });
+
+        $("#Upload").click(function () {
+            var vidFileLength = $("#FileUpload")[0].files.length;
+            if (vidFileLength === 0) {
+                toastr.warning('No file selected.');
+                
+                return false;
+            }
+            
+            else if ($("input[name='ZONENBIN']:checked").val() == "ZONENBIN") {
+                if ($("#ZONEID").val() == "") {
+                    alert("Enter ZoneID")
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+            else {
+                return true;
+            }
+        });
+        $("input[name='ZONENBIN']").click(function () {
+            var zone = $(this).val();
+            //alert(zone)
+            if (zone == "ZONENBIN") {
+                $("#zonediv").css("display", "block");
+            }
+            else {
+                $("#zonediv").css("display", "none");
+
+            }
+        })
+        
+    }
+
+    function validate(file) {
+        var ext = file.split(".");
+        ext = ext[ext.length - 1].toLowerCase();
+        var arrayExtensions = ["txt"];
+
+        if (arrayExtensions.lastIndexOf(ext) == -1) {
+            alert("Upload a valid file format");
+            $("#FileUpload").val("");
+        }
+    }
+
+    function CapitalLetters() {
+        $('#ZONEID').keyup(function () {
+            $(this).val($(this).val().toUpperCase());
+        });
+        $('#BINNO').keyup(function () {
+            $(this).val($(this).val().toUpperCase());
+        });
+
+    }
+
+    function ResetControls() {
+        $('.clr').val("");
+    }
+
+</script>

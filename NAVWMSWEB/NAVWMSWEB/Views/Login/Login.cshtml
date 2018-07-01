@@ -1,0 +1,124 @@
+﻿@{
+    Layout =null;
+
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__localhost">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WMS - Login</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" crossorigin="anonymous">
+    <link href="~/Content/style.css" rel="stylesheet">
+</head>
+
+<body style="" data-gr-c-s-loaded="true">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="logo">
+                    <img class="img-responsive" alt="WMS" src="~/Assets/images/wms_logo_login-page.png">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-container col-md-offset-4">
+                <form class="form-signin">
+                    <label for="inputEmail" class="sr-only">Username</label>
+                    <input type="text" id="inputUser" class="form-control" placeholder="Username" required="" autofocus="">
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+                    @*<button  class="btn btn-lg btn-primary btn-block" type="submit">Login </button>*@
+                    @*<input type="button" id="btnLogon" value="LOGIN" class="btn btn-lg btn-primary btn-block" />*@
+                    <input type="button" id="btnLogon" class="btn btn-lg btn-primary btn-block" required="" value="Login">
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="copyright col-md-offset-4">
+                Copyright &copy; 2018 Boutiqaat. All rights reserved.
+            </div>
+        </div>
+    </div>
+
+  
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    @*<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>*@
+   
+    <script src="~/Content/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/popper.min.js"></script>
+    <script src="~/Content/bootstrap.min.js"></script>   
+</body>
+
+</html>
+<script type="text/javascript">
+        $(document).ready(function () {
+         
+            $("#btnLogon").click(function () {
+              
+             var username = '';
+             var userid = '';
+             var stid= '';
+             var rollid = '';
+             var tokenid = '';
+             $.ajax({
+                     type: 'POST',
+                     url: 'http://192.168.8.235/NAVWMSAPI/api/NAVWMS/USERLOGIN',
+                     dataType: 'json',
+                     data: { userNM: $("#inputUser").val(), userPWD: $("#inputPassword").val() },
+                     success: function (result) {
+                         $.each(result.result, function (i, data1) {
+                             $.each(data1, function (j, data2) {
+                                 username = data2.USERNAME;
+                                 userid = data2.USERID;
+                                 rollid = data2.ROLLID;
+                                 tokenid = data2.TOCKEN;
+                                 stid = data2.STOREID;
+                              
+                                 
+                             });
+                         });
+                         if (result.stat = 'Success') {
+                             setsession(username, userid, rollid, tokenid, stid);
+                             return;
+                         }
+                     },
+                     error: function (xhr, error) {
+                         var err = eval("(" + xhr.responseText + ")");
+                         alert(err);
+                     }
+                 });
+                 return false;
+             });
+     });
+
+     function setsession(username, userid, rollid, tokenid, stid) {
+         $.ajax({
+            type: "POST",
+            url: '@Url.Action("SetSessionValues","login")',
+             data: '{userid: "' + userid + '", username: "' + username + '",rollid: "' + rollid + '", tokenid: "' + tokenid + '", stid: "' + stid + '"  }',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: OnSuccess,
+            failure: function(response) {
+            }
+        });
+    }
+
+        function OnSuccess(response) {
+        
+          
+            //window.open("home","index")
+            window.location = "/navwmsweb/home/index"
+            return;
+    }
+</script>

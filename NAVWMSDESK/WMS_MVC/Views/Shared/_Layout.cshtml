@@ -1,0 +1,228 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- META SECTION -->
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <!-- END META SECTION -->
+    <!-- CSS INCLUDE -->
+    @*@Styles.Render("~/assets/css/theme-blue.css")*@
+    <link rel="stylesheet" type="text/css" id="theme" href="~/assets/css/theme-black.css" />
+    <link href="~/Content/smartadmin-production.min.css" rel="stylesheet" />
+    <link href="~/Content/smartadmin-production-plugins.min.css" rel="stylesheet" />
+    
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.common-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.dataviz.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link href="~/assets/css/fontawesome/font-awesome.min.css" rel="stylesheet" />
+    @*<link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">*@
+    <link href="https://kendo.cdn.telerik.com/2017.1.223/styles/kendo.dataviz.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.1.223/js/kendo.aspnetmvc.min.js"></script>
+    <!-- START PLUGINS -->
+    @*<script type="text/javascript" src="../assets/js/plugins/jquery/jquery.min.js"></script>*@
+    <script type="text/javascript" src="../assets/js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+    <script src="~/Content/bootbox.min.js"></script>
+    <!-- END PLUGINS -->
+    <!-- EOF CSS INCLUDE -->
+    <link href="~/assets/css/custom.css" rel="stylesheet" />
+    <style>
+        .page-container .page-content{
+            background: #EFF1EE;
+        }
+        .breadcrumb{
+            background: #EFF1EE;
+        }
+        .theme-settings{
+            display:none;
+        }
+        
+    </style>
+    <script>
+
+        $(document).ready(function (e) {
+            var DEPTCODE = '@Request.RequestContext.HttpContext.Session["DEPTCODE"]';
+            var DEPTNAME = '@Request.RequestContext.HttpContext.Session["DEPTNAME"]';
+            var ROLLCODE = '@Request.RequestContext.HttpContext.Session["ROLLCODE"]';
+            var Rollname = '@Request.RequestContext.HttpContext.Session["ROLLDESC"]';
+            var DEPTNAME = '@Request.RequestContext.HttpContext.Session["DEPTNAME"]';
+            var UserName = '@Request.RequestContext.HttpContext.Session["UserName"]';
+
+
+            $('#usrname').text(UserName);
+            $('#Rollname').text(Rollname);
+            $('#deptname').text(DEPTNAME);
+            if ((DEPTCODE == "1") && (ROLLCODE == "1")) {
+                $('#navminimize').addClass('fa-indent');
+                $('#navminimize').click();
+            }
+
+            else {
+                $('#navminimize').addClass('fa-dedent');
+            }
+
+            //$("body").on("contextmenu", function (e) {
+            //    return false;
+            //});
+
+            //if (!UserName) {
+            //    SessionEnd();
+            //}
+
+        });
+    </script>
+    
+</head>
+<body >
+    <!-- START PAGE CONTAINER -->
+    <div class="page-container" style="height:100vh;">
+
+        <!-- START PAGE SIDEBAR -->
+        <div class="page-sidebar">
+            <!-- START X-NAVIGATION -->
+            <ul class="x-navigation" >
+                <li class="xn-logo">
+                    <a href="#">Boutiqaat</a>
+                    <a href="#" class="x-navigation-control"></a>
+                </li>
+                <div class="profile">
+                    
+                    <div class="profile-data" style="padding-left: 40px;">
+                        <div class="profile-data-name"><span id="usrname" ></span></div>
+                        <div class="profile-data-title" style="font-size: 9px;    font-weight: 700;"><span id="deptname"></span>/<span id="Rollname"></span></div>
+                    </div>
+                    <div class="profile-controls">
+                        <a href="" class="profile-control-left" style="top: 10px;"><span class="fa fa-user"></span></a>
+                        @*<a href="pages-messages.html" class="profile-control-right"><span class="fa fa-envelope"></span></a>*@
+                    </div>
+                </div>
+                @*<li class="xn-title" style="font-weight:700"></li>*@
+               
+                @*<li class="active">
+                    <a href="@Url.Action("ItemEditor" , "ItemEditor")"><span class="fa fa-desktop"></span> <span class="xn-text">Product</span></a>
+                </li>*@
+                @*@Html.Action("Index", "Menu")*@
+                
+
+            </ul>
+            <!-- END X-NAVIGATION -->
+        </div>
+        <!-- END PAGE SIDEBAR -->
+        <!-- PAGE CONTENT -->
+        <div class="page-content">
+
+            <!-- START X-NAVIGATION VERTICAL -->
+            <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+                <!-- TOGGLE NAVIGATION -->
+                <li class="xn-icon-button">
+                    <a href="#" class="x-navigation-minimize"><span id="navminimize" class="fa"></span></a>
+                </li>
+                <!-- END TOGGLE NAVIGATION -->
+                <!-- SEARCH -->
+                <li class="header-tit">
+                    @*<form role="form">
+                        <input type="text" name="search" placeholder="Search..." />
+                    </form>*@
+                    <div class="profile-data-name"></div>
+                </li>
+                <!-- END SEARCH -->
+                <!-- SIGN OUT -->
+                <li class="xn-icon-button pull-right">
+                    
+                    <a href="#" class="mb-control" data-box="#mb-signout" style="padding:13px;">
+                        
+                        @*<span class="fa fa-sign-out"></span>*@
+                        <img src="~/assets/images/logout.png" style="width: 100%;"/>
+
+                    </a>
+                </li>
+                <!-- END SIGN OUT -->
+                <!-- MESSAGES -->
+                <!-- END TASKS -->
+            </ul>
+            <!-- END X-NAVIGATION VERTICAL -->
+            <!-- START BREADCRUMB -->
+            
+            <!-- END BREADCRUMB -->
+            @RenderBody()
+
+        </div>
+        <!-- END PAGE CONTENT -->
+    </div>
+    <!-- END PAGE CONTAINER -->
+    <!-- MESSAGE BOX-->
+    <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+        <div class="mb-container">
+            <div class="mb-middle">
+                <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+                <div class="mb-content">
+                    <p>Are you sure you want to log out?</p>
+                    <p>Press No if you want to continue work. Press Yes to logout current user.</p>
+                </div>
+                <div class="mb-footer">
+                    <div class="pull-right">
+                        <a href="@Url.Action("logout", "Login")" class="btn btn-success btn-lg" id="logout">Yes</a>
+                        <button class="btn btn-default btn-lg mb-control-close">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END MESSAGE BOX-->
+    <!-- START PRELOADS -->
+
+    @*<script type="text/javascript" src="../assets/js/plugins/jquery/jquery.min.js"></script>*@
+    <script type="text/javascript" src="../assets/js/plugins/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/assets/js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+    <script src="~/Content/bootbox.min.js"></script>
+    <audio id="audio-alert" src="../assets/audio/alert.mp3" preload="auto"></audio>
+    <audio id="audio-fail" src="../assets/audio/fail.mp3" preload="auto"></audio>
+    <!-- END PRELOADS -->
+    <!-- START SCRIPTS -->
+    
+    <!-- START THIS PAGE PLUGINS-->
+    <script type='text/javascript' src='../assets/js/plugins/icheck/icheck.min.js'></script>
+    <script type="text/javascript" src="../assets/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+  
+    <!-- END THIS PAGE PLUGINS-->
+    
+    <!-- START TEMPLATE -->
+    <script type="text/javascript" src="../assets/assets/settings.js"></script>
+
+    <script type="text/javascript" src="../assets/js/plugins.js"></script>
+    <script type="text/javascript" src="~/assets/js/actions.js"></script>
+
+    @*<script type="text/javascript" src="../assets/js/demo_dashboard.js"></script>*@
+
+    <!-- END TEMPLATE -->
+
+    <!-- CUSTOM -->
+
+    <script src="~/assets/js/Common.js"></script>
+
+    <!-- END CUSTOM -->
+</body>
+</html>
+
+<script>
+    //session end
+    @*var sessionTimeoutWarning = @Session.Timeout- 1;
+    var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+    setTimeout('SessionEnd()', sTimeout);
+    function SessionEnd() {
+        window.location = "/ERP/Home/LogOff";
+    }*@
+</script>

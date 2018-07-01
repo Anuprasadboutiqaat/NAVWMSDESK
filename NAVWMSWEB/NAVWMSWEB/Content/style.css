@@ -1,0 +1,549 @@
+body {
+    background: url(../assets/images/bodybg.jpg) 0 0 no-repeat;
+    background-size: cover;
+}
+@media (max-width: 767px) {
+    body {
+        background: url(../assets/images/bodybg_small.png) 0 0 no-repeat;
+    }
+}
+.logo {
+    margin: 60px auto;
+    max-width: 400px;
+}
+@media (max-width: 767px) {
+    .logo {
+        max-width: 300px;
+    }
+}
+.form-container {
+    max-width: 350px;
+    margin: 0 auto;
+}
+@media (max-width: 767px) {
+    .form-container {
+        max-width: 300px;
+    }
+}
+.clear {
+    clear: both;
+}
+.form-control {
+    background: #ebe6e3;
+    border-radius: 60px;
+    height: 50px;
+    border-color: #ebe6e3;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+.form-control:focus {
+    border-color: #000;
+    box-shadow: none;
+}
+.form-control::-webkit-input-placeholder { color: #000;}  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: #000; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: #000; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: #000; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: #000; }  /* Microsoft Edge */
+.btn-primary {
+    background-color: #000;
+    border-color: #000;
+    border-radius: 60px;
+    text-transform: uppercase;
+}
+.btn-primary.focus, .btn-primary:focus,.btn-primary.active, .btn-primary:active, .btn-primary:hover, .open>.dropdown-toggle.btn-primary {
+    background-color: #ac9231;
+    border-color: #ac9231;
+}
+.btn-primary.btn-lg {
+    padding: 14px 16px;    
+}
+
+.btn-primary.white {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000;
+}
+
+.spacer {
+    margin: 0 0 30px 0;
+}
+
+.spacer-small {
+    margin: 0 0 15px 0;
+}
+
+/*Sign in page*/
+
+form.form-signin .form-control {
+    height: 55px;
+}
+
+form.form-signin input {
+    background: #fff url(../assets/images/common_sprite.png) 0 0 no-repeat;
+    padding-left: 55px;
+}
+
+form.form-signin input[type=button] {
+    background: #000;
+}
+
+form.form-signin input[type=button]:hover {
+    background: #ac9231;
+    border-color: #ac9231;
+}
+
+form.form-signin input#inputUser{
+    background-position: 15px 13px;
+}
+
+form.form-signin input#inputPassword {
+    background-position: 15px -43px;
+}
+
+form.form-signin .btn-primary {
+    margin: 20px 0;
+}
+
+/*Landing Page*/
+body.landingpage {
+    background: url(../assets/images/bodybg.jpg) 0 0 no-repeat;
+    background-size: cover;
+}
+@media (max-width: 767px) {
+    body.landingpage {
+        background: url(../assets/images/bodybg_small.png) 0 0 no-repeat;
+    }
+}
+body.landingpage .logo {
+    margin: 10px auto 20px;
+    max-width: 220px;
+}
+@media (max-width: 767px) {
+    body.landingpage .logo {
+        max-width: 200px;
+    }
+}
+@media (max-width: 767px) {
+    .form-container.landing {
+        max-width: 320px;
+    }
+}
+.form-container.landing .col-xs-4{
+    padding-left: 0;
+    padding-right: 0;
+}
+.form-container.landing .spacer {
+    margin: 0 0 50px 0;
+}
+.form-container.landing a {
+    display: block;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: bold;
+}
+.form-container.landing a:hover {
+    text-decoration: none;
+}
+.form-container.landing a span.circle {
+    background: #eaeae8;
+    display: block;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    padding: 5px;
+    margin: 0 auto 5px auto;
+    position: relative;
+}
+.form-container.landing a span.circle:before {
+    width: 90px;
+    height: 90px;
+    background: #fff;
+    display: block;
+    border-radius: 100%;
+    font-size: 0;
+    content: "|";
+}
+.form-container.landing a span span {
+    display: block;
+    position: absolute;
+    top: 28px;
+    width: 40px;
+    left: 24px;
+}
+.form-container.landing a.ico_recieving span span {
+    background: url(../assets/images/ico_receiving.jpg) 0 0 no-repeat;
+    background-size: 100% auto;
+}
+.form-container.landing a.ico_putaway span span {
+    left: 30px;
+    top: 25px;
+}
+.form-container.landing a.ico_picking span span {
+    left: 30px;
+    top: 25px;
+}
+.form-container.landing a.ico_shipping span span {
+    left: 28px;
+    top: 31px;
+}
+.form-container.landing a.ico_inquiries span span {
+    left: 31px;
+}
+.form-container.landing a.ico_processing span span {
+    left: 34px;
+    top: 25px;
+}
+.form-container.landing a.ico_logout span span {
+    left: 30px;
+    top: 27px;
+}
+
+/*Inner common pages*/
+.inner-header {
+    background: #fff;
+    padding: 2px;
+    text-align: center;
+    font-weight: bold;
+}
+.inner-header h4{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px) {
+  .sidebar-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  } 
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas.active {
+    left: 0; /* 6 columns */
+  }    
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+/*button container*/
+.button-container {
+    text-align: center;
+}
+
+.button-container button {
+    width: 90%;
+    margin: 10px auto 5px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    background: #fff;
+    text-align: left;
+    font-weight: bold;
+    font-size: 13px;
+    border: none;
+}
+
+.main-content {
+    padding: 10px 15px;
+}
+
+.main-content .form-control {
+    padding: 6px 20px;
+    background: #fff;
+    font-weight: bold;
+    font-size: 12px;
+} 
+
+.button-container button.btn-white {
+    -webkit-box-shadow: 10px 12px 10px -12px rgba(138,138,138,1);
+    -moz-box-shadow: 10px 12px 10px -12px rgba(138,138,138,1);
+    box-shadow: 10px 12px 10px -12px rgba(138,138,138,1);
+}
+
+.button-container button.btn-white span {
+    background: url(../assets/images/button_arrow.jpg) no-repeat right center;
+    display: block;
+}
+
+.button-container button.btn-black-back {
+    background: #000;
+    border: none;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 25px;
+}
+.button-container .btn-small-gray{
+    width: auto;
+    background: #b5b5b5;
+    padding: 10px 40px;
+    color: #fff;
+    border-radius: 20px;
+    float: left;
+}
+.button-container .btn-small-black{
+    width: auto;
+    background: #000;
+    padding: 10px 40px;
+    color: #fff;
+    border-radius: 20px;
+    float: right;
+}
+
+/*copyright*/
+
+.copyright {
+    max-width: 350px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/*Inner Header*/
+body.landingpage.putaway {
+    background: #eeeeee;
+}
+body.landingpage.putaway .innerheader {
+    margin-left: -15px;
+    margin-right: -15px;
+    background: #fff;
+    padding: 7px 0 7px;
+}
+body.landingpage.putaway .innerheader .logo {
+    margin: 7px auto;
+    max-width: 100px;
+}
+body.landingpage.putaway .pageheader {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto;
+}
+body.landingpage.putaway .put2pageheader {
+    text-align: left;
+    padding: 20px 0;
+    font-size: 18px;
+    font-weight: bold;
+    position: relative;
+    max-width: 350px;
+    margin: 0 auto;
+}
+body.landingpage.putaway .pageheader a.btn-back {
+    display: block;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 22px;
+}
+body.landingpage.putaway .pageheader a.btn-back i {
+    font-size: 25px;
+    color: #000;
+}
+body.landingpage.putaway .pageheader .filter {
+    width: 100px;
+    position: absolute;
+    top: 15px;
+    right: 0;
+    background: #fff;
+    padding: 3px;
+    border-radius: 30px;
+}
+body.landingpage.putaway .pageheader .filter select {
+    border: none;
+    font-size: 14px;
+}
+body.landingpage.putaway .pageheader .filter select:focus {
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+body.landingpage.putaway .pageheader .dropdown {
+    width: 80px;
+    margin: 0 auto;
+}
+body.landingpage.putaway .pageheader button {
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.welcomeheader {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.welcomeheader ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.welcomeheader ul li {
+    display: inline-block;
+    background: #fff;
+    padding: 10px 15px;
+    border-radius: 30px;
+}
+
+.welcomeheader ul li:last-child { 
+    float: right;
+}
+
+.welcomeheader ul li span {
+    color: #ad9032;
+}
+
+.welcomeheader.landing {
+    max-width: 60%;
+}
+
+.welcomeheader.landing ul li {
+    display: block;
+    float: none;
+    text-align: center;
+}
+
+.welcomeheader.landing ul li:first-child {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+    body.landingpage.putaway .form-container.landing {
+        max-width: 350px;
+    }
+}
+body.landingpage.putaway .form-container.landing .table-container {
+    border: 1px #d9d9d9 solid;
+    border-radius: 10px;
+    background: #fff;
+}
+body.landingpage.putaway .form-container.landing .table-container table tr.main-row td {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+body.landingpage.putaway .form-container.landing .table-container table tr.merged-row td {
+    padding-top: 0;
+}
+
+body.landingpage.putaway .form-container.landing .table-container table {
+    width: 100%;
+}
+body.landingpage.putaway .form-container.landing .table-container table tr td {
+    border-bottom: 1px #d9d9d9 solid;
+    padding: 10px;
+    font-size: 12px;
+}
+
+body.landingpage.putaway .form-container.landing .table-container table tr td a {
+    height: auto;
+}
+
+body.landingpage.putaway .form-container.landing .table-container table tr td a i{
+    font-size: 25px;
+    color: green;
+}
+
+body.landingpage.putaway .form-container.landing .table-container table tr td a.open i{
+    color: #02bcd5;
+}
+
+body.landingpage.putaway .form-container.landing .table-container table tr td button {
+    box-shadow: none;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    font-size: 12px;
+    width: 100%;
+}
+
+body.landingpage.putaway div.table-head {
+    text-transform: uppercase;
+    padding: 0 0 5px 0;
+    font-weight: bold;
+}
+
+
+/*dropdown*/
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: .3em;
+    vertical-align: middle;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-left: .3em solid transparent;
+}
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 3px 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #292b2c;
+    text-align: inherit;
+    white-space: nowrap;
+    background: 0 0;
+    border: 0;
+}
+
+.table-checkbox {
+    display: inline-block;
+    float: right;
+    font-weight: normal;
+}
+
+.table-checkbox label {
+    font-weight: normal;
+    padding-left: 5px;
+}
+
+

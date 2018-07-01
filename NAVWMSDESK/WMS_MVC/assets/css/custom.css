@@ -1,0 +1,78 @@
+﻿.topdiv {
+    margin-top: 1% !important;
+}
+
+.header-tit{
+    padding-top: 16px !important;
+    font-weight: 600;
+    color: white;
+}
+
+.highlightblue
+{
+    background-color: #57a9a859;
+    padding: 4%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.fieldlist label {
+    display: block;
+    padding-bottom: 1em;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+.divTextPading {
+    padding: 5px;
+}
+
+.headermargins header {
+    margin: 0px;
+    margin-bottom: 20px;
+    color: dimgray;
+}
+
+.error {
+    color: red;
+}
+
+.textUpper {
+    text-transform: uppercase;
+}
+
+.validation-summary-errors {
+    display: none;
+}
+
+.prodheader {
+    margin: 0px !important;
+    margin-bottom: 15px !important;
+    color: black !important;
+    background-color: rgba(230, 229, 229, 0.59) !important;
+    padding: 10px !important;
+    font-weight: 600 !important;
+    border-bottom: none !important;
+}
+
+.drpdwn {
+    position: absolute !important;
+    top: 6px;
+    font-size: 24px !important;
+    right: 11px;
+    color: black !important;
+    pointer-events: none !important;
+    width: 22px !important;
+    height: 25px !important;
+    padding: 5px !important;
+    padding-top: 8px !important;
+    padding-left: 10px !important;
+    background-color: #f0f0f0 !important;
+}
+
+.k-grid tbody .k-button, .k-ie8 .k-grid tbody button.k-button {
+    min-width: 60px !important;
+}

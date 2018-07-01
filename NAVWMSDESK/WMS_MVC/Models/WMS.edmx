@@ -1,0 +1,1595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NAVWMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="WMS_CC_REQUEST">
+          <Key>
+            <PropertyRef Name="DOCNO" />
+          </Key>
+          <Property Name="DOCNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCDATE" Type="datetime" />
+          <Property Name="ZONEID" Type="varchar" MaxLength="15" />
+          <Property Name="BINNO" Type="varchar" MaxLength="25" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="ACHIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_CC_SCAN">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="CCNO" Type="varchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="varchar" MaxLength="10" />
+          <Property Name="BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="F_ZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="F_BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="MATCHSTATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_CLASS_EDITOR">
+          <Key>
+            <PropertyRef Name="CLASSID" />
+          </Key>
+          <Property Name="CLASSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CLSNAME" Type="varchar" MaxLength="25" />
+          <Property Name="CLSFLAG" Type="varchar" MaxLength="3" />
+          <Property Name="CLSSTATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_CYCLECOUNT">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CCNO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="varchar" MaxLength="10" />
+          <Property Name="BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="UOM" Type="varchar" MaxLength="10" />
+          <Property Name="QTY" Type="varchar" MaxLength="50" />
+          <Property Name="RECINSERTED" Type="datetime" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="USERASSIGNDATE" Type="datetime" />
+          <Property Name="ASSIGNSTATUS" Type="bit" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="F_BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="F_ZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="T_BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="T_ZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="SEDSTATUS" Type="int" />
+          <Property Name="CCSTATUS" Type="int" />
+          <Property Name="ARCHIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_DOC_REGISTER">
+          <Key>
+            <PropertyRef Name="DOCNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCTYPE" Type="varchar" MaxLength="15" />
+          <Property Name="PRESET" Type="varchar" MaxLength="10" />
+          <Property Name="SERIALNO" Type="int" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WMS_MOVE_DETAIL">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="FROMBINNO" Type="varchar" MaxLength="50" />
+          <Property Name="SUGGBINNO" Type="varchar" MaxLength="50" />
+          <Property Name="SUGGZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="SCANBINNO" Type="varchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
+          <Property Name="ITEMDESC" Type="varchar" MaxLength="250" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="PICKDATE" Type="datetime" />
+          <Property Name="PUTDATE" Type="datetime" />
+          <Property Name="INTEGRATED" Type="datetime" />
+          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
+          <Property Name="MOVSTATUS" Type="int" />
+          <Property Name="ARCHIVE" Type="bit" />
+        </EntityType>
+        <EntityType Name="WMS_MOVE_HEAD">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
+          <Property Name="DOCSTATUS" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'NAVWMS.dbo.WMS_MOVEMENT' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="WMS_MOVEMENT">
+          <Property Name="FROMBIN" Type="varchar" MaxLength="20" />
+          <Property Name="TOBIN" Type="varchar" MaxLength="20" />
+          <Property Name="TROLLYNO" Type="varchar" MaxLength="20" />
+          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
+          <Property Name="ITEMNO" Type="varchar" MaxLength="20" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="ITEMDESC" Type="varchar" MaxLength="250" />
+          <Property Name="FROMUSER" Type="int" />
+          <Property Name="TOUSER" Type="int" />
+          <Property Name="FROMDATE" Type="datetime" />
+          <Property Name="TODATE" Type="datetime" />
+          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="20" />
+          <Property Name="ARCHIVE" Type="int" />
+        </EntityType>-->
+        <EntityType Name="WMS_PICKING">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="PICKNO" Type="varchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="UOM" Type="varchar" MaxLength="10" />
+          <Property Name="QTY" Type="varchar" MaxLength="50" />
+          <Property Name="RECINSERTED" Type="datetime" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="USERASSIGNDATE" Type="datetime" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="EANCODE" Type="varchar" MaxLength="50" />
+          <Property Name="EANTAG" Type="int" />
+          <Property Name="ACTBINNO" Type="varchar" MaxLength="50" />
+          <Property Name="ACTBARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="PNA" Type="int" />
+          <Property Name="PICKSTATUS" Type="int" />
+          <Property Name="ASSIGNSTATUS" Type="bit" />
+          <Property Name="ARCHIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_PUTAWAY">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="PUTNO" Type="varchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="UOM" Type="varchar" MaxLength="10" />
+          <Property Name="QTY" Type="varchar" MaxLength="50" />
+          <Property Name="RECINSERTED" Type="datetime" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="USERASSIGNDATE" Type="datetime" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="ARCHIVE" Type="int" />
+          <Property Name="PUTSTATUS" Type="int" />
+          <Property Name="ASSIGNSTATUS" Type="bit" />
+        </EntityType>
+        <EntityType Name="WMS_ROLL_EDITOR">
+          <Key>
+            <PropertyRef Name="ROLLID" />
+          </Key>
+          <Property Name="ROLLID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROLLDESC" Type="varchar" MaxLength="20" />
+          <Property Name="ROLLSTATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_STOCKMOVEMENT">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FROMBIN" Type="varchar" MaxLength="50" />
+          <Property Name="TOBIN" Type="varchar" MaxLength="50" />
+          <Property Name="TROLLEYNO" Type="varchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="int" />
+          <Property Name="ZONEID" Type="int" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="SKUNO" Type="varchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="UOM" Type="varchar" MaxLength="10" />
+          <Property Name="QTY" Type="int" />
+          <Property Name="FROMUSERID" Type="int" />
+          <Property Name="DATE_1" Type="datetime" />
+          <Property Name="TOUSERID" Type="int" />
+          <Property Name="DATE_2" Type="datetime" />
+          <Property Name="ARCHIVE" Type="int" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_STORE_EDITOR">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STOREID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="STORETAG" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="STORENAME" Type="varchar" MaxLength="50" />
+          <Property Name="EXCHRATE" Type="float" />
+          <Property Name="ERPSTOREID" Type="int" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_SUBCLASS_EDITOR">
+          <Key>
+            <PropertyRef Name="SUBCLASSID" />
+          </Key>
+          <Property Name="SUBCLASSID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SUBCLSNAME" Type="varchar" MaxLength="50" />
+          <Property Name="SUBFLAG" Type="varchar" MaxLength="10" />
+          <Property Name="CLASSID" Type="int" />
+          <Property Name="SUBCLSSTATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_SUBROLL_EDITOR">
+          <Key>
+            <PropertyRef Name="SUBROLLID" />
+          </Key>
+          <Property Name="SUBROLLID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROLLID" Type="int" Nullable="false" />
+          <Property Name="CLSID" Type="int" />
+          <Property Name="SUBCLASSID" Type="int" />
+          <Property Name="SUBCLSSTATUS" Type="int" />
+          <Property Name="ROLLSTATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_USER_EDITOR">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="USERPASSWORD" Type="nvarchar" MaxLength="100" />
+          <Property Name="ROLLID" Type="int" />
+          <Property Name="STOREID" Type="varchar" MaxLength="50" />
+          <Property Name="APIURL" Type="varchar" MaxLength="250" />
+          <Property Name="USERSTATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_USER_TASKS">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="SUBDOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="DOCTYPE" Type="varchar" MaxLength="3" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="50" />
+          <Property Name="ASSIGNDATE" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.WMS_USER_TOKEN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WMS_USER_TOKEN">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TOKENID" Type="nvarchar(max)" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="FDATE" Type="datetime" />
+          <Property Name="TDATE" Type="datetime" />
+          <Property Name="INTERVAL" Type="int" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="WMS_ZONE_EDITOR">
+          <Key>
+            <PropertyRef Name="ZONEID" />
+          </Key>
+          <Property Name="ZONEID" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="ZONEDESC" Type="varchar" MaxLength="30" />
+          <Property Name="ZONESTATUS" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.VW_CC1_TEMP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_CC1_TEMP">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="CCNO" Type="varchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="varchar" MaxLength="10" />
+          <Property Name="BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="F_BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="F_ZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="T_BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="T_ZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="SEDSTATUS" Type="int" />
+          <Property Name="CCSTATUS" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.VW_CLASS_SUBCLASS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_CLASS_SUBCLASS">
+          <Key>
+            <PropertyRef Name="CLASSID" />
+            <PropertyRef Name="SUBCLASSID" />
+          </Key>
+          <Property Name="CLASSID" Type="int" Nullable="false" />
+          <Property Name="CLSNAME" Type="varchar" MaxLength="25" />
+          <Property Name="SUBCLASSID" Type="int" Nullable="false" />
+          <Property Name="SUBCLSNAME" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_USER">
+          <Key>
+            <PropertyRef Name="USERID" />
+            <PropertyRef Name="USERNAME" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="USERID" Type="int" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="USERPASSWORD" Type="nvarchar" MaxLength="100" />
+          <Property Name="CLSNAME" Type="varchar" MaxLength="25" />
+          <Property Name="SUBCLSNAME" Type="varchar" MaxLength="50" />
+          <Property Name="ROLLDESC" Type="varchar" MaxLength="20" />
+          <Property Name="ROLLID" Type="int" />
+          <Property Name="Expr1" Type="int" Nullable="false" />
+          <Property Name="CLSID" Type="int" />
+          <Property Name="SUBCLSID" Type="int" />
+          <Property Name="SUBCLSSTATUS" Type="int" />
+          <Property Name="ROLLSTATUS" Type="int" />
+          <Property Name="USERSTATUS" Type="int" />
+        </EntityType>
+        <Function Name="CC_DOCLIST_CONFIRM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="CCNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BINNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZONEID" Type="nvarchar" Mode="In" />
+          <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CC_DOCLIST_CONFIRM_1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="CCNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BINNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZONEID" Type="nvarchar" Mode="In" />
+          <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="FN_ListToTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SplitOn" Type="char" Mode="In" />
+          <Parameter Name="List" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ListValue" Type="varchar" MaxLength="500" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="MOV_DOCLIST_CONFIRM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="DOCNO" Type="varchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="ITEMNO" Type="varchar" Mode="In" />
+          <Parameter Name="SERIALNO" Type="varchar" Mode="In" />
+          <Parameter Name="BINNO" Type="varchar" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+          <Parameter Name="WHNO" Type="varchar" Mode="In" />
+          <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="NAV_INTEGRATION" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="WHNO" Type="varchar" Mode="In" />
+          <Parameter Name="DOCNO" Type="varchar" Mode="In" />
+          <Parameter Name="SUBDOCNO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="PIK_DOCLIST_CONFIRM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="PICKNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="SBCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BINNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="TAG" Type="int" Mode="In" />
+          <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="PTA_DOCLIST_CONFIRM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="PUTNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BINNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="TEST_DOCLIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="USERID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="USER_EDITOR_ADDEDIT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="USERID" Type="varchar" Mode="In" />
+          <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+          <Parameter Name="USERPASSWORD" Type="varchar(max)" Mode="In" />
+          <Parameter Name="USERROLL" Type="int" Mode="In" />
+          <Parameter Name="USERSTATUS" Type="int" Mode="In" />
+          <Parameter Name="STOREID" Type="int" Mode="In" />
+          <Parameter Name="GENERIC" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="USER_LOGIN" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+          <Parameter Name="PASSWORD" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="USER_TOKEN_CHECK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="TOKENEXTEND" Type="varchar" Mode="In" />
+          <Parameter Name="PARAOUT" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="WMS_DESKTOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="DOCNO" Type="varchar" Mode="In" />
+          <Parameter Name="SUBDOCNO" Type="varchar" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+          <Parameter Name="USERNAME" Type="varchar" Mode="In" />
+          <Parameter Name="DOCTYPE" Type="varchar" Mode="In" />
+          <Parameter Name="DATE1" Type="datetime" Mode="In" />
+          <Parameter Name="DATE2" Type="datetime" Mode="In" />
+          <Parameter Name="WHNO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="WMS_NAVDATA_PULL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="WHNO" Type="varchar" Mode="In" />
+          <Parameter Name="DOCNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="SUBDOCNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="SERAILNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMDESC" Type="nvarchar" Mode="In" />
+          <Parameter Name="UOM" Type="nvarchar" Mode="In" />
+          <Parameter Name="QTY" Type="nvarchar" Mode="In" />
+          <Parameter Name="BINNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZONEID" Type="nvarchar" Mode="In" />
+          <Parameter Name="EANCODE" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="NAVWMSModelStoreContainer">
+          <EntitySet Name="WMS_CC_REQUEST" EntityType="Self.WMS_CC_REQUEST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_CC_SCAN" EntityType="Self.WMS_CC_SCAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_CLASS_EDITOR" EntityType="Self.WMS_CLASS_EDITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_CYCLECOUNT" EntityType="Self.WMS_CYCLECOUNT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_DOC_REGISTER" EntityType="Self.WMS_DOC_REGISTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_MOVE_DETAIL" EntityType="Self.WMS_MOVE_DETAIL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_MOVE_HEAD" EntityType="Self.WMS_MOVE_HEAD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_PICKING" EntityType="Self.WMS_PICKING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_PUTAWAY" EntityType="Self.WMS_PUTAWAY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_ROLL_EDITOR" EntityType="Self.WMS_ROLL_EDITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_STOCKMOVEMENT" EntityType="Self.WMS_STOCKMOVEMENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_STORE_EDITOR" EntityType="Self.WMS_STORE_EDITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_SUBCLASS_EDITOR" EntityType="Self.WMS_SUBCLASS_EDITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_SUBROLL_EDITOR" EntityType="Self.WMS_SUBROLL_EDITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_USER_EDITOR" EntityType="Self.WMS_USER_EDITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_USER_TASKS" EntityType="Self.WMS_USER_TASKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_ZONE_EDITOR" EntityType="Self.WMS_ZONE_EDITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WMS_USER_TOKEN" EntityType="Self.WMS_USER_TOKEN" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WMS_USER_TOKEN].[SRNO] AS [SRNO], 
+    [WMS_USER_TOKEN].[TOKENID] AS [TOKENID], 
+    [WMS_USER_TOKEN].[USERID] AS [USERID], 
+    [WMS_USER_TOKEN].[FDATE] AS [FDATE], 
+    [WMS_USER_TOKEN].[TDATE] AS [TDATE], 
+    [WMS_USER_TOKEN].[INTERVAL] AS [INTERVAL], 
+    [WMS_USER_TOKEN].[STATUS] AS [STATUS]
+    FROM [dbo].[WMS_USER_TOKEN] AS [WMS_USER_TOKEN]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_CC1_TEMP" EntityType="Self.VW_CC1_TEMP" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_CC1_TEMP].[SRNO] AS [SRNO], 
+    [VW_CC1_TEMP].[DOCNO] AS [DOCNO], 
+    [VW_CC1_TEMP].[CCNO] AS [CCNO], 
+    [VW_CC1_TEMP].[ZONEID] AS [ZONEID], 
+    [VW_CC1_TEMP].[BINNO] AS [BINNO], 
+    [VW_CC1_TEMP].[BARCODE] AS [BARCODE], 
+    [VW_CC1_TEMP].[ITEMNO] AS [ITEMNO], 
+    [VW_CC1_TEMP].[SERIALNO] AS [SERIALNO], 
+    [VW_CC1_TEMP].[DESCRIPTION] AS [DESCRIPTION], 
+    [VW_CC1_TEMP].[USERID] AS [USERID], 
+    [VW_CC1_TEMP].[F_BINNO] AS [F_BINNO], 
+    [VW_CC1_TEMP].[F_ZONEID] AS [F_ZONEID], 
+    [VW_CC1_TEMP].[T_BINNO] AS [T_BINNO], 
+    [VW_CC1_TEMP].[T_ZONEID] AS [T_ZONEID], 
+    [VW_CC1_TEMP].[SEDSTATUS] AS [SEDSTATUS], 
+    [VW_CC1_TEMP].[CCSTATUS] AS [CCSTATUS]
+    FROM [dbo].[VW_CC1_TEMP] AS [VW_CC1_TEMP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_CLASS_SUBCLASS" EntityType="Self.VW_CLASS_SUBCLASS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_CLASS_SUBCLASS].[CLASSID] AS [CLASSID], 
+    [VW_CLASS_SUBCLASS].[CLSNAME] AS [CLSNAME], 
+    [VW_CLASS_SUBCLASS].[SUBCLASSID] AS [SUBCLASSID], 
+    [VW_CLASS_SUBCLASS].[SUBCLSNAME] AS [SUBCLSNAME]
+    FROM [dbo].[VW_CLASS_SUBCLASS] AS [VW_CLASS_SUBCLASS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_USER" EntityType="Self.VW_USER" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_USER].[USERID] AS [USERID], 
+    [VW_USER].[USERNAME] AS [USERNAME], 
+    [VW_USER].[USERPASSWORD] AS [USERPASSWORD], 
+    [VW_USER].[CLSNAME] AS [CLSNAME], 
+    [VW_USER].[SUBCLSNAME] AS [SUBCLSNAME], 
+    [VW_USER].[ROLLDESC] AS [ROLLDESC], 
+    [VW_USER].[ROLLID] AS [ROLLID], 
+    [VW_USER].[Expr1] AS [Expr1], 
+    [VW_USER].[CLSID] AS [CLSID], 
+    [VW_USER].[SUBCLSID] AS [SUBCLSID], 
+    [VW_USER].[SUBCLSSTATUS] AS [SUBCLSSTATUS], 
+    [VW_USER].[ROLLSTATUS] AS [ROLLSTATUS], 
+    [VW_USER].[USERSTATUS] AS [USERSTATUS]
+    FROM [dbo].[VW_USER] AS [VW_USER]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NAVWMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="FN_ListToTable_Result">
+          <Property Name="ListValue" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <EntityType Name="WMS_CC_REQUEST">
+          <Key>
+            <PropertyRef Name="DOCNO" />
+          </Key>
+          <Property Name="DOCNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCDATE" Type="DateTime" Precision="3" />
+          <Property Name="ZONEID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BINNO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="ACHIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_CC_SCAN">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZONEID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="MATCHSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_CLASS_EDITOR">
+          <Key>
+            <PropertyRef Name="CLASSID" />
+          </Key>
+          <Property Name="CLASSID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLSNAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CLSFLAG" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="CLSSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_CYCLECOUNT">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZONEID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UOM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
+          <Property Name="ASSIGNSTATUS" Type="Boolean" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="T_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="T_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SEDSTATUS" Type="Int32" />
+          <Property Name="CCSTATUS" Type="Int32" />
+          <Property Name="ARCHIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_DOC_REGISTER">
+          <Key>
+            <PropertyRef Name="DOCNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCTYPE" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="PRESET" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SERIALNO" Type="Int32" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WMS_MOVE_DETAIL">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FROMBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUGGBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUGGZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SCANBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMDESC" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="PICKDATE" Type="DateTime" Precision="3" />
+          <Property Name="PUTDATE" Type="DateTime" Precision="3" />
+          <Property Name="INTEGRATED" Type="DateTime" Precision="3" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MOVSTATUS" Type="Int32" />
+          <Property Name="ARCHIVE" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WMS_MOVE_HEAD">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOCSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_PICKING">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PICKNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UOM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="EANCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EANTAG" Type="Int32" />
+          <Property Name="ACTBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTBARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PNA" Type="Int32" />
+          <Property Name="PICKSTATUS" Type="Int32" />
+          <Property Name="ASSIGNSTATUS" Type="Boolean" />
+          <Property Name="ARCHIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_PUTAWAY">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PUTNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UOM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="ARCHIVE" Type="Int32" />
+          <Property Name="PUTSTATUS" Type="Int32" />
+          <Property Name="ASSIGNSTATUS" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="WMS_ROLL_EDITOR">
+          <Key>
+            <PropertyRef Name="ROLLID" />
+          </Key>
+          <Property Name="ROLLID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROLLDESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ROLLSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_STOCKMOVEMENT">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FROMBIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TOBIN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TROLLEYNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WAREHOUSENO" Type="Int32" />
+          <Property Name="ZONEID" Type="Int32" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SKUNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="UOM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="QTY" Type="Int32" />
+          <Property Name="FROMUSERID" Type="Int32" />
+          <Property Name="DATE_1" Type="DateTime" Precision="3" />
+          <Property Name="TOUSERID" Type="Int32" />
+          <Property Name="DATE_2" Type="DateTime" Precision="3" />
+          <Property Name="ARCHIVE" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_STORE_EDITOR">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STOREID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORETAG" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STORENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EXCHRATE" Type="Double" />
+          <Property Name="ERPSTOREID" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_SUBCLASS_EDITOR">
+          <Key>
+            <PropertyRef Name="SUBCLASSID" />
+          </Key>
+          <Property Name="SUBCLASSID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SUBCLSNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUBFLAG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CLASSID" Type="Int32" />
+          <Property Name="SUBCLSSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_SUBROLL_EDITOR">
+          <Key>
+            <PropertyRef Name="SUBROLLID" />
+          </Key>
+          <Property Name="SUBROLLID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ROLLID" Type="Int32" Nullable="false" />
+          <Property Name="CLSID" Type="Int32" />
+          <Property Name="SUBCLASSID" Type="Int32" />
+          <Property Name="SUBCLSSTATUS" Type="Int32" />
+          <Property Name="ROLLSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_USER_EDITOR">
+          <Key>
+            <PropertyRef Name="USERID" />
+          </Key>
+          <Property Name="USERID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USERNAME" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USERPASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ROLLID" Type="Int32" />
+          <Property Name="STOREID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APIURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="USERSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_USER_TASKS">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SUBDOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOCTYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ASSIGNDATE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="WMS_ZONE_EDITOR">
+          <Key>
+            <PropertyRef Name="ZONEID" />
+          </Key>
+          <Property Name="ZONEID" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ZONEDESC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ZONESTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_USER_TOKEN">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TOKENID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="FDATE" Type="DateTime" Precision="3" />
+          <Property Name="TDATE" Type="DateTime" Precision="3" />
+          <Property Name="INTERVAL" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VW_CC1_TEMP">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZONEID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="T_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="T_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SEDSTATUS" Type="Int32" />
+          <Property Name="CCSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VW_CLASS_SUBCLASS">
+          <Key>
+            <PropertyRef Name="CLASSID" />
+            <PropertyRef Name="SUBCLASSID" />
+          </Key>
+          <Property Name="CLASSID" Type="Int32" Nullable="false" />
+          <Property Name="CLSNAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SUBCLASSID" Type="Int32" Nullable="false" />
+          <Property Name="SUBCLSNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VW_USER">
+          <Key>
+            <PropertyRef Name="USERID" />
+            <PropertyRef Name="USERNAME" />
+            <PropertyRef Name="Expr1" />
+          </Key>
+          <Property Name="USERID" Type="Int32" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USERPASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CLSNAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SUBCLSNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ROLLDESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ROLLID" Type="Int32" />
+          <Property Name="Expr1" Type="Int32" Nullable="false" />
+          <Property Name="CLSID" Type="Int32" />
+          <Property Name="SUBCLSID" Type="Int32" />
+          <Property Name="SUBCLSSTATUS" Type="Int32" />
+          <Property Name="ROLLSTATUS" Type="Int32" />
+          <Property Name="USERSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="NAVWMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="WMS_CC_REQUEST" EntityType="Self.WMS_CC_REQUEST" />
+          <EntitySet Name="WMS_CC_SCAN" EntityType="Self.WMS_CC_SCAN" />
+          <EntitySet Name="WMS_CLASS_EDITOR" EntityType="Self.WMS_CLASS_EDITOR" />
+          <EntitySet Name="WMS_CYCLECOUNT" EntityType="Self.WMS_CYCLECOUNT" />
+          <EntitySet Name="WMS_DOC_REGISTER" EntityType="Self.WMS_DOC_REGISTER" />
+          <EntitySet Name="WMS_MOVE_DETAIL" EntityType="Self.WMS_MOVE_DETAIL" />
+          <EntitySet Name="WMS_MOVE_HEAD" EntityType="Self.WMS_MOVE_HEAD" />
+          <EntitySet Name="WMS_PICKING" EntityType="Self.WMS_PICKING" />
+          <EntitySet Name="WMS_PUTAWAY" EntityType="Self.WMS_PUTAWAY" />
+          <EntitySet Name="WMS_ROLL_EDITOR" EntityType="Self.WMS_ROLL_EDITOR" />
+          <EntitySet Name="WMS_STOCKMOVEMENT" EntityType="Self.WMS_STOCKMOVEMENT" />
+          <EntitySet Name="WMS_STORE_EDITOR" EntityType="Self.WMS_STORE_EDITOR" />
+          <EntitySet Name="WMS_SUBCLASS_EDITOR" EntityType="Self.WMS_SUBCLASS_EDITOR" />
+          <EntitySet Name="WMS_SUBROLL_EDITOR" EntityType="Self.WMS_SUBROLL_EDITOR" />
+          <EntitySet Name="WMS_USER_EDITOR" EntityType="Self.WMS_USER_EDITOR" />
+          <EntitySet Name="WMS_USER_TASKS" EntityType="Self.WMS_USER_TASKS" />
+          <EntitySet Name="WMS_ZONE_EDITOR" EntityType="Self.WMS_ZONE_EDITOR" />
+          <EntitySet Name="WMS_USER_TOKEN" EntityType="Self.WMS_USER_TOKEN" />
+          <EntitySet Name="VW_CC1_TEMP" EntityType="Self.VW_CC1_TEMP" />
+          <EntitySet Name="VW_CLASS_SUBCLASS" EntityType="Self.VW_CLASS_SUBCLASS" />
+          <EntitySet Name="VW_USER" EntityType="Self.VW_USER" />
+          <FunctionImport Name="FN_ListToTable" IsComposable="true" ReturnType="Collection(NAVWMSModel.FN_ListToTable_Result)">
+            <Parameter Name="SplitOn" Mode="In" Type="String" />
+            <Parameter Name="List" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="CC_DOCLIST_CONFIRM" ReturnType="Collection(NAVWMSModel.CC_DOCLIST_CONFIRM_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="CCNO" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="ITEMNO" Mode="In" Type="String" />
+            <Parameter Name="BINNO" Mode="In" Type="String" />
+            <Parameter Name="ZONEID" Mode="In" Type="String" />
+            <Parameter Name="TOKENID" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CC_DOCLIST_CONFIRM_1" ReturnType="Collection(NAVWMSModel.CC_DOCLIST_CONFIRM_1_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="CCNO" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="ITEMNO" Mode="In" Type="String" />
+            <Parameter Name="BINNO" Mode="In" Type="String" />
+            <Parameter Name="ZONEID" Mode="In" Type="String" />
+            <Parameter Name="TOKENID" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="MOV_DOCLIST_CONFIRM" ReturnType="Collection(String)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="DOCNO" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="ITEMNO" Mode="In" Type="String" />
+            <Parameter Name="SERIALNO" Mode="In" Type="String" />
+            <Parameter Name="BINNO" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+            <Parameter Name="WHNO" Mode="In" Type="String" />
+            <Parameter Name="TOKENID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="NAV_INTEGRATION" ReturnType="Collection(NAVWMSModel.NAV_INTEGRATION_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="WHNO" Mode="In" Type="String" />
+            <Parameter Name="DOCNO" Mode="In" Type="String" />
+            <Parameter Name="SUBDOCNO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PIK_DOCLIST_CONFIRM" ReturnType="Collection(NAVWMSModel.PIK_DOCLIST_CONFIRM_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="PICKNO" Mode="In" Type="String" />
+            <Parameter Name="SBCODE" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="ITEMNO" Mode="In" Type="String" />
+            <Parameter Name="BINNO" Mode="In" Type="String" />
+            <Parameter Name="TAG" Mode="In" Type="Int32" />
+            <Parameter Name="TOKENID" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PTA_DOCLIST_CONFIRM" ReturnType="Collection(NAVWMSModel.PTA_DOCLIST_CONFIRM_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="PUTNO" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="ITEMNO" Mode="In" Type="String" />
+            <Parameter Name="BINNO" Mode="In" Type="String" />
+            <Parameter Name="TOKENID" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="TEST_DOCLIST" ReturnType="Collection(NAVWMSModel.TEST_DOCLIST_Result)">
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="USER_EDITOR_ADDEDIT" ReturnType="Collection(NAVWMSModel.USER_EDITOR_ADDEDIT_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="USERID" Mode="In" Type="String" />
+            <Parameter Name="USERNAME" Mode="In" Type="String" />
+            <Parameter Name="USERPASSWORD" Mode="In" Type="String" />
+            <Parameter Name="USERROLL" Mode="In" Type="Int32" />
+            <Parameter Name="USERSTATUS" Mode="In" Type="Int32" />
+            <Parameter Name="STOREID" Mode="In" Type="Int32" />
+            <Parameter Name="GENERIC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USER_LOGIN" ReturnType="Collection(NAVWMSModel.USER_LOGIN_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="USERNAME" Mode="In" Type="String" />
+            <Parameter Name="PASSWORD" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="USER_TOKEN_CHECK">
+            <Parameter Name="TOKENID" Mode="In" Type="String" />
+            <Parameter Name="TOKENEXTEND" Mode="In" Type="String" />
+            <Parameter Name="PARAOUT" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="WMS_DESKTOP" ReturnType="Collection(NAVWMSModel.WMS_DESKTOP_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="DOCNO" Mode="In" Type="String" />
+            <Parameter Name="SUBDOCNO" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+            <Parameter Name="USERNAME" Mode="In" Type="String" />
+            <Parameter Name="DOCTYPE" Mode="In" Type="String" />
+            <Parameter Name="DATE1" Mode="In" Type="DateTime" />
+            <Parameter Name="DATE2" Mode="In" Type="DateTime" />
+            <Parameter Name="WHNO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="WMS_NAVDATA_PULL">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="WHNO" Mode="In" Type="String" />
+            <Parameter Name="DOCNO" Mode="In" Type="String" />
+            <Parameter Name="SUBDOCNO" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="ITEMNO" Mode="In" Type="String" />
+            <Parameter Name="SERAILNO" Mode="In" Type="String" />
+            <Parameter Name="ITEMDESC" Mode="In" Type="String" />
+            <Parameter Name="UOM" Mode="In" Type="String" />
+            <Parameter Name="QTY" Mode="In" Type="String" />
+            <Parameter Name="BINNO" Mode="In" Type="String" />
+            <Parameter Name="ZONEID" Mode="In" Type="String" />
+            <Parameter Name="EANCODE" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="CC_DOCLIST_CONFIRM_Result">
+          <Property Type="String" Name="DOCNO" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CCNO" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ZONEBIN" Nullable="true" MaxLength="61" />
+          <Property Type="Int32" Name="USERID" Nullable="true" />
+          <Property Type="Double" Name="TOTQTY" Nullable="true" />
+          <Property Type="Int32" Name="CCQTY" Nullable="true" />
+          <Property Type="String" Name="QTY" Nullable="true" MaxLength="61" />
+          <Property Type="Int32" Name="CCSTATUS" Nullable="true" />
+          <Property Type="String" Name="MYACT" Nullable="false" MaxLength="3" />
+        </ComplexType>
+        <ComplexType Name="CC_DOCLIST_CONFIRM_1_Result">
+          <Property Type="String" Name="DOCNO" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CCNO" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ZONEBIN" Nullable="true" MaxLength="61" />
+          <Property Type="Int32" Name="USERID" Nullable="true" />
+          <Property Type="Double" Name="TOTQTY" Nullable="true" />
+          <Property Type="Int32" Name="CCQTY" Nullable="true" />
+          <Property Type="String" Name="QTY" Nullable="true" MaxLength="61" />
+          <Property Type="Int32" Name="CCSTATUS" Nullable="true" />
+          <Property Type="String" Name="MYACT" Nullable="false" MaxLength="3" />
+        </ComplexType>
+        <ComplexType Name="NAV_INTEGRATION_Result">
+          <Property Type="String" Name="DOCNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PUTNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="WAREHOUSENO" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="PIK_DOCLIST_CONFIRM_Result">
+          <Property Type="String" Name="DOCNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PICKNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ZONEBIN" Nullable="true" MaxLength="101" />
+          <Property Type="Int32" Name="USERID" Nullable="true" />
+          <Property Type="Double" Name="TOTQTY" Nullable="true" />
+          <Property Type="Double" Name="PICKQTY" Nullable="true" />
+          <Property Type="String" Name="QTY" Nullable="true" MaxLength="61" />
+          <Property Type="Int32" Name="PICKSTATUS" Nullable="true" />
+          <Property Type="String" Name="MYACT" Nullable="false" MaxLength="3" />
+        </ComplexType>
+        <ComplexType Name="PTA_DOCLIST_CONFIRM_Result">
+          <Property Type="String" Name="DOCNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PUTNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ZONEID" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="USERID" Nullable="true" />
+          <Property Type="Double" Name="TOTQTY" Nullable="true" />
+          <Property Type="Double" Name="PUTQTY" Nullable="true" />
+          <Property Type="String" Name="QTY" Nullable="true" MaxLength="61" />
+          <Property Type="Int32" Name="PUTSTATUS" Nullable="true" />
+          <Property Type="String" Name="MYACT" Nullable="false" MaxLength="3" />
+        </ComplexType>
+        <ComplexType Name="TEST_DOCLIST_Result">
+          <Property Type="Decimal" Name="SRNO" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="WAREHOUSENO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DOCNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CCNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ZONEID" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="BINNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BARCODE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="F_ZONEID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="F_BINNO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="USERID" Nullable="true" />
+          <Property Type="Int32" Name="MATCHSTATUS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USER_EDITOR_ADDEDIT_Result">
+          <Property Type="Int32" Name="USERID" Nullable="false" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="USERPASSWORD" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ROLLID" Nullable="true" />
+          <Property Type="String" Name="STOREID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APIURL" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="USERSTATUS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="USER_LOGIN_Result">
+          <Property Type="Int32" Name="USERID" Nullable="false" />
+          <Property Type="String" Name="USERNAME" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="USERPASSWORD" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ROLLID" Nullable="true" />
+          <Property Type="String" Name="STOREID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="APIURL" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="USERSTATUS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="WMS_DESKTOP_Result">
+          <Property Type="String" Name="DOCNO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DOCDATE" Nullable="true" />
+          <Property Type="Int32" Name="NOOFPUTS" Nullable="true" />
+          <Property Type="Double" Name="PUTQTY" Nullable="true" />
+          <Property Type="Double" Name="SCANQTY" Nullable="true" />
+          <Property Type="String" Name="PUTSTATUS" Nullable="false" MaxLength="10" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NAVWMSModelStoreContainer" CdmEntityContainer="NAVWMSEntities">
+          <EntitySetMapping Name="WMS_CC_REQUEST">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CC_REQUEST">
+              <MappingFragment StoreEntitySet="WMS_CC_REQUEST">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="DOCDATE" ColumnName="DOCDATE" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="ACHIVE" ColumnName="ACHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_CC_SCAN">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CC_SCAN">
+              <MappingFragment StoreEntitySet="WMS_CC_SCAN">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="MATCHSTATUS" ColumnName="MATCHSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_CLASS_EDITOR">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CLASS_EDITOR">
+              <MappingFragment StoreEntitySet="WMS_CLASS_EDITOR">
+                <ScalarProperty Name="CLASSID" ColumnName="CLASSID" />
+                <ScalarProperty Name="CLSNAME" ColumnName="CLSNAME" />
+                <ScalarProperty Name="CLSFLAG" ColumnName="CLSFLAG" />
+                <ScalarProperty Name="CLSSTATUS" ColumnName="CLSSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_CYCLECOUNT">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CYCLECOUNT">
+              <MappingFragment StoreEntitySet="WMS_CYCLECOUNT">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="RECINSERTED" ColumnName="RECINSERTED" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERASSIGNDATE" ColumnName="USERASSIGNDATE" />
+                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
+                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
+                <ScalarProperty Name="SEDSTATUS" ColumnName="SEDSTATUS" />
+                <ScalarProperty Name="CCSTATUS" ColumnName="CCSTATUS" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_DOC_REGISTER">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_DOC_REGISTER">
+              <MappingFragment StoreEntitySet="WMS_DOC_REGISTER">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCTYPE" ColumnName="DOCTYPE" />
+                <ScalarProperty Name="PRESET" ColumnName="PRESET" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_MOVE_DETAIL">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_MOVE_DETAIL">
+              <MappingFragment StoreEntitySet="WMS_MOVE_DETAIL">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="FROMBINNO" ColumnName="FROMBINNO" />
+                <ScalarProperty Name="SUGGBINNO" ColumnName="SUGGBINNO" />
+                <ScalarProperty Name="SUGGZONEID" ColumnName="SUGGZONEID" />
+                <ScalarProperty Name="SCANBINNO" ColumnName="SCANBINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="ITEMDESC" ColumnName="ITEMDESC" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="PICKDATE" ColumnName="PICKDATE" />
+                <ScalarProperty Name="PUTDATE" ColumnName="PUTDATE" />
+                <ScalarProperty Name="INTEGRATED" ColumnName="INTEGRATED" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="MOVSTATUS" ColumnName="MOVSTATUS" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_MOVE_HEAD">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_MOVE_HEAD">
+              <MappingFragment StoreEntitySet="WMS_MOVE_HEAD">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="DOCSTATUS" ColumnName="DOCSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_PICKING">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_PICKING">
+              <MappingFragment StoreEntitySet="WMS_PICKING">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="PICKNO" ColumnName="PICKNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="RECINSERTED" ColumnName="RECINSERTED" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERASSIGNDATE" ColumnName="USERASSIGNDATE" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="EANCODE" ColumnName="EANCODE" />
+                <ScalarProperty Name="EANTAG" ColumnName="EANTAG" />
+                <ScalarProperty Name="ACTBINNO" ColumnName="ACTBINNO" />
+                <ScalarProperty Name="ACTBARCODE" ColumnName="ACTBARCODE" />
+                <ScalarProperty Name="PNA" ColumnName="PNA" />
+                <ScalarProperty Name="PICKSTATUS" ColumnName="PICKSTATUS" />
+                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_PUTAWAY">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_PUTAWAY">
+              <MappingFragment StoreEntitySet="WMS_PUTAWAY">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="PUTNO" ColumnName="PUTNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="RECINSERTED" ColumnName="RECINSERTED" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERASSIGNDATE" ColumnName="USERASSIGNDATE" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+                <ScalarProperty Name="PUTSTATUS" ColumnName="PUTSTATUS" />
+                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_ROLL_EDITOR">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_ROLL_EDITOR">
+              <MappingFragment StoreEntitySet="WMS_ROLL_EDITOR">
+                <ScalarProperty Name="ROLLID" ColumnName="ROLLID" />
+                <ScalarProperty Name="ROLLDESC" ColumnName="ROLLDESC" />
+                <ScalarProperty Name="ROLLSTATUS" ColumnName="ROLLSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_STOCKMOVEMENT">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_STOCKMOVEMENT">
+              <MappingFragment StoreEntitySet="WMS_STOCKMOVEMENT">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="FROMBIN" ColumnName="FROMBIN" />
+                <ScalarProperty Name="TOBIN" ColumnName="TOBIN" />
+                <ScalarProperty Name="TROLLEYNO" ColumnName="TROLLEYNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="SKUNO" ColumnName="SKUNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="FROMUSERID" ColumnName="FROMUSERID" />
+                <ScalarProperty Name="DATE_1" ColumnName="DATE_1" />
+                <ScalarProperty Name="TOUSERID" ColumnName="TOUSERID" />
+                <ScalarProperty Name="DATE_2" ColumnName="DATE_2" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_STORE_EDITOR">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_STORE_EDITOR">
+              <MappingFragment StoreEntitySet="WMS_STORE_EDITOR">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="STOREID" ColumnName="STOREID" />
+                <ScalarProperty Name="STORETAG" ColumnName="STORETAG" />
+                <ScalarProperty Name="STORENAME" ColumnName="STORENAME" />
+                <ScalarProperty Name="EXCHRATE" ColumnName="EXCHRATE" />
+                <ScalarProperty Name="ERPSTOREID" ColumnName="ERPSTOREID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_SUBCLASS_EDITOR">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_SUBCLASS_EDITOR">
+              <MappingFragment StoreEntitySet="WMS_SUBCLASS_EDITOR">
+                <ScalarProperty Name="SUBCLASSID" ColumnName="SUBCLASSID" />
+                <ScalarProperty Name="SUBCLSNAME" ColumnName="SUBCLSNAME" />
+                <ScalarProperty Name="SUBFLAG" ColumnName="SUBFLAG" />
+                <ScalarProperty Name="CLASSID" ColumnName="CLASSID" />
+                <ScalarProperty Name="SUBCLSSTATUS" ColumnName="SUBCLSSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_SUBROLL_EDITOR">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_SUBROLL_EDITOR">
+              <MappingFragment StoreEntitySet="WMS_SUBROLL_EDITOR">
+                <ScalarProperty Name="SUBROLLID" ColumnName="SUBROLLID" />
+                <ScalarProperty Name="ROLLID" ColumnName="ROLLID" />
+                <ScalarProperty Name="CLSID" ColumnName="CLSID" />
+                <ScalarProperty Name="SUBCLASSID" ColumnName="SUBCLASSID" />
+                <ScalarProperty Name="SUBCLSSTATUS" ColumnName="SUBCLSSTATUS" />
+                <ScalarProperty Name="ROLLSTATUS" ColumnName="ROLLSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_USER_EDITOR">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_USER_EDITOR">
+              <MappingFragment StoreEntitySet="WMS_USER_EDITOR">
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+                <ScalarProperty Name="ROLLID" ColumnName="ROLLID" />
+                <ScalarProperty Name="STOREID" ColumnName="STOREID" />
+                <ScalarProperty Name="APIURL" ColumnName="APIURL" />
+                <ScalarProperty Name="USERSTATUS" ColumnName="USERSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_USER_TASKS">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_USER_TASKS">
+              <MappingFragment StoreEntitySet="WMS_USER_TASKS">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="SUBDOCNO" ColumnName="SUBDOCNO" />
+                <ScalarProperty Name="DOCTYPE" ColumnName="DOCTYPE" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="ASSIGNDATE" ColumnName="ASSIGNDATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_ZONE_EDITOR">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_ZONE_EDITOR">
+              <MappingFragment StoreEntitySet="WMS_ZONE_EDITOR">
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="ZONEDESC" ColumnName="ZONEDESC" />
+                <ScalarProperty Name="ZONESTATUS" ColumnName="ZONESTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_USER_TOKEN">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_USER_TOKEN">
+              <MappingFragment StoreEntitySet="WMS_USER_TOKEN">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="TOKENID" ColumnName="TOKENID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="FDATE" ColumnName="FDATE" />
+                <ScalarProperty Name="TDATE" ColumnName="TDATE" />
+                <ScalarProperty Name="INTERVAL" ColumnName="INTERVAL" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_CC1_TEMP">
+            <EntityTypeMapping TypeName="NAVWMSModel.VW_CC1_TEMP">
+              <MappingFragment StoreEntitySet="VW_CC1_TEMP">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
+                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
+                <ScalarProperty Name="SEDSTATUS" ColumnName="SEDSTATUS" />
+                <ScalarProperty Name="CCSTATUS" ColumnName="CCSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_CLASS_SUBCLASS">
+            <EntityTypeMapping TypeName="NAVWMSModel.VW_CLASS_SUBCLASS">
+              <MappingFragment StoreEntitySet="VW_CLASS_SUBCLASS">
+                <ScalarProperty Name="CLASSID" ColumnName="CLASSID" />
+                <ScalarProperty Name="CLSNAME" ColumnName="CLSNAME" />
+                <ScalarProperty Name="SUBCLASSID" ColumnName="SUBCLASSID" />
+                <ScalarProperty Name="SUBCLSNAME" ColumnName="SUBCLSNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_USER">
+            <EntityTypeMapping TypeName="NAVWMSModel.VW_USER">
+              <MappingFragment StoreEntitySet="VW_USER">
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+                <ScalarProperty Name="CLSNAME" ColumnName="CLSNAME" />
+                <ScalarProperty Name="SUBCLSNAME" ColumnName="SUBCLSNAME" />
+                <ScalarProperty Name="ROLLDESC" ColumnName="ROLLDESC" />
+                <ScalarProperty Name="ROLLID" ColumnName="ROLLID" />
+                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
+                <ScalarProperty Name="CLSID" ColumnName="CLSID" />
+                <ScalarProperty Name="SUBCLSID" ColumnName="SUBCLSID" />
+                <ScalarProperty Name="SUBCLSSTATUS" ColumnName="SUBCLSSTATUS" />
+                <ScalarProperty Name="ROLLSTATUS" ColumnName="ROLLSTATUS" />
+                <ScalarProperty Name="USERSTATUS" ColumnName="USERSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="NAVWMSModel.Store.FN_ListToTable" FunctionImportName="FN_ListToTable">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.FN_ListToTable_Result">
+                <ScalarProperty Name="ListValue" ColumnName="ListValue" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CC_DOCLIST_CONFIRM" FunctionName="NAVWMSModel.Store.CC_DOCLIST_CONFIRM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.CC_DOCLIST_CONFIRM_Result">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="ZONEBIN" ColumnName="ZONEBIN" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="TOTQTY" ColumnName="TOTQTY" />
+                <ScalarProperty Name="CCQTY" ColumnName="CCQTY" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="CCSTATUS" ColumnName="CCSTATUS" />
+                <ScalarProperty Name="MYACT" ColumnName="MYACT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CC_DOCLIST_CONFIRM_1" FunctionName="NAVWMSModel.Store.CC_DOCLIST_CONFIRM_1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.CC_DOCLIST_CONFIRM_1_Result">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="ZONEBIN" ColumnName="ZONEBIN" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="TOTQTY" ColumnName="TOTQTY" />
+                <ScalarProperty Name="CCQTY" ColumnName="CCQTY" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="CCSTATUS" ColumnName="CCSTATUS" />
+                <ScalarProperty Name="MYACT" ColumnName="MYACT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MOV_DOCLIST_CONFIRM" FunctionName="NAVWMSModel.Store.MOV_DOCLIST_CONFIRM" />
+          <FunctionImportMapping FunctionImportName="NAV_INTEGRATION" FunctionName="NAVWMSModel.Store.NAV_INTEGRATION">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.NAV_INTEGRATION_Result">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="PUTNO" ColumnName="PUTNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PIK_DOCLIST_CONFIRM" FunctionName="NAVWMSModel.Store.PIK_DOCLIST_CONFIRM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.PIK_DOCLIST_CONFIRM_Result">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="PICKNO" ColumnName="PICKNO" />
+                <ScalarProperty Name="ZONEBIN" ColumnName="ZONEBIN" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="TOTQTY" ColumnName="TOTQTY" />
+                <ScalarProperty Name="PICKQTY" ColumnName="PICKQTY" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="PICKSTATUS" ColumnName="PICKSTATUS" />
+                <ScalarProperty Name="MYACT" ColumnName="MYACT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PTA_DOCLIST_CONFIRM" FunctionName="NAVWMSModel.Store.PTA_DOCLIST_CONFIRM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.PTA_DOCLIST_CONFIRM_Result">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="PUTNO" ColumnName="PUTNO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="TOTQTY" ColumnName="TOTQTY" />
+                <ScalarProperty Name="PUTQTY" ColumnName="PUTQTY" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="PUTSTATUS" ColumnName="PUTSTATUS" />
+                <ScalarProperty Name="MYACT" ColumnName="MYACT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="TEST_DOCLIST" FunctionName="NAVWMSModel.Store.TEST_DOCLIST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.TEST_DOCLIST_Result">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="MATCHSTATUS" ColumnName="MATCHSTATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USER_EDITOR_ADDEDIT" FunctionName="NAVWMSModel.Store.USER_EDITOR_ADDEDIT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.USER_EDITOR_ADDEDIT_Result">
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+                <ScalarProperty Name="ROLLID" ColumnName="ROLLID" />
+                <ScalarProperty Name="STOREID" ColumnName="STOREID" />
+                <ScalarProperty Name="APIURL" ColumnName="APIURL" />
+                <ScalarProperty Name="USERSTATUS" ColumnName="USERSTATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USER_LOGIN" FunctionName="NAVWMSModel.Store.USER_LOGIN">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.USER_LOGIN_Result">
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="USERPASSWORD" ColumnName="USERPASSWORD" />
+                <ScalarProperty Name="ROLLID" ColumnName="ROLLID" />
+                <ScalarProperty Name="STOREID" ColumnName="STOREID" />
+                <ScalarProperty Name="APIURL" ColumnName="APIURL" />
+                <ScalarProperty Name="USERSTATUS" ColumnName="USERSTATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="USER_TOKEN_CHECK" FunctionName="NAVWMSModel.Store.USER_TOKEN_CHECK" />
+          <FunctionImportMapping FunctionImportName="WMS_DESKTOP" FunctionName="NAVWMSModel.Store.WMS_DESKTOP">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.WMS_DESKTOP_Result">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="DOCDATE" ColumnName="DOCDATE" />
+                <ScalarProperty Name="NOOFPUTS" ColumnName="NOOFPUTS" />
+                <ScalarProperty Name="PUTQTY" ColumnName="PUTQTY" />
+                <ScalarProperty Name="SCANQTY" ColumnName="SCANQTY" />
+                <ScalarProperty Name="PUTSTATUS" ColumnName="PUTSTATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="WMS_NAVDATA_PULL" FunctionName="NAVWMSModel.Store.WMS_NAVDATA_PULL" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,132 @@
+﻿
+@{
+    Layout = null;
+}
+@model NAVWMSDESK.ViewModel.Login.LoginViewModel
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WMS</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/toastr.js"></script>
+    <!-- Bootstrap -->
+    <link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="~/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    @*<link href="../build/css/custom.css" rel="stylesheet">*@
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link href="~/build/css/custom.css" rel="stylesheet" />
+</head>
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    <form>
+                        <div class="logo-login">
+                            <img src="~/build/images/logo_login.jpg" alt="Login">
+                        </div>
+                        @using (Html.BeginForm("SignIn", "Login", FormMethod.Post, new { }))
+                        {
+                            <div class="content-wrapper">
+                                <div class="user">
+                                    @*<input type="text" class="form-control" placeholder="Username" required="" />*@
+                                    @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", @type = "TEXT", @placeholder = "UserName" })
+                                </div>
+                                <div class="pass">
+                                    @* <input type="password" class="form-control" placeholder="Password" required="" />*@
+                                    @Html.TextBoxFor(a => a.Password, new { @class = "form-control", @type = "password", @placeholder = "Password" })
+                                </div>
+                                <div>
+                                    <a class="btn btn-default submit savebtn ">Log in</a>
+                                    @*<input type="submit" value="Log in" class="btn btn-default submit">*@
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        }
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(document).on('click', '.savebtn', function (e) {
+
+        var UserName = $('#UserName').val();
+        var Password = $('#Password').val();
+        if (!UserName) {
+            e.preventDefault();
+            toastr.error('UserName is required');
+        }
+        else  if (!Password) {
+            e.preventDefault();
+            toastr.error('Password is required');
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                //url: ("http://localhost:4800/api/User/UserValidation?UserName=" + UserName + "&Password=" + Password + ""),
+                url: '@Url.Action("GetUserCredentials", "Login")',
+                //url: ("/Login/GetUserCredentials"),
+                data: ({ UserName: UserName, Password: Password }),
+                dataType: "json",
+                success: function (result) {
+
+                    if (result == 1) {
+
+                        window.location = "/navwmsdesk/Home/Home";
+                    }
+                    else {
+                        toastr.error('Invalid Credentials');
+                        ResetControls();
+                        //window.location = "/Login/SignIn";
+                    }
+                },
+                error: function (ex) {
+
+                    //alert(ex.toString());
+                }
+            });
+        }
+        });
+    function ResetControls() {
+        $('#UserName').val('');
+        $('#Password').val('');
+    }
+    function UserCredentials() {
+
+        var UserName = $('#UserName').val();
+        var Password = $('#Password').val();
+        $.post("GetUserCredentials", { UserName: UserName, Password: Password });
+
+        //$.ajax({
+        //    type: "GET",
+        //    url: ("GetUserCredentials"),
+        //    data: ({ UserName: UserName, Password: Password }),
+        //    dataType: "json",
+        //    success: function (result) {
+
+
+        //    },
+        //    error: function (ex) {
+
+        //        //alert(ex.toString());
+        //    }
+        //});
+
+    }
+</script>

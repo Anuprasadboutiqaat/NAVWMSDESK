@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "Subroll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="kendo">
+    <div id="grid"></div>
+</div>
+<script>
+    $("#grid").kendoGrid({
+        //height: 400,
+        columns: [
+                            { field: "SUBROLLID", title: "SUBROLLID", hidden: true, width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "ROLLID", title: "ROLL", width: "10%", editor: RollDrpEditor, template: "#=ROLLDESC#", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "CLSID", title: "CLASS", width: "10%", editor: ClassDrpEditor, template: "#=CLSNAME#", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "SUBCLASSID", title: "SUBCLASS", width: "10%", editor: SubClassDrpEditor, template: "#=SUBCLSNAME#", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "SUBCLSSTATUS", title: "SUBCLSSTATUS", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { field: "ROLLSTATUS", title: "ROLLSTATUS", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                            { command: ["edit", "destroy"], width: 180, title: "ACTION", }
+        ],
+         toolbar: ["create"],
+       // toolbar: kendo.template($("#searchtemplate").html()),
+        dataSource: {
+            pageSize: 15,
+            type: "webapi",
+            transport: {
+                idField: "SUBROLLID",
+                read: {
+                    url: "http://localhost:4800/api/Subroll/GetSUBROLL",
+                },
+                create: {
+                    url: "http://localhost:4800/api/Subroll/PostWMS_SUBROLL_EDITOR",
+                    type: "POST",
+                    complete: function (e) {
+                        $("#grid").data("kendoGrid").dataSource.read();
+                    }
+                },
+                update: {
+                    url: "http://localhost:4800/api/Subroll/PutWMS_SUBROLL_EDITOR/{0}",                 
+                    type: "PUT",
+                    complete: function (e) {
+                        $("#grid").data("kendoGrid").dataSource.read();
+                    }
+                },
+                destroy: {
+                    url: "http://localhost:4800/api/Subroll/DeleteWMS_SUBROLL_EDITOR/{0}",
+                    type: "DELETE",
+                    complete: function (e) {
+                        $("#grid").data("kendoGrid").dataSource.read();
+                    }
+                }
+			},
+            schema: {
+                            data: "Data",
+                            total: function (response) {
+                                return response.Total;
+                            },
+                errors: "Errors",
+                model: {
+                    id: "SUBROLLID",
+					fields: {
+					    SUBROLLID: { type: "number" },
+					    ROLLID: { type: "number" },
+					    CLSID: { type: "number" },
+					    SUBCLASSID: { type: "number" },
+					    SUBCLSSTATUS: { type: "number" },
+					    ROLLSTATUS: { type: "number" },
+					    CLSNAME: { type: "string" },
+					    SUBCLSNAME: { type: "string" },
+					    ROLLDESC: { type: "string" },
+					    
+					}
+                }
+
+            },
+
+            serverPaging: true,
+            serverSorting: true,
+            serverFiltering: true,
+            serverGrouping: true,
+            serverAggregates: true,
+        },
+        pageable: {
+                    input: true,
+                    numeric: false
+                },
+        editable: "inline",
+        scrollable: true
+    })
+    function ClassDrpEditor(container, options) {
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataTextField: "CLSNAME",
+                dataValueField: "CLASSID",
+                dataSource: {
+                    type: "webapi",
+                    transport: {
+                        read: {
+                            url: ("http://localhost:4800/api/Subclass/GetClass"),
+                            dataType: "json",
+
+                        },
+                    }
+
+                }
+
+            });
+    }
+    function RollDrpEditor(container, options) {
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataTextField: "ROLLDESC",
+                dataValueField: "ROLLID",
+                dataSource: {
+                    type: "webapi",
+                    transport: {
+                        read: {
+                            url: ("http://localhost:4800/api/Subroll/GetRoll"),
+                            dataType: "json",
+
+                        },
+                    }
+
+                }
+
+            });
+    }
+    function SubClassDrpEditor(container, options) {
+        $('<input required name="' + options.field + '"/>')
+            .appendTo(container)
+            .kendoDropDownList({
+                autoBind: true,
+                dataTextField: "SUBCLSNAME",
+                dataValueField: "SUBCLASSID",
+                dataSource: {
+                    type: "webapi",
+                    transport: {
+                        read: {
+                            url: ("http://localhost:4800/api/Subroll/GetSubclass"),
+                            dataType: "json",
+
+                        },
+                    }
+
+                }
+
+            });
+    }
+</script>
+

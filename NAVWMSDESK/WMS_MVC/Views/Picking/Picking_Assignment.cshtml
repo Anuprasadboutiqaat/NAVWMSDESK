@@ -1,0 +1,401 @@
+﻿@model NAVWMSDESK.ViewModel.Picking.PickingViewModel
+@{
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+    ViewBag.Header = "Picking Assignment";
+}
+
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="">
+            <div class="x_content">
+                <div class="container">
+                @using (Html.BeginForm("Picking_Assignment", "Picking", FormMethod.Post, new { }))
+                {
+                    <div class="row col-sm-12">
+                        <div class="col-sm-3">
+                            <span class="sectionhead">DOCNO</span>
+                            <div class="form-group">
+                                <div class="input-group date" id="my">
+                                    @Html.TextBoxFor(m => m.DOCNO, new { @class = "form-control", @style = "width: 100%;", @type = "TEXT", @placeholder = "DATE1" })  
+                                    <div class="input-group-btn" style="width: 0%;">
+                                        <button type="button" id="clrdocno" class="btn btn-default btn-sm" style="height:34px;width: 100%;margin-left: 0px;font-size:15px"><span class="fa fa-times" style="margin-right: 0px;"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <span class="sectionhead">ZONE</span>
+                                <div class="form-group">                                    
+                                    @Html.DropDownListFor(m => m.ZONEID, ViewData["ZONEID"] as SelectList, "-- SELECT ZONE --", new { @class = "form-control required " })  
+                                </div>
+                            </div>                                          
+                            <div class="col-sm-3">
+                                <span class="sectionhead">STATUS</span>
+
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.STATUS1, ViewData["STATUS1"] as SelectList, "-- SELECT STATUS --", new { @class = "form-control required statcls" })
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <span class="sectionhead">USER</span>
+                                <div class="form-group">
+                                    @Html.DropDownListFor(m => m.USER, ViewData["USER"] as SelectList, "-- SELECT USER -- ", new { @class = "form-control required usrcls" })
+                                </div>                          
+
+                        </div>
+                    </div>
+                    }
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="col-sm-4">
+                                <span class="sectionhead">SELECT NO. OF STATUS</span>
+                                <div class="form-group">
+                                    @Html.TextBoxFor(m => m.STATUSCNT, new { @class = "form-control", @style = "width: 100%;", @type = "TEXT", @placeholder = "" })
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" id="btnSave" class="btn btn-primary savebtn" style="width: 120px;background: black;height: 40px;float: right;margin-right: 3%;" name="Command" value="SUBMIT">CONFIRM</button>
+                    </div>
+                    <div class="row">
+                        <div class="table-container" id="grid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+    var docno;
+    var WHNO;
+
+    docno = localStorage.getItem("Docno");
+
+    $(document).ready(function () {
+
+        $("#DOCNO").val(docno);
+        WHNO = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+        getzone();
+        griddata();
+        localStorage.removeItem("Docno");
+
+        $("#checkAll").click(function () {
+
+            var $cb = $(this);
+            var checked = $cb.is(':checked');
+            var grid = $('#grid').data('kendoGrid');
+            grid.table.find("tr").find("td:last input").attr("checked", checked);
+
+            //now making all the rows value to 1 or 0
+            var items = $("#grid").data("kendoGrid").dataSource.data();
+            for (i = 0; i < items.length; i++) {
+                var item = items[i];
+                item.set('ASSIGNSTATUS', checked);
+            }
+
+            if (!checked) {
+                $("#grid").data("kendoGrid").clearSelection();
+            }
+
+        });
+
+    });
+
+
+    $("#clrdocno").click(function () {
+
+        $("#DOCNO").val("");
+        changegriddata();
+
+    });
+
+    function changegriddata() {
+        docno = $("#DOCNO").val();
+        WHNO = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+        getzone();
+        griddata();
+    }
+
+    function griddata() {
+
+        $("#grid").kendoGrid({
+            columns: [
+
+                { field: "DOCNO", title: "DOCNO", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                { field: "PICKNO", title: "PICK NO", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                { field: "ZONEID", title: "ZONE", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+
+                {
+                    field: "ASSIGNSTATUS", title: "STATUS", width: 125, template: "<input type=\"checkbox\"   #= ASSIGNSTATUS ? checked='checked' : '' #  class=\"chk\"/>",
+                    headerTemplate: '<label>  <input type="checkbox" id="checkAll"/>STATUS</label>', headerAttributes: { style: "text-align: center" }, attributes: { style: "text-align: center" }
+                },
+
+                {
+                    field: "USERNAME",
+                    title: "USER",
+                    filterable: {
+                        cell: {
+                            template: function (args) {
+
+                                args.element.kendoDropDownList({
+                                    dataTextField: "USERNAME",
+                                    dataValueField: "USERNAME",
+                                    optionLabel: "SELECT",
+                                    valuePrimitive: true,
+                                    autoBind: false,
+
+                                    dataSource: new kendo.data.DataSource({
+                                        type: "json",
+                                        transport: {
+                                            read: "GetUser"
+                                        },
+                                    }),
+
+                                    requestEnd: function (e) {
+                                        $(args).value("SELECT");
+                                    }
+
+                                });
+
+                            },
+                            showOperators: false
+                        }
+                    }, width: "15%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" }
+                },
+                { field: "USERID", hidden: true, width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+
+
+            ],
+
+            editable: false,
+            // toolbar: kendo.template($("#searchtemplate").html()),
+            dataSource: {
+                //autoSync: true,
+                type: "aspnetmvc-ajax",
+                transport: {
+
+                    read: {
+                        url: "GetPickingDetails",
+                        data: { id: docno, WHNO: WHNO }
+                    },
+
+                },
+                pageSize: 15,
+                batch: true,
+                //"autoSync='true'"
+                schema: {
+                    data: "Data",
+                    total: function (response) {
+                        return response.Total;
+                    },
+                    model: {
+                        id: "SRNO",
+                        fields: {
+
+                            SRNO: { type: "number" },
+                            DOCNO: { type: "string" },
+                            PICKNO: { type: "string" },
+                            USERNAME: { type: "string" },
+                            ZONEID: { type: "string" },
+                            USERID: { type: "number" },
+                            PUTSTATUS: { type: "number" },
+                            ASSIGNSTATUS: { type: "boolean" },
+
+                        }
+                    }
+
+                },
+                dataBound: function (e) {
+                    //   $('[name="STREFNO"]')
+                    $('.chk').bind("change", function (e) {
+                        var grid = $("#grid").data("kendoGrid");
+                        var row = $(e.target).closest("tr");
+                        row.toggleClass("k-state-selected");
+                        var data = grid.dataItem(row);
+
+                    });
+                },
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+            },
+            edit: function (e) {
+
+            },
+            columnMenu: true,
+            selectable: 'row',
+            navigatable: true,
+            //sortable: {
+            //    mode: "single"
+            //},
+            pageable: true,
+            filterable: true,
+            scrollable: true,
+            filterable: { mode: "row" }
+            // sortable:true,
+
+        });
+    }
+
+    function getzone() {
+
+        // Ajax call for Zone id dropdown value
+
+        $.ajax({
+            type: 'POST',
+            url: 'GetZoneID',
+            data: { id: docno, WHNO: WHNO },
+            dataType: 'json',
+            success: function (data) {
+
+                $('#ZONEID option').remove();
+                var optionTag1 = $('<option></option>');
+                $(optionTag1).val("").text("-- SELECT ZONE--");
+                $('#ZONEID').append(optionTag1);
+                $.each(data, function (index, val) {
+
+                    var optionTag = $('<option></option>');
+                    $(optionTag).val(val.ZONEID).text(val.ZONEID);
+                    $('#ZONEID').append(optionTag);
+
+                });
+            },
+            error: function (ex) {
+                toastr.error('Failed to get ZoneID' + ex);
+            }
+        });
+    }
+
+
+    // Select No. of Checkbox from textbox value
+
+    $("#STATUSCNT").change(function () {
+
+        var $cb = $("#checkAll");
+        var checked = $cb.is(':checked');
+        var statcnt = $("#STATUSCNT").val();
+        var grid = $('#grid').data('kendoGrid');
+        grid.table.find("tr").find("td:last input").attr("checked", checked);
+
+        //now making all the rows value to 1 or 0
+        var items = $("#grid").data("kendoGrid").dataSource.data();
+
+        for (i = 0; i < items.length; i++) {
+            items[i].set('ASSIGNSTATUS', false);
+        }
+        for (i = 0; i < statcnt; i++) {
+            var item = items[i];
+            item.set('ASSIGNSTATUS', true);
+        }
+    });
+
+    $(".savebtn").click(function () {
+        var WHNO = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+        var userid = ""; var zoneid = ""; var docno = "";
+        var head = {
+
+            USER: $('#USER').val(),
+            USERNAME: $("#USER :selected").text(),
+            ZONEID: $('#ZONEID').val(),
+            DOCNO: $("#DOCNO").val(),
+            WHNO: WHNO
+        };
+        var idsToSend = [];
+
+        var grid = $("#grid").data("kendoGrid")
+        var ds = grid.dataSource.view();
+
+        for (var i = 0; i < ds.length; i++) {
+            var row = grid.table.find("tr[data-uid='" + ds[i].uid + "']");
+            var checkbox = $(row).find(".chk");
+
+            if (checkbox.is(":checked")) {
+
+                idsToSend.push(ds[i].PICKNO + "," + ds[i].DOCNO);
+
+                //idsToSend.push(ds[i].PICKNO);
+            }
+        }
+
+        $.post("BulkUpdate/picking", { ids: idsToSend, header: head });
+        updateSearchFilters("grid", "USERNAME", "isnotnull", "")
+        $('#USER').val("");
+        $('#STATUS1').val("");
+        $('#ZONEID').val("");
+
+        //refresh
+        $("#grid").data("kendoGrid").dataSource.read();
+
+    });
+
+
+
+    $(".statcls").change(function () {
+
+        var STATUSval = $("#STATUS1 :selected").text();
+        if(STATUSval == "ASSIGN"){
+
+            updateSearchFilters("grid", "USERNAME", "neq", "none")
+
+        }
+        else if (STATUSval == "UNASSIGN") {
+
+            updateSearchFilters("grid", "USERNAME", "eq", "none")
+
+        }
+        else if (STATUSval == "BOTH") {
+
+            updateSearchFilters("grid", "USERNAME", "isnotnull", "")
+
+        }
+    });
+
+    // ZoneID Filtering
+
+    $(".zonecls").change(function () {
+        var ZONEval = $('#ZONEID').val();
+        if (ZONEval != "") {
+            updateSearchFilters("grid", "ZONEID", "eq", ZONEval)
+        }
+        else {
+            updateSearchFilters("grid", "ZONEID", "isnotnull", "")
+        }
+
+    });
+
+    function updateSearchFilters(grid, field, operator, value) {
+
+        var newFilter = { field: field, operator: operator, value: value };
+        var dataSource = $("#" + grid).data("kendoGrid").dataSource;
+        var filters = null;
+
+        if (dataSource.filter() != null) {
+
+            filters = dataSource.filter().filters;
+
+        }
+        if (filters == null) {
+            filters = [newFilter];
+        }
+        else {
+            var isNew = true;
+            var index = 0;
+            for (index = 0; index < filters.length; index++) {
+                if (filters[index].field == field) {
+                    isNew = false;
+                    break;
+                }
+            }
+            if (isNew) {
+                filters.push(newFilter);
+            }
+            else {
+                filters[index] = newFilter;
+            }
+        }
+        dataSource.filter(filters);
+    }
+
+</script>

@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = null;
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__localhost">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>WMS - Landing</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="~/Content/style.css" rel="stylesheet">
+</head>
+
+<body data-gr-c-s-loaded="true" class="landingpage">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="logo">
+                    <img class="img-responsive" alt="WMS" src="~/Assets/images/wms_logo_login-page.png">
+                </div>
+            </div>
+        </div>
+         
+        <div class="welcomeheader landing">
+            <ul>
+                <li>Hi: <span id="username"></span></li>
+                <li>WH ID: <span id="whid"></span></li>
+            </ul>
+        </div>
+         
+        <div class="form-container landing col-mds-offset-4">
+            <div class="row spacer">
+                <div class="col-xs-6">
+                    <a href="/navwmsweb/put01/put01" class="ico_putaway"><span class="circle"><span> <img class="img-responsive" id="btnputaway" alt="putaway" src="~/Assets/images/ico_putaway.jpg"></span></span>Putaway</a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="/navwmsweb/pick/pick01"  class="ico_picking"><span class="circle"><span><img href="/navwmsweb/pick/pick01" class="img-responsive" id="btnpicking" alt="picking" src="~/Assets/images/ico_picking.jpg"></span></span>Picking</a>
+                </div>
+            </div>
+            <div class="row spacer">
+                <div class="col-xs-6">
+                    <a href="#" class="ico_inquiries"><span class="circle"><span><img class="img-responsive" id="btncc" alt="inquiries" src="~/Assets/images/ico_cyclecount.jpg"></span></span>Cycle Count</a>
+                </div>
+                <div class="col-xs-6">
+                    <a href="#" class="ico_processing"><span class="circle"><span><img class="img-responsive" id="btnmov" alt="processing" src="~/Assets/images/ico_stockmoment.jpg"></span></span>Stock Moment</a>
+                </div>
+            </div>
+            <div class="row spacer">
+                <div class="col-xs-12 col-sm-offset-0"><a href="#" class="ico_logout"><span class="circle"><span>
+                    <img class="img-responsive" id="btnLogout" alt="logout" src="~/Assets/images/ico_logout.jpg"></span></span>Logout</a></div>
+            </div>
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/Content/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/popper.min.js"></script>
+    <script src="~/Content/bootstrap.min.js"></script>   
+    <link href="~/Content/fontawesome/webfont_css/css/fontawesome-all.css" rel="stylesheet">
+
+</body>
+
+</html>
+<script>
+
+        @*$(document).ready(function (e) {
+           
+            var UserName = '@Request.RequestContext.HttpContext.Session["USERNAME"]';
+
+         
+            $('#usrname').text(UserName);
+         
+           
+
+
+        });*@
+
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+      
+
+        var userid = '@Request.RequestContext.HttpContext.Session["USERID"]';
+        var usrname = '@Request.RequestContext.HttpContext.Session["USERNAME"]';
+        var whid = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+      
+        $('#username').text(usrname);
+        $('#whid').text(whid);
+         $("#btnLogout").click(function () {
+           
+                 $.ajax({
+                     type: 'POST',
+                     url: 'http://192.168.8.235/navwmsapi/api/navWMS/USERLOGOUT',
+                     dataType: 'json',
+                     data: { userID: userid},
+                     success: function (result) {
+                         $.each(result.result, function (i, data1) {
+                             $.each(data1, function (j, data2) {
+                                 userid = data2.USERID;
+                             });
+                         });
+                         if (result.stat = 'Success') {
+                             window.location = "/navwmsweb/login/login"
+                         }
+                     },
+                     error: function (xhr, error) {
+                         var err = eval("(" + xhr.responseText + ")");
+                        
+                     }
+                 });
+                 return false;
+         });
+
+         //$("#btnputaway").click(function () {
+         //    //window.open("put01","put01");
+         //     window.location = "/navwmsweb/put01/put01"
+         //});
+     });
+</script>

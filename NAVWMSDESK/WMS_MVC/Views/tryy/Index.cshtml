@@ -1,0 +1,65 @@
+﻿
+@* Important! Register the following route if it's not existing in the RouteTable
+config.Routes.MapHttpRoute(
+    name: "DefaultApi",
+    routeTemplate: "api/{controller}/{id}",
+    defaults: new { id = RouteParameter.Optional }
+);
+*@
+
+<div id="grid"></div>
+<script>
+    $("#grid").kendoGrid({
+        height: 400,
+        columns: [
+            {field: "CLSNAME"},
+            {field: "CLSFLAG"},
+            {field: "CLSSTATUS"},
+            {command: [ "edit" , "destroy"], width: 180 }
+        ],
+        toolbar: ["create"],
+        dataSource: {
+            type: "webapi", 
+            transport: {
+                idField: "CLASSID",
+                read: {
+                     url: "/api/WMS_CLASS_EDITOR"
+                }, 
+				create: { 
+					url: "/api/WMS_CLASS_EDITOR"
+				},
+				update: { 
+					url: "/api/WMS_CLASS_EDITOR/{0}"
+				},
+				destroy: { 
+					url: "/api/WMS_CLASS_EDITOR/{0}"
+				}
+			},
+            schema: {
+                data: "Data",
+                total: "Total", 
+                errors: "Errors",
+                model: {
+                    id: "CLASSID",
+					fields: {
+						CLASSID: { type: "number"},
+						CLSNAME: { type: "string"},
+						CLSFLAG: { type: "string"},
+						CLSSTATUS: { type: "number"}
+					}
+                }
+            },
+            serverPaging: true,
+            serverSorting: true,
+            serverFiltering: true,
+            serverGrouping: true,
+            serverAggregates: true,
+        },
+        columnMenu: true,
+        editable: "inline",
+        pageable: true,
+        filterable: true,
+        scrollable: true
+    })
+
+</script>

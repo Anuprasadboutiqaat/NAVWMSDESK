@@ -1,0 +1,37 @@
+﻿@model NAVWMSDESK.ViewModel.Login.LoginViewModel
+
+@{
+    Layout = null;
+}
+<div>
+    @using (Html.BeginForm("Login1", "Login1", FormMethod.Post, new { }))
+            {
+       
+                    @Html.TextBoxFor(a => a.UserName, new { @class = "form-control", @style = "width: 100%;", @type = "TEXT", @placeholder = "UserName" })
+              
+
+                    @Html.TextBoxFor(a => a.Password, new { @class = "form-control", @style = "width: 100%;", @type = "password", @placeholder = "Password" })
+              
+
+                    <button type="submit" id="btnSave" class="btn btn-black btn-block text-uppercase waves-effect waves-light text-dark" style="color: #fffdfd !important;background-color: #B19432;" name="Command" value="login">Login</button>
+
+                
+    }
+
+</div>
+<script type="text/javascript">
+    window.onload = window.history.forward(0);  //calling function on window onload
+    $(document).ready(function () {
+        $("#USERNAME").focus();
+        var Msgstatus = ('@ViewData["Msgstatus"]');
+        if (Msgstatus == "Success") {
+            toastr.success("Successfull")
+
+        }
+        else if (Msgstatus == "AD") {
+            toastr.warning("User Not validating with ActiveDirectory")
+        }
+        resetControls();
+    });
+</script>
+

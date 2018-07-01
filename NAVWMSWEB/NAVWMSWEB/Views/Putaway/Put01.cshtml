@@ -1,0 +1,239 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" class="gr__localhost">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>PutDashboard</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" crossorigin="anonymous">
+    <link href="~/Content/style.css" rel="stylesheet">
+    <link href="~/Content/fontawesome/webfont_css/css/fontawesome-all.css" rel="stylesheet">
+
+</head>
+
+<body data-gr-c-s-loaded="true" class="landingpage putaway">
+    <div class="container">
+        <div class="row">
+            <div class="innerheader">
+                <div class="logo">
+                    <img id="btnHome" class="img-responsive" alt="WMS" src="../assets/images/wms_logo_login-page.png">
+                </div>
+            </div>
+        </div>
+        <div class="pageheader">
+            <a href="/navwmsweb/home/index" class="btn-back" id="btnBack"><i class="far fa-arrow-alt-circle-left"></i></a>
+            Putaway
+            <div class="filter">
+                <select class="dropdownmenu" id="ddlFilter" name="ddlFilter">
+                    <option value="-1" selected >All</option>
+                    <option value="0">Open</option>
+                    <option value="2">Posted</option>
+                </select>
+            </div>
+        </div>
+        <div class="welcomeheader">
+            <ul>
+                <li>Hi: <span id="username"></span></li>
+                <li>WH ID: <span id="whid"></span></li>
+            </ul>
+        </div>
+        <div class="form-container landing col-mds-offset-4">
+            <div class="table-container">
+                @*<table cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td>PUT-001</td>
+                            <td>50/50</td>
+                            <td>COMPLETE</td>
+                            <td><button class="btn-success">Complete</button></td>
+                        </tr>
+                        <tr>
+                            <td>PUT-001</td>
+                            <td>50/50</td>
+                            <td>COMPLETE</td>
+                            <td><button class="btn-info">Open</button></td>
+                        </tr>
+                        <tr>
+                            <td>PUT-001</td>
+                            <td>50/50</td>
+                            <td>COMPLETE</td>
+                            <td><button class="btn-success">Complete</button></td>
+                        </tr>
+                        <tr>
+                            <td>PUT-001</td>
+                            <td>50/50</td>
+                            <td>COMPLETE</td>
+                            <td><button class="btn-info">Open</button></td>
+                        </tr>
+                        <tr>
+                            <td>PUT-001</td>
+                            <td>50/50</td>
+                            <td>COMPLETE</td>
+                            <td><button class="btn-info">Open</button></td>
+                        </tr>
+                    </table>*@
+                <div id="grid">
+                    <table cellspacing="0" cellpadding="0" id="AA">
+                        <thead>
+                            @*<tr>
+                               
+                                <th>
+                                    PUTNO
+                                </th>
+                                <th>
+                                    QTY
+                                </th>
+                                <th>
+                                    STATUS
+                                </th>
+                                <th>
+                                    ACTION
+                                </th>
+                            </tr>*@
+                        </thead>
+                        <tbody id="datarow">
+                            @*For Display And download the Files*@
+                        </tbody>
+                    </table>        
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script>
+        $(document).ready(function () {
+            var usrid = '@Request.RequestContext.HttpContext.Session["USERID"]';
+            var tknid = '@Request.RequestContext.HttpContext.Session["TOKENID"]';
+            var usrname = '@Request.RequestContext.HttpContext.Session["USERNAME"]';
+            var whid = '@Request.RequestContext.HttpContext.Session["STOREID"]';
+
+            var tt = 1;
+            $('#username').text(usrname);
+            $('#whid').text(whid);
+            GetDataFilter(usrid, tknid, tt, -1);
+            $('[data-toggle="offcanvas"]').click(function () {
+                $('.sidebar-offcanvas').toggleClass('active');
+            });
+            $('[data-toggle="closeoffcanvas"]').click(function () {
+                $('.sidebar-offcanvas').removeClass('active');
+            });
+        });
+        function GetData(userid, tknid, tt) {
+
+            $("#datarow").empty();
+            $.ajax({
+                type: 'POST',
+                url: 'http://192.168.8.235/navwmsapi/api/NAVWMS/PTA01',
+                dataType: 'json',
+                data: { Status: tt, userID: userid, TokenID: tknid },
+
+                success: function (result) {
+                    $.each(result.result, function (i, data1) {
+                        if (data1.PUTSTATUS == 0)
+                        { showstatus = "Open" } else { showstatus = "Done" }
+                        var html1 = "<tr><td>" + data1.PUTNO + "</td><td>" + data1.QTY + "</td><td>" + showstatus + "</td>  <td><button class='btn-info' onclick=myaction('" + data1.PUTNO + "')>Done</button></td>  </td></tr>"
+                        $("#datarow").append(html1);
+                    });
+                },
+                error: function (ex) {
+                    toastr.error('Failed to retrieve ' + ex);
+                }
+            });
+        }
+        $("#ddlFilter").change(function () {
+
+            var usrid = '@Request.RequestContext.HttpContext.Session["USERID"]';
+            var tknid = '@Request.RequestContext.HttpContext.Session["TOKENID"]';
+            var tt = 1;
+            var filt = $('#ddlFilter').val()
+            GetDataFilter(usrid, tknid, tt, filt);
+        });
+
+        function GetDataFilter(userid, tknid, tt, filter) {
+            $("#datarow").empty();
+            $.ajax({
+                type: 'POST',
+                url: 'http://192.168.8.235/navwmsapi/api/NAVWMS/PTA01',
+                dataType: 'json',
+                data: { Status: tt, userID: userid, TokenID: tknid },
+                success: function (result) {
+                    $.each(result.result, function (i, data1) {
+                        // alert(data1.PUTSTATUS)
+                        if (filter >= 0) {
+                            if (data1.PUTSTATUS == 2)
+                            { showstatus = "Posted" }
+                            else if (data1.PUTSTATUS < 2) {
+                                showstatus = "Open"
+                            }
+                            if (data1.PUTSTATUS == filter) {
+                                //var html1 = "<tr><td><button class='btn-info' onclick=MoveNext('" + data1.PUTNO + "')>" + data1.PUTNO + "</button>   </td><td>" + data1.QTY + "</td><td>" + showstatus + "</td>  <td><button class='btn-info' onclick=myaction('" + data1.PUTNO + "')>Done</button></td>  </td></tr>"
+                                var html1 = "<tr><td> <a href='#' style='text-decoration: underline;color: blue;' onclick=movenext('" + data1.PUTNO + "')  >" + data1.PUTNO + "</a></button></td><td>" + data1.ZONEID + "</td><td>" + data1.QTY + "</td><td>" + showstatus + "</td>  <td><a onclick=myaction('" + data1.PUTNO + "') class='open'><i class='far fa-check-circle'></i></a></td>  </td></tr>"
+                                $("#datarow").append(html1);
+                            }
+                        }
+                        else {
+                            var tt = 111;
+                            if (data1.PUTSTATUS == 2)
+
+                            { showstatus = "Posted" } else { showstatus = "Open" }
+                            var html1 = "<tr><td><a href='#' style='text-decoration: underline;color: blue;' onclick=movenext('" + data1.PUTNO + "')  >" + data1.PUTNO + "</a></td><td>" + data1.ZONEID + "</td><td>" + data1.QTY + "</td><td>" + showstatus + "</td>  <td> <a onclick=myaction('" + data1.PUTNO + "') class='open'><i class='far fa-check-circle'></i></a></td>  </td></tr>"
+                            //var html1 = "<tr><td> <button class='btn-info' onclick=MoveNext('" + data1.PUTNO + "')>" + data1.PUTNO + "</button></td><td>" + data1.QTY + "</td><td>" + showstatus + "</td>  <td> <a onclick=myaction('" + data1.PUTNO + "') class='open'><i class='far fa-check-circle'></i></a></td>  </td></tr>"
+                            //var html1 = "<tr><td> <button class='btn-info' onclick=MoveNext('" + data1.PUTNO   + "')>" + data1.PUTNO + "</button></td><td>" + data1.QTY + "</td><td>" + showstatus + "</td>  <td><button class='btn-info' onclick=myaction('" + data1.PUTNO + "')>Done</button></td>  </td></tr>"
+                            $("#datarow").append(html1);
+                        }
+                    });
+                },
+                error: function (xhr, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.message)
+                }
+            });
+        }
+        function movenext(putno) {
+            window.location = "/navwmsweb/put01/put02?ptn=" + putno;
+        }
+
+        function myaction(pt) {
+            var usrid = '@Request.RequestContext.HttpContext.Session["USERID"]';
+            var tknid = '@Request.RequestContext.HttpContext.Session["TOKENID"]';
+            var tt = 2;
+             $.ajax({
+                type: 'POST',
+                url: 'http://192.168.8.235/navwmsapi/api/navWMS/pta01',
+                dataType: 'json',
+                data: { Status: tt , userID: usrid, PutNo: pt, TokenID: tknid },
+                success: function (result) {
+                    if (result.stat = 'Success') {
+                        alert(pt + ': Posted/ Completed')
+                    }
+                },
+                error: function (xhr, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert(err.message)
+                } 
+        
+            }); 
+        }
+        $("#btnHome").click(function () {
+            window.location = "/navwmsweb/home/index"
+            return;
+        });
+
+
+       
+
+    </script>
+</body>
+
+</html>
+

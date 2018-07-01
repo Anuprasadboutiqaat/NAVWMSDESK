@@ -1,0 +1,216 @@
+﻿
+@{
+    ViewBag.Header = "Cyclecount";   
+    Layout = "~/Views/Shared/_NavLayout.cshtml";
+}
+@model NAVWMSDESK.ViewModel.Putaway.CyclecountViewModel
+
+<body class="nav-md dashboard">
+    <div class="top_nav">
+
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="">
+            <div class="x_content">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span class="sectionhead">DATE</span>
+                            <div class="form-group">
+                                <div>
+                                    @Html.TextBoxFor(m => m.DATE1, new { @class = "form-control required selector  ", @placeholder = "FROM  DATE " })
+                                 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="sectionhead">ZONE</span>
+                            <div class="form-group">
+                                <div >
+                                    @Html.DropDownListFor(m => m.ZONEID, ViewData["ZONEID"] as SelectList, "ZONE", new { @class = "form-control required " , @multiple = "multiple" })   
+                                   @* @Html.ListBoxFor(m => m.ZONEID, ViewData["ZONEID"] as SelectList, "ZONE", new { @class = "form-control required " })*@  
+                                    @*@Html.DropDownListFor(s => s.SelectedOptions, Model.Options, new { @class = "form-control required ", @multiple = "multiple" })*@                            
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="sectionhead">REQNO</span>
+                            <div class="form-group">
+                                <div>
+                                    @Html.TextBoxFor(m => m.REQNO, new { @class = "form-control required  ", @placeholder = "REQ NO" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="" style="margin-top: 6%;">
+
+                                <button type="submit" id="btnSave" class="btn btn-primary savebtn" style="width: 80px;background: #ac9231;text-align:center;height: 30px;margin-right: 2%;" name="Command" value="SUBMIT">CONFIRM</button>
+                                <button type="submit" id="btnReset" class="btn btn-primary resetbtn" style="width: 80px;background: lightblue;text-align:center;height: 30px;margin-right: 3%;" name="Command1" value="SUBMIT1">RESET</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="table-container" id="grid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+    $(document).ready(function () {
+
+        //$('.chk').click(function () {
+        //    
+
+        //});
+       
+        $("#DATE1").val(getActualDate());
+        $(".selector").datepicker({
+            dateFormat: "yy-mm-dd",
+            orientation: "top",
+            autoclose: true
+        });
+    
+        GetDetails();
+    });
+    function GetDetails() {
+        $("#grid").kendoGrid({           
+            columns: [
+
+                { field: "BINNO", title: "BINNO", width: "10%", attributes: { style: "text-align: center" }, headerAttributes: { style: "text-align: center" } },
+                
+                {
+                    field: "ASSIGNSTATUS", title: "STATUS", width: 125, template: "<input id='ASSIGNSTATUS1' type=\"checkbox\"   #= ASSIGNSTATUS ? checked='checked' : '' #  class=\"chk\"/>",
+                    headerTemplate: '<label>  <input type="checkbox" id="checkAll"/>STATUS</label>', headerAttributes: { style: "text-align: center" }, attributes: { style: "text-align: center" }
+                },
+                { command: [{ name: "edit", text: { edit: " ", update: " ", cancel: " " } }, { name: "destroy", text: " " }], width: 150, title: "ACTION" }
+
+              
+
+
+            ],
+
+            editable: "inline",
+            // toolbar: kendo.template($("#searchtemplate").html()),
+            dataSource: {
+                //autoSync: true,
+                type: "aspnetmvc-ajax",
+                transport: {
+
+                    read: {
+                        url: "GetCyclecount",
+                        //data: { id: docno, WHNO: WHNO }
+                    },
+
+                },
+                pageSize: 10,
+                batch: true,
+                //"autoSync='true'"
+                schema: {
+                    data: "Data",
+                    total: function (response) {
+                        return response.Total;
+                    },
+                    model: {
+                        id: "SRNO",
+                        fields: {
+
+                            SRNO: { type: "number" },
+                            BINO: { type: "number" },
+                            PUTNO: { type: "string" },
+                            USERNAME: { type: "string" },
+                            ZONEID: { type: "string" },
+                            USERID: { type: "number" },
+                            PUTSTATUS: { type: "number" },
+                            ASSIGNSTATUS: { type: "boolean" },
+
+                        }
+                    }
+
+                },
+                dataBound: function (e) {
+                    //   $('[name="STREFNO"]')
+                    $('.chk').bind("change", function (e) {
+                        alert("abc");
+                        var grid = $("#grid").data("kendoGrid");
+                        var row = $(e.target).closest("tr");
+                        row.toggleClass("k-state-selected");
+                        var data = grid.dataItem(row);
+
+                    });
+                    
+                },
+                change: changegrid,
+                serverPaging: true,
+                serverSorting: true,
+                serverFiltering: true,
+
+            },
+            edit: function (e) {
+                
+            },
+            columnMenu: true,
+            selectable: 'row',
+            navigatable: true,
+            //sortable: {
+            //    mode: "single"
+            //},
+            pageable: true,
+            filterable: true,
+            scrollable: true
+           // filterable: { mode: "row" }
+            // sortable:true,
+
+        });
+        function changegrid(e) {
+            if (e.action == "itemchange" && e.field == "ASSIGNSTATUS") {
+                if ($(this).hasclass('k-state-selected')) {
+                    alert('checked');
+
+                } else {
+                    alert('not checked');
+                }
+            }
+        }
+     
+        $("#ASSIGNSTATUS1").click(function () {
+            alert("here")
+        });
+
+        $("#checkAll").click(function () {
+
+            //alert('fgh');
+            var $cb = $(this);
+            var checked = $cb.is(':checked');
+            var grid = $('#grid').data('kendoGrid');
+            grid.table.find("tr").find("td:last input").attr("checked", checked);
+
+            //now making all the rows value to 1 or 0
+            var items = $("#grid").data("kendoGrid").dataSource.data();
+            if (items.length > 5) {
+               // alert("Maximum 10");
+            }
+            else {
+                for (i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    item.set('ASSIGNSTATUS', checked);
+               
+                    // var row = grid.tbody.find(">tr:not(.k-grouping-row)").eq(0);
+                    // grid.select(row);
+
+                }
+            }
+            if (!checked) {
+                $("#grid").data("kendoGrid").clearSelection();
+            }
+
+        });
+    }
+  
+   </script>
