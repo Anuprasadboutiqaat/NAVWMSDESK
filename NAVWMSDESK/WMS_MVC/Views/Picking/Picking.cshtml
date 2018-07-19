@@ -19,7 +19,7 @@
                                         <span class="sectionhead">From</span>
                                         <div class="form-group">
                                             <div @*class="input-group date"*@ id="myDatepicker">
-                                                @Html.TextBoxFor(m => m.DATE1, new { @class = "form-control required selector  ", @placeholder = "FROM  DATE " })
+                                                @Html.TextBoxFor(m => m.DATE1, new { @class = "form-control required datepicker  ", @placeholder = "FROM  DATE " })
                                                 @*<span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>*@
@@ -30,7 +30,7 @@
                                         <span class="sectionhead">To</span>
                                         <div class="form-group">
                                             <div @*class="input-group date"*@ id="myDatepicker2">
-                                                @Html.TextBoxFor(m => m.DATE2, new { @class = "form-control required selector  ", @placeholder = "TO DATE " })
+                                                @Html.TextBoxFor(m => m.DATE2, new { @class = "form-control required datepicker  ", @placeholder = "TO DATE " })
                                                 @*<span class="input-group-addon">
                                                     <span class="glyphicon glyphicon-calendar"></span>
                                                 </span>*@
@@ -71,14 +71,14 @@
         $("#DATE1").val(custgetActualDate(-37));
         $("#DATE2").val(getActualDate());
 
-        $(".selector").datepicker({
-            dateFormat: "yy-mm-dd",
-            orientation: "top",
-            autoclose: true
-        });
+        //$(".selector").datepicker({
+        //    dateFormat: "yy-mm-dd",
+        //    orientation: "top",
+        //    autoclose: true
+        //});
         $('.datepicker').datepicker({
             orientation: "top",
-            format: "dd/mm/yyyy",
+            format: "dd-mm-yyyy",
             autoclose: true
         });
         GetDetails();

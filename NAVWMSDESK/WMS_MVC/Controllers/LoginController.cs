@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using NAVWMSDESK.Models;
 using NAVWMSDESK.ViewModel.Login;
 using System.DirectoryServices;
+using WMS_MVC.Models;
+
 namespace NAVWMSDESK.Controllers
 {
    

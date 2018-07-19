@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAVWMSDESK.Models
+namespace WMS_MVC.Models
 {
     using System;
     using System.Data.Entity;
@@ -27,10 +27,13 @@ namespace NAVWMSDESK.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ARCHIVE_CC_REQUEST> ARCHIVE_CC_REQUEST { get; set; }
+        public virtual DbSet<ARCHIVE_PICKING> ARCHIVE_PICKING { get; set; }
+        public virtual DbSet<ARCHIVE_PUTAWAY> ARCHIVE_PUTAWAY { get; set; }
+        public virtual DbSet<ERRORMGMT_API> ERRORMGMT_API { get; set; }
         public virtual DbSet<WMS_CC_REQUEST> WMS_CC_REQUEST { get; set; }
         public virtual DbSet<WMS_CC_SCAN> WMS_CC_SCAN { get; set; }
         public virtual DbSet<WMS_CLASS_EDITOR> WMS_CLASS_EDITOR { get; set; }
-        public virtual DbSet<WMS_CYCLECOUNT> WMS_CYCLECOUNT { get; set; }
         public virtual DbSet<WMS_DOC_REGISTER> WMS_DOC_REGISTER { get; set; }
         public virtual DbSet<WMS_MOVE_DETAIL> WMS_MOVE_DETAIL { get; set; }
         public virtual DbSet<WMS_MOVE_HEAD> WMS_MOVE_HEAD { get; set; }
@@ -44,6 +47,12 @@ namespace NAVWMSDESK.Models
         public virtual DbSet<WMS_USER_EDITOR> WMS_USER_EDITOR { get; set; }
         public virtual DbSet<WMS_USER_TASKS> WMS_USER_TASKS { get; set; }
         public virtual DbSet<WMS_ZONE_EDITOR> WMS_ZONE_EDITOR { get; set; }
+        public virtual DbSet<ARCHIVE_CC_SCAN> ARCHIVE_CC_SCAN { get; set; }
+        public virtual DbSet<ARCHIVE_CYCLECOUNT> ARCHIVE_CYCLECOUNT { get; set; }
+        public virtual DbSet<ARCHIVE_MOVE_DETAIL> ARCHIVE_MOVE_DETAIL { get; set; }
+        public virtual DbSet<ARCHIVE_MOVE_HEAD> ARCHIVE_MOVE_HEAD { get; set; }
+        public virtual DbSet<CC_TEST> CC_TEST { get; set; }
+        public virtual DbSet<WMS_CYCLECOUNT> WMS_CYCLECOUNT { get; set; }
         public virtual DbSet<WMS_USER_TOKEN> WMS_USER_TOKEN { get; set; }
         public virtual DbSet<VW_CC1_TEMP> VW_CC1_TEMP { get; set; }
         public virtual DbSet<VW_CLASS_SUBCLASS> VW_CLASS_SUBCLASS { get; set; }
@@ -100,7 +109,7 @@ namespace NAVWMSDESK.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CC_DOCLIST_CONFIRM_Result>("CC_DOCLIST_CONFIRM", sTATUSParameter, cCNOParameter, bARCODEParameter, iTEMNOParameter, bINNOParameter, zONEIDParameter, tOKENIDParameter, uSERIDParameter);
         }
     
-        public virtual ObjectResult<CC_DOCLIST_CONFIRM_1_Result> CC_DOCLIST_CONFIRM_1(Nullable<int> sTATUS, string cCNO, string bARCODE, string iTEMNO, string bINNO, string zONEID, string tOKENID, Nullable<int> uSERID)
+        public virtual ObjectResult<CC_DOCLIST_CONFIRM_2_Result> CC_DOCLIST_CONFIRM_2(Nullable<int> sTATUS, string cCNO, string bARCODE, string iTEMNO, string bINNO, string zONEID, string tOKENID, Nullable<int> uSERID)
         {
             var sTATUSParameter = sTATUS.HasValue ?
                 new ObjectParameter("STATUS", sTATUS) :
@@ -134,7 +143,7 @@ namespace NAVWMSDESK.Models
                 new ObjectParameter("USERID", uSERID) :
                 new ObjectParameter("USERID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CC_DOCLIST_CONFIRM_1_Result>("CC_DOCLIST_CONFIRM_1", sTATUSParameter, cCNOParameter, bARCODEParameter, iTEMNOParameter, bINNOParameter, zONEIDParameter, tOKENIDParameter, uSERIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CC_DOCLIST_CONFIRM_2_Result>("CC_DOCLIST_CONFIRM_2", sTATUSParameter, cCNOParameter, bARCODEParameter, iTEMNOParameter, bINNOParameter, zONEIDParameter, tOKENIDParameter, uSERIDParameter);
         }
     
         public virtual ObjectResult<string> MOV_DOCLIST_CONFIRM(Nullable<int> sTATUS, string dOCNO, string bARCODE, string iTEMNO, string sERIALNO, string bINNO, Nullable<int> uSERID, string wHNO, string tOKENID)
@@ -238,6 +247,47 @@ namespace NAVWMSDESK.Models
                 new ObjectParameter("USERID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PIK_DOCLIST_CONFIRM_Result>("PIK_DOCLIST_CONFIRM", sTATUSParameter, pICKNOParameter, sBCODEParameter, bARCODEParameter, iTEMNOParameter, bINNOParameter, tAGParameter, tOKENIDParameter, uSERIDParameter);
+        }
+    
+        public virtual ObjectResult<PIK_DOCLIST_CONFIRM_ORIGINAL_Result> PIK_DOCLIST_CONFIRM_ORIGINAL(Nullable<int> sTATUS, string pICKNO, string sBCODE, string bARCODE, string iTEMNO, string bINNO, Nullable<int> tAG, string tOKENID, Nullable<int> uSERID)
+        {
+            var sTATUSParameter = sTATUS.HasValue ?
+                new ObjectParameter("STATUS", sTATUS) :
+                new ObjectParameter("STATUS", typeof(int));
+    
+            var pICKNOParameter = pICKNO != null ?
+                new ObjectParameter("PICKNO", pICKNO) :
+                new ObjectParameter("PICKNO", typeof(string));
+    
+            var sBCODEParameter = sBCODE != null ?
+                new ObjectParameter("SBCODE", sBCODE) :
+                new ObjectParameter("SBCODE", typeof(string));
+    
+            var bARCODEParameter = bARCODE != null ?
+                new ObjectParameter("BARCODE", bARCODE) :
+                new ObjectParameter("BARCODE", typeof(string));
+    
+            var iTEMNOParameter = iTEMNO != null ?
+                new ObjectParameter("ITEMNO", iTEMNO) :
+                new ObjectParameter("ITEMNO", typeof(string));
+    
+            var bINNOParameter = bINNO != null ?
+                new ObjectParameter("BINNO", bINNO) :
+                new ObjectParameter("BINNO", typeof(string));
+    
+            var tAGParameter = tAG.HasValue ?
+                new ObjectParameter("TAG", tAG) :
+                new ObjectParameter("TAG", typeof(int));
+    
+            var tOKENIDParameter = tOKENID != null ?
+                new ObjectParameter("TOKENID", tOKENID) :
+                new ObjectParameter("TOKENID", typeof(string));
+    
+            var uSERIDParameter = uSERID.HasValue ?
+                new ObjectParameter("USERID", uSERID) :
+                new ObjectParameter("USERID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PIK_DOCLIST_CONFIRM_ORIGINAL_Result>("PIK_DOCLIST_CONFIRM_ORIGINAL", sTATUSParameter, pICKNOParameter, sBCODEParameter, bARCODEParameter, iTEMNOParameter, bINNOParameter, tAGParameter, tOKENIDParameter, uSERIDParameter);
         }
     
         public virtual ObjectResult<PTA_DOCLIST_CONFIRM_Result> PTA_DOCLIST_CONFIRM(Nullable<int> sTATUS, string pUTNO, string bARCODE, string iTEMNO, string bINNO, string tOKENID, Nullable<int> uSERID)
@@ -349,6 +399,19 @@ namespace NAVWMSDESK.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("USER_TOKEN_CHECK", tOKENIDParameter, tOKENEXTENDParameter, pARAOUT);
         }
     
+        public virtual int WMS_DBAPART(Nullable<int> sTATUS, string dOCNO)
+        {
+            var sTATUSParameter = sTATUS.HasValue ?
+                new ObjectParameter("STATUS", sTATUS) :
+                new ObjectParameter("STATUS", typeof(int));
+    
+            var dOCNOParameter = dOCNO != null ?
+                new ObjectParameter("DOCNO", dOCNO) :
+                new ObjectParameter("DOCNO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("WMS_DBAPART", sTATUSParameter, dOCNOParameter);
+        }
+    
         public virtual ObjectResult<WMS_DESKTOP_Result> WMS_DESKTOP(Nullable<int> sTATUS, string dOCNO, string sUBDOCNO, Nullable<int> uSERID, string uSERNAME, string dOCTYPE, Nullable<System.DateTime> dATE1, Nullable<System.DateTime> dATE2, string wHNO)
         {
             var sTATUSParameter = sTATUS.HasValue ?
@@ -390,7 +453,7 @@ namespace NAVWMSDESK.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WMS_DESKTOP_Result>("WMS_DESKTOP", sTATUSParameter, dOCNOParameter, sUBDOCNOParameter, uSERIDParameter, uSERNAMEParameter, dOCTYPEParameter, dATE1Parameter, dATE2Parameter, wHNOParameter);
         }
     
-        public virtual int WMS_NAVDATA_PULL(Nullable<int> sTATUS, string wHNO, string dOCNO, string sUBDOCNO, string bARCODE, string iTEMNO, string sERAILNO, string iTEMDESC, string uOM, string qTY, string bINNO, string zONEID, string eANCODE)
+        public virtual ObjectResult<string> WMS_NAVDATA_PULL(Nullable<int> sTATUS, string wHNO, string dOCNO, string sUBDOCNO, string bARCODE, string iTEMNO, string sERAILNO, string iTEMDESC, string uOM, string qTY, string bINNO, string zONEID, string eANCODE, string uSERID)
         {
             var sTATUSParameter = sTATUS.HasValue ?
                 new ObjectParameter("STATUS", sTATUS) :
@@ -444,7 +507,76 @@ namespace NAVWMSDESK.Models
                 new ObjectParameter("EANCODE", eANCODE) :
                 new ObjectParameter("EANCODE", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("WMS_NAVDATA_PULL", sTATUSParameter, wHNOParameter, dOCNOParameter, sUBDOCNOParameter, bARCODEParameter, iTEMNOParameter, sERAILNOParameter, iTEMDESCParameter, uOMParameter, qTYParameter, bINNOParameter, zONEIDParameter, eANCODEParameter);
+            var uSERIDParameter = uSERID != null ?
+                new ObjectParameter("USERID", uSERID) :
+                new ObjectParameter("USERID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("WMS_NAVDATA_PULL", sTATUSParameter, wHNOParameter, dOCNOParameter, sUBDOCNOParameter, bARCODEParameter, iTEMNOParameter, sERAILNOParameter, iTEMDESCParameter, uOMParameter, qTYParameter, bINNOParameter, zONEIDParameter, eANCODEParameter, uSERIDParameter);
+        }
+    
+        public virtual ObjectResult<WMS_NAVDATA_PUSH_Result> WMS_NAVDATA_PUSH(Nullable<int> sTATUS, string wHNO, string dOCNO, string sUBDOCNO, string bARCODE, string iTEMNO, string sERAILNO, string iTEMDESC, string uOM, string qTY, string bINNO, string zONEID, string eANCODE, Nullable<int> uSERID, string rEMARKS)
+        {
+            var sTATUSParameter = sTATUS.HasValue ?
+                new ObjectParameter("STATUS", sTATUS) :
+                new ObjectParameter("STATUS", typeof(int));
+    
+            var wHNOParameter = wHNO != null ?
+                new ObjectParameter("WHNO", wHNO) :
+                new ObjectParameter("WHNO", typeof(string));
+    
+            var dOCNOParameter = dOCNO != null ?
+                new ObjectParameter("DOCNO", dOCNO) :
+                new ObjectParameter("DOCNO", typeof(string));
+    
+            var sUBDOCNOParameter = sUBDOCNO != null ?
+                new ObjectParameter("SUBDOCNO", sUBDOCNO) :
+                new ObjectParameter("SUBDOCNO", typeof(string));
+    
+            var bARCODEParameter = bARCODE != null ?
+                new ObjectParameter("BARCODE", bARCODE) :
+                new ObjectParameter("BARCODE", typeof(string));
+    
+            var iTEMNOParameter = iTEMNO != null ?
+                new ObjectParameter("ITEMNO", iTEMNO) :
+                new ObjectParameter("ITEMNO", typeof(string));
+    
+            var sERAILNOParameter = sERAILNO != null ?
+                new ObjectParameter("SERAILNO", sERAILNO) :
+                new ObjectParameter("SERAILNO", typeof(string));
+    
+            var iTEMDESCParameter = iTEMDESC != null ?
+                new ObjectParameter("ITEMDESC", iTEMDESC) :
+                new ObjectParameter("ITEMDESC", typeof(string));
+    
+            var uOMParameter = uOM != null ?
+                new ObjectParameter("UOM", uOM) :
+                new ObjectParameter("UOM", typeof(string));
+    
+            var qTYParameter = qTY != null ?
+                new ObjectParameter("QTY", qTY) :
+                new ObjectParameter("QTY", typeof(string));
+    
+            var bINNOParameter = bINNO != null ?
+                new ObjectParameter("BINNO", bINNO) :
+                new ObjectParameter("BINNO", typeof(string));
+    
+            var zONEIDParameter = zONEID != null ?
+                new ObjectParameter("ZONEID", zONEID) :
+                new ObjectParameter("ZONEID", typeof(string));
+    
+            var eANCODEParameter = eANCODE != null ?
+                new ObjectParameter("EANCODE", eANCODE) :
+                new ObjectParameter("EANCODE", typeof(string));
+    
+            var uSERIDParameter = uSERID.HasValue ?
+                new ObjectParameter("USERID", uSERID) :
+                new ObjectParameter("USERID", typeof(int));
+    
+            var rEMARKSParameter = rEMARKS != null ?
+                new ObjectParameter("REMARKS", rEMARKS) :
+                new ObjectParameter("REMARKS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<WMS_NAVDATA_PUSH_Result>("WMS_NAVDATA_PUSH", sTATUSParameter, wHNOParameter, dOCNOParameter, sUBDOCNOParameter, bARCODEParameter, iTEMNOParameter, sERAILNOParameter, iTEMDESCParameter, uOMParameter, qTYParameter, bINNOParameter, zONEIDParameter, eANCODEParameter, uSERIDParameter, rEMARKSParameter);
         }
     }
 }

@@ -15,6 +15,7 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using System.Web.Script.Serialization;
 using NAVWMSDESK.ViewModel.Putaway;
+using WMS_MVC.Models;
 
 namespace NAVWMSDESK.Controllers.Putaway
 {

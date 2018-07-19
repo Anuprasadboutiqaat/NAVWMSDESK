@@ -5,15 +5,235 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="NAVWMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ARCHIVE_CC_REQUEST">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOCDATE" Type="datetime" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="FDATE" Type="datetime" />
+          <Property Name="TDATE" Type="datetime" />
+          <Property Name="REMARKS" Type="nvarchar" MaxLength="250" />
+          <Property Name="CLOSEDBY" Type="int" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="ACHIVE" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.ARCHIVE_CC_SCAN' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ARCHIVE_CC_SCAN">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="PNA" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.ARCHIVE_CYCLECOUNT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ARCHIVE_CYCLECOUNT">
+          <Key>
+            <PropertyRef Name="SRNO" />
+            <PropertyRef Name="DOCNO" />
+            <PropertyRef Name="CCNO" />
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CCNO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="250" />
+          <Property Name="UOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" />
+          <Property Name="RECINSERTED" Type="datetime" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="USERASSIGNDATE" Type="datetime" />
+          <Property Name="ASSIGNSTATUS" Type="bit" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="F_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="SEDSTATUS" Type="int" />
+          <Property Name="CCSTATUS" Type="int" />
+          <Property Name="ARCHIVE" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.ARCHIVE_MOVE_DETAIL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ARCHIVE_MOVE_DETAIL">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FROMBINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SUGGBINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SUGGZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="SCANBINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="int" />
+          <Property Name="ITEMDESC" Type="nvarchar" MaxLength="250" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="PICKDATE" Type="datetime" />
+          <Property Name="PUTDATE" Type="datetime" />
+          <Property Name="INTEGRATED" Type="datetime" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="MOVSTATUS" Type="int" />
+          <Property Name="DOCSTATUS" Type="int" />
+          <Property Name="INTSTATUS" Type="int" />
+          <Property Name="ARCHIVE" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.ARCHIVE_MOVE_HEAD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ARCHIVE_MOVE_HEAD">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOCSTATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="ARCHIVE_PICKING">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="PICKNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="250" />
+          <Property Name="UOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" />
+          <Property Name="RECINSERTED" Type="datetime" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="USERASSIGNDATE" Type="datetime" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="EANCODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="EANTAG" Type="int" />
+          <Property Name="ACTBINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACTBARCODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="PNA" Type="int" />
+          <Property Name="PICKSTATUS" Type="int" />
+          <Property Name="ASSIGNSTATUS" Type="bit" />
+          <Property Name="ARCHIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="ARCHIVE_PUTAWAY">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="PUTNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="250" />
+          <Property Name="UOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="varchar" MaxLength="50" />
+          <Property Name="RECINSERTED" Type="datetime" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="USERASSIGNDATE" Type="datetime" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="ARCHIVE" Type="int" />
+          <Property Name="PUTSTATUS" Type="int" />
+          <Property Name="ASSIGNSTATUS" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.CC_TEST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CC_TEST">
+          <Key>
+            <PropertyRef Name="SRNO" />
+            <PropertyRef Name="DOCNO" />
+            <PropertyRef Name="CCNO" />
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CCNO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="250" />
+          <Property Name="UOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" />
+          <Property Name="RECINSERTED" Type="datetime" />
+          <Property Name="USERID" Type="int" />
+          <Property Name="USERASSIGNDATE" Type="datetime" />
+          <Property Name="ASSIGNSTATUS" Type="bit" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="F_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="SEDSTATUS" Type="int" />
+          <Property Name="CCSTATUS" Type="int" />
+          <Property Name="ARCHIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="ERRORMGMT_API">
+          <Key>
+            <PropertyRef Name="LOG_NO" />
+          </Key>
+          <Property Name="LOG_NO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPLICATION" Type="varchar" MaxLength="150" />
+          <Property Name="API" Type="nvarchar" MaxLength="250" />
+          <Property Name="APITYPE" Type="varchar" MaxLength="50" />
+          <Property Name="CONTROLLER" Type="varchar" MaxLength="100" />
+          <Property Name="ERROR_TYPE" Type="varchar" MaxLength="350" />
+          <Property Name="ERROR_MESSAGE" Type="nvarchar(max)" />
+          <Property Name="ERROR_DETAILS" Type="nvarchar(max)" />
+          <Property Name="ERROR_LINE" Type="varchar" MaxLength="100" />
+          <Property Name="ERROR_TIME" Type="datetime" />
+          <Property Name="REMARKS" Type="varchar" MaxLength="150" />
+        </EntityType>
         <EntityType Name="WMS_CC_REQUEST">
           <Key>
-            <PropertyRef Name="DOCNO" />
+            <PropertyRef Name="SRNO" />
           </Key>
-          <Property Name="DOCNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
           <Property Name="DOCDATE" Type="datetime" />
-          <Property Name="ZONEID" Type="varchar" MaxLength="15" />
-          <Property Name="BINNO" Type="varchar" MaxLength="25" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
           <Property Name="USERID" Type="int" />
+          <Property Name="FDATE" Type="datetime" />
+          <Property Name="TDATE" Type="datetime" />
+          <Property Name="REMARKS" Type="nvarchar" MaxLength="250" />
+          <Property Name="CLOSEDBY" Type="int" />
+          <Property Name="STATUS" Type="int" />
           <Property Name="ACHIVE" Type="int" />
         </EntityType>
         <EntityType Name="WMS_CC_SCAN">
@@ -21,16 +241,17 @@
             <PropertyRef Name="SRNO" />
           </Key>
           <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
-          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
-          <Property Name="CCNO" Type="varchar" MaxLength="50" />
-          <Property Name="ZONEID" Type="varchar" MaxLength="10" />
-          <Property Name="BINNO" Type="varchar" MaxLength="50" />
-          <Property Name="BARCODE" Type="varchar" MaxLength="50" />
-          <Property Name="F_ZONEID" Type="varchar" MaxLength="50" />
-          <Property Name="F_BINNO" Type="varchar" MaxLength="50" />
+          <Property Name="TRANSDATE" Type="datetime" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="CCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_BINNO" Type="nvarchar" MaxLength="50" />
           <Property Name="USERID" Type="int" />
-          <Property Name="MATCHSTATUS" Type="int" />
+          <Property Name="PNA" Type="int" />
         </EntityType>
         <EntityType Name="WMS_CLASS_EDITOR">
           <Key>
@@ -41,31 +262,36 @@
           <Property Name="CLSFLAG" Type="varchar" MaxLength="3" />
           <Property Name="CLSSTATUS" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NAVWMS.dbo.WMS_CYCLECOUNT' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="WMS_CYCLECOUNT">
           <Key>
+            <PropertyRef Name="SRNO" />
+            <PropertyRef Name="DOCNO" />
+            <PropertyRef Name="CCNO" />
             <PropertyRef Name="BARCODE" />
           </Key>
           <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DOCNO" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CCNO" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
-          <Property Name="ZONEID" Type="varchar" MaxLength="10" />
-          <Property Name="BINNO" Type="varchar" MaxLength="50" />
-          <Property Name="BARCODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
-          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
-          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
-          <Property Name="UOM" Type="varchar" MaxLength="10" />
-          <Property Name="QTY" Type="varchar" MaxLength="50" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CCNO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="250" />
+          <Property Name="UOM" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="nvarchar" MaxLength="50" />
           <Property Name="RECINSERTED" Type="datetime" />
           <Property Name="USERID" Type="int" />
           <Property Name="USERASSIGNDATE" Type="datetime" />
           <Property Name="ASSIGNSTATUS" Type="bit" />
           <Property Name="TRANSDATE" Type="datetime" />
-          <Property Name="F_BINNO" Type="varchar" MaxLength="50" />
-          <Property Name="F_ZONEID" Type="varchar" MaxLength="50" />
-          <Property Name="T_BINNO" Type="varchar" MaxLength="50" />
-          <Property Name="T_ZONEID" Type="varchar" MaxLength="50" />
+          <Property Name="F_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="F_ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="T_ZONEID" Type="nvarchar" MaxLength="50" />
           <Property Name="SEDSTATUS" Type="int" />
           <Property Name="CCSTATUS" Type="int" />
           <Property Name="ARCHIVE" Type="int" />
@@ -82,35 +308,38 @@
         </EntityType>
         <EntityType Name="WMS_MOVE_DETAIL">
           <Key>
-            <PropertyRef Name="SRNO" />
+            <PropertyRef Name="BARCODE" />
           </Key>
           <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
-          <Property Name="FROMBINNO" Type="varchar" MaxLength="50" />
-          <Property Name="SUGGBINNO" Type="varchar" MaxLength="50" />
-          <Property Name="SUGGZONEID" Type="varchar" MaxLength="50" />
-          <Property Name="SCANBINNO" Type="varchar" MaxLength="50" />
-          <Property Name="BARCODE" Type="varchar" MaxLength="50" />
-          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
-          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
-          <Property Name="ITEMDESC" Type="varchar" MaxLength="250" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="FROMBINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SUGGBINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SUGGZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="SCANBINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="QTY" Type="int" />
+          <Property Name="ITEMDESC" Type="nvarchar" MaxLength="250" />
           <Property Name="USERID" Type="int" />
           <Property Name="PICKDATE" Type="datetime" />
           <Property Name="PUTDATE" Type="datetime" />
           <Property Name="INTEGRATED" Type="datetime" />
-          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
           <Property Name="MOVSTATUS" Type="int" />
-          <Property Name="ARCHIVE" Type="bit" />
+          <Property Name="DOCSTATUS" Type="int" />
+          <Property Name="INTSTATUS" Type="int" />
+          <Property Name="ARCHIVE" Type="int" />
         </EntityType>
         <EntityType Name="WMS_MOVE_HEAD">
           <Key>
             <PropertyRef Name="SRNO" />
           </Key>
           <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
           <Property Name="USERID" Type="int" />
           <Property Name="TRANSDATE" Type="datetime" />
-          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
           <Property Name="DOCSTATUS" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -135,25 +364,25 @@ warning 6013: The table/view 'NAVWMS.dbo.WMS_MOVEMENT' does not have a primary k
             <PropertyRef Name="BARCODE" />
           </Key>
           <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
-          <Property Name="PICKNO" Type="varchar" MaxLength="50" />
-          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
-          <Property Name="ZONEID" Type="varchar" MaxLength="50" />
-          <Property Name="BINNO" Type="varchar" MaxLength="50" />
-          <Property Name="BARCODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
-          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
-          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
-          <Property Name="UOM" Type="varchar" MaxLength="10" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="PICKNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="250" />
+          <Property Name="UOM" Type="nvarchar" MaxLength="50" />
           <Property Name="QTY" Type="varchar" MaxLength="50" />
           <Property Name="RECINSERTED" Type="datetime" />
           <Property Name="USERID" Type="int" />
           <Property Name="USERASSIGNDATE" Type="datetime" />
           <Property Name="TRANSDATE" Type="datetime" />
-          <Property Name="EANCODE" Type="varchar" MaxLength="50" />
+          <Property Name="EANCODE" Type="nvarchar" MaxLength="50" />
           <Property Name="EANTAG" Type="int" />
-          <Property Name="ACTBINNO" Type="varchar" MaxLength="50" />
-          <Property Name="ACTBARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="ACTBINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ACTBARCODE" Type="nvarchar" MaxLength="50" />
           <Property Name="PNA" Type="int" />
           <Property Name="PICKSTATUS" Type="int" />
           <Property Name="ASSIGNSTATUS" Type="bit" />
@@ -164,16 +393,16 @@ warning 6013: The table/view 'NAVWMS.dbo.WMS_MOVEMENT' does not have a primary k
             <PropertyRef Name="BARCODE" />
           </Key>
           <Property Name="SRNO" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DOCNO" Type="varchar" MaxLength="50" />
-          <Property Name="PUTNO" Type="varchar" MaxLength="50" />
-          <Property Name="WAREHOUSENO" Type="varchar" MaxLength="50" />
-          <Property Name="ZONEID" Type="varchar" MaxLength="50" />
-          <Property Name="BINNO" Type="varchar" MaxLength="50" />
-          <Property Name="BARCODE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ITEMNO" Type="varchar" MaxLength="50" />
-          <Property Name="SERIALNO" Type="varchar" MaxLength="50" />
-          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
-          <Property Name="UOM" Type="varchar" MaxLength="10" />
+          <Property Name="DOCNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="PUTNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="WAREHOUSENO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZONEID" Type="nvarchar" MaxLength="50" />
+          <Property Name="BINNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="BARCODE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ITEMNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SERIALNO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="250" />
+          <Property Name="UOM" Type="nvarchar" MaxLength="50" />
           <Property Name="QTY" Type="varchar" MaxLength="50" />
           <Property Name="RECINSERTED" Type="datetime" />
           <Property Name="USERID" Type="int" />
@@ -334,21 +563,19 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Key>
             <PropertyRef Name="USERID" />
             <PropertyRef Name="USERNAME" />
-            <PropertyRef Name="Expr1" />
           </Key>
           <Property Name="USERID" Type="int" Nullable="false" />
-          <Property Name="USERNAME" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar" MaxLength="12" Nullable="false" />
           <Property Name="USERPASSWORD" Type="nvarchar" MaxLength="100" />
           <Property Name="CLSNAME" Type="varchar" MaxLength="25" />
           <Property Name="SUBCLSNAME" Type="varchar" MaxLength="50" />
           <Property Name="ROLLDESC" Type="varchar" MaxLength="20" />
           <Property Name="ROLLID" Type="int" />
-          <Property Name="Expr1" Type="int" Nullable="false" />
           <Property Name="CLSID" Type="int" />
-          <Property Name="SUBCLSID" Type="int" />
           <Property Name="SUBCLSSTATUS" Type="int" />
           <Property Name="ROLLSTATUS" Type="int" />
           <Property Name="USERSTATUS" Type="int" />
+          <Property Name="SUBCLASSID" Type="int" />
         </EntityType>
         <Function Name="CC_DOCLIST_CONFIRM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="STATUS" Type="int" Mode="In" />
@@ -360,7 +587,7 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="USERID" Type="int" Mode="In" />
         </Function>
-        <Function Name="CC_DOCLIST_CONFIRM_1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="CC_DOCLIST_CONFIRM_2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="STATUS" Type="int" Mode="In" />
           <Parameter Name="CCNO" Type="nvarchar" Mode="In" />
           <Parameter Name="BARCODE" Type="nvarchar" Mode="In" />
@@ -409,6 +636,17 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
           <Parameter Name="USERID" Type="int" Mode="In" />
         </Function>
+        <Function Name="PIK_DOCLIST_CONFIRM_ORIGINAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="PICKNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="SBCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BINNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="TAG" Type="int" Mode="In" />
+          <Parameter Name="TOKENID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+        </Function>
         <Function Name="PTA_DOCLIST_CONFIRM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="STATUS" Type="int" Mode="In" />
           <Parameter Name="PUTNO" Type="nvarchar" Mode="In" />
@@ -441,6 +679,10 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Parameter Name="TOKENEXTEND" Type="varchar" Mode="In" />
           <Parameter Name="PARAOUT" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="WMS_DBAPART" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="DOCNO" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="WMS_DESKTOP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="STATUS" Type="int" Mode="In" />
           <Parameter Name="DOCNO" Type="varchar" Mode="In" />
@@ -466,12 +708,33 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Parameter Name="BINNO" Type="nvarchar" Mode="In" />
           <Parameter Name="ZONEID" Type="nvarchar" Mode="In" />
           <Parameter Name="EANCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="USERID" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="WMS_NAVDATA_PUSH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+          <Parameter Name="WHNO" Type="varchar" Mode="In" />
+          <Parameter Name="DOCNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="SUBDOCNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="SERAILNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="ITEMDESC" Type="nvarchar" Mode="In" />
+          <Parameter Name="UOM" Type="nvarchar" Mode="In" />
+          <Parameter Name="QTY" Type="nvarchar" Mode="In" />
+          <Parameter Name="BINNO" Type="nvarchar" Mode="In" />
+          <Parameter Name="ZONEID" Type="nvarchar" Mode="In" />
+          <Parameter Name="EANCODE" Type="nvarchar" Mode="In" />
+          <Parameter Name="USERID" Type="int" Mode="In" />
+          <Parameter Name="REMARKS" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="NAVWMSModelStoreContainer">
+          <EntitySet Name="ARCHIVE_CC_REQUEST" EntityType="Self.ARCHIVE_CC_REQUEST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ARCHIVE_PICKING" EntityType="Self.ARCHIVE_PICKING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ARCHIVE_PUTAWAY" EntityType="Self.ARCHIVE_PUTAWAY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ERRORMGMT_API" EntityType="Self.ERRORMGMT_API" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WMS_CC_REQUEST" EntityType="Self.WMS_CC_REQUEST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WMS_CC_SCAN" EntityType="Self.WMS_CC_SCAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WMS_CLASS_EDITOR" EntityType="Self.WMS_CLASS_EDITOR" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="WMS_CYCLECOUNT" EntityType="Self.WMS_CYCLECOUNT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WMS_DOC_REGISTER" EntityType="Self.WMS_DOC_REGISTER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WMS_MOVE_DETAIL" EntityType="Self.WMS_MOVE_DETAIL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WMS_MOVE_HEAD" EntityType="Self.WMS_MOVE_HEAD" Schema="dbo" store:Type="Tables" />
@@ -485,6 +748,139 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <EntitySet Name="WMS_USER_EDITOR" EntityType="Self.WMS_USER_EDITOR" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WMS_USER_TASKS" EntityType="Self.WMS_USER_TASKS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WMS_ZONE_EDITOR" EntityType="Self.WMS_ZONE_EDITOR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ARCHIVE_CC_SCAN" EntityType="Self.ARCHIVE_CC_SCAN" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ARCHIVE_CC_SCAN].[SRNO] AS [SRNO], 
+    [ARCHIVE_CC_SCAN].[WAREHOUSENO] AS [WAREHOUSENO], 
+    [ARCHIVE_CC_SCAN].[DOCNO] AS [DOCNO], 
+    [ARCHIVE_CC_SCAN].[CCNO] AS [CCNO], 
+    [ARCHIVE_CC_SCAN].[BARCODE] AS [BARCODE], 
+    [ARCHIVE_CC_SCAN].[F_ZONEID] AS [F_ZONEID], 
+    [ARCHIVE_CC_SCAN].[F_BINNO] AS [F_BINNO], 
+    [ARCHIVE_CC_SCAN].[T_ZONEID] AS [T_ZONEID], 
+    [ARCHIVE_CC_SCAN].[T_BINNO] AS [T_BINNO], 
+    [ARCHIVE_CC_SCAN].[USERID] AS [USERID], 
+    [ARCHIVE_CC_SCAN].[PNA] AS [PNA]
+    FROM [dbo].[ARCHIVE_CC_SCAN] AS [ARCHIVE_CC_SCAN]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ARCHIVE_CYCLECOUNT" EntityType="Self.ARCHIVE_CYCLECOUNT" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ARCHIVE_CYCLECOUNT].[SRNO] AS [SRNO], 
+    [ARCHIVE_CYCLECOUNT].[DOCNO] AS [DOCNO], 
+    [ARCHIVE_CYCLECOUNT].[CCNO] AS [CCNO], 
+    [ARCHIVE_CYCLECOUNT].[WAREHOUSENO] AS [WAREHOUSENO], 
+    [ARCHIVE_CYCLECOUNT].[ZONEID] AS [ZONEID], 
+    [ARCHIVE_CYCLECOUNT].[BINNO] AS [BINNO], 
+    [ARCHIVE_CYCLECOUNT].[BARCODE] AS [BARCODE], 
+    [ARCHIVE_CYCLECOUNT].[ITEMNO] AS [ITEMNO], 
+    [ARCHIVE_CYCLECOUNT].[SERIALNO] AS [SERIALNO], 
+    [ARCHIVE_CYCLECOUNT].[DESCRIPTION] AS [DESCRIPTION], 
+    [ARCHIVE_CYCLECOUNT].[UOM] AS [UOM], 
+    [ARCHIVE_CYCLECOUNT].[QTY] AS [QTY], 
+    [ARCHIVE_CYCLECOUNT].[RECINSERTED] AS [RECINSERTED], 
+    [ARCHIVE_CYCLECOUNT].[USERID] AS [USERID], 
+    [ARCHIVE_CYCLECOUNT].[USERASSIGNDATE] AS [USERASSIGNDATE], 
+    [ARCHIVE_CYCLECOUNT].[ASSIGNSTATUS] AS [ASSIGNSTATUS], 
+    [ARCHIVE_CYCLECOUNT].[TRANSDATE] AS [TRANSDATE], 
+    [ARCHIVE_CYCLECOUNT].[F_BINNO] AS [F_BINNO], 
+    [ARCHIVE_CYCLECOUNT].[F_ZONEID] AS [F_ZONEID], 
+    [ARCHIVE_CYCLECOUNT].[T_BINNO] AS [T_BINNO], 
+    [ARCHIVE_CYCLECOUNT].[T_ZONEID] AS [T_ZONEID], 
+    [ARCHIVE_CYCLECOUNT].[SEDSTATUS] AS [SEDSTATUS], 
+    [ARCHIVE_CYCLECOUNT].[CCSTATUS] AS [CCSTATUS], 
+    [ARCHIVE_CYCLECOUNT].[ARCHIVE] AS [ARCHIVE]
+    FROM [dbo].[ARCHIVE_CYCLECOUNT] AS [ARCHIVE_CYCLECOUNT]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ARCHIVE_MOVE_DETAIL" EntityType="Self.ARCHIVE_MOVE_DETAIL" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ARCHIVE_MOVE_DETAIL].[SRNO] AS [SRNO], 
+    [ARCHIVE_MOVE_DETAIL].[DOCNO] AS [DOCNO], 
+    [ARCHIVE_MOVE_DETAIL].[FROMBINNO] AS [FROMBINNO], 
+    [ARCHIVE_MOVE_DETAIL].[SUGGBINNO] AS [SUGGBINNO], 
+    [ARCHIVE_MOVE_DETAIL].[SUGGZONEID] AS [SUGGZONEID], 
+    [ARCHIVE_MOVE_DETAIL].[SCANBINNO] AS [SCANBINNO], 
+    [ARCHIVE_MOVE_DETAIL].[BARCODE] AS [BARCODE], 
+    [ARCHIVE_MOVE_DETAIL].[ITEMNO] AS [ITEMNO], 
+    [ARCHIVE_MOVE_DETAIL].[SERIALNO] AS [SERIALNO], 
+    [ARCHIVE_MOVE_DETAIL].[QTY] AS [QTY], 
+    [ARCHIVE_MOVE_DETAIL].[ITEMDESC] AS [ITEMDESC], 
+    [ARCHIVE_MOVE_DETAIL].[USERID] AS [USERID], 
+    [ARCHIVE_MOVE_DETAIL].[PICKDATE] AS [PICKDATE], 
+    [ARCHIVE_MOVE_DETAIL].[PUTDATE] AS [PUTDATE], 
+    [ARCHIVE_MOVE_DETAIL].[INTEGRATED] AS [INTEGRATED], 
+    [ARCHIVE_MOVE_DETAIL].[WAREHOUSENO] AS [WAREHOUSENO], 
+    [ARCHIVE_MOVE_DETAIL].[MOVSTATUS] AS [MOVSTATUS], 
+    [ARCHIVE_MOVE_DETAIL].[DOCSTATUS] AS [DOCSTATUS], 
+    [ARCHIVE_MOVE_DETAIL].[INTSTATUS] AS [INTSTATUS], 
+    [ARCHIVE_MOVE_DETAIL].[ARCHIVE] AS [ARCHIVE]
+    FROM [dbo].[ARCHIVE_MOVE_DETAIL] AS [ARCHIVE_MOVE_DETAIL]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ARCHIVE_MOVE_HEAD" EntityType="Self.ARCHIVE_MOVE_HEAD" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ARCHIVE_MOVE_HEAD].[SRNO] AS [SRNO], 
+    [ARCHIVE_MOVE_HEAD].[DOCNO] AS [DOCNO], 
+    [ARCHIVE_MOVE_HEAD].[USERID] AS [USERID], 
+    [ARCHIVE_MOVE_HEAD].[TRANSDATE] AS [TRANSDATE], 
+    [ARCHIVE_MOVE_HEAD].[WAREHOUSENO] AS [WAREHOUSENO], 
+    [ARCHIVE_MOVE_HEAD].[DOCSTATUS] AS [DOCSTATUS]
+    FROM [dbo].[ARCHIVE_MOVE_HEAD] AS [ARCHIVE_MOVE_HEAD]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CC_TEST" EntityType="Self.CC_TEST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CC_TEST].[SRNO] AS [SRNO], 
+    [CC_TEST].[DOCNO] AS [DOCNO], 
+    [CC_TEST].[CCNO] AS [CCNO], 
+    [CC_TEST].[WAREHOUSENO] AS [WAREHOUSENO], 
+    [CC_TEST].[ZONEID] AS [ZONEID], 
+    [CC_TEST].[BINNO] AS [BINNO], 
+    [CC_TEST].[BARCODE] AS [BARCODE], 
+    [CC_TEST].[ITEMNO] AS [ITEMNO], 
+    [CC_TEST].[SERIALNO] AS [SERIALNO], 
+    [CC_TEST].[DESCRIPTION] AS [DESCRIPTION], 
+    [CC_TEST].[UOM] AS [UOM], 
+    [CC_TEST].[QTY] AS [QTY], 
+    [CC_TEST].[RECINSERTED] AS [RECINSERTED], 
+    [CC_TEST].[USERID] AS [USERID], 
+    [CC_TEST].[USERASSIGNDATE] AS [USERASSIGNDATE], 
+    [CC_TEST].[ASSIGNSTATUS] AS [ASSIGNSTATUS], 
+    [CC_TEST].[TRANSDATE] AS [TRANSDATE], 
+    [CC_TEST].[F_BINNO] AS [F_BINNO], 
+    [CC_TEST].[F_ZONEID] AS [F_ZONEID], 
+    [CC_TEST].[T_BINNO] AS [T_BINNO], 
+    [CC_TEST].[T_ZONEID] AS [T_ZONEID], 
+    [CC_TEST].[SEDSTATUS] AS [SEDSTATUS], 
+    [CC_TEST].[CCSTATUS] AS [CCSTATUS], 
+    [CC_TEST].[ARCHIVE] AS [ARCHIVE]
+    FROM [dbo].[CC_TEST] AS [CC_TEST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WMS_CYCLECOUNT" EntityType="Self.WMS_CYCLECOUNT" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WMS_CYCLECOUNT].[SRNO] AS [SRNO], 
+    [WMS_CYCLECOUNT].[DOCNO] AS [DOCNO], 
+    [WMS_CYCLECOUNT].[CCNO] AS [CCNO], 
+    [WMS_CYCLECOUNT].[WAREHOUSENO] AS [WAREHOUSENO], 
+    [WMS_CYCLECOUNT].[ZONEID] AS [ZONEID], 
+    [WMS_CYCLECOUNT].[BINNO] AS [BINNO], 
+    [WMS_CYCLECOUNT].[BARCODE] AS [BARCODE], 
+    [WMS_CYCLECOUNT].[ITEMNO] AS [ITEMNO], 
+    [WMS_CYCLECOUNT].[SERIALNO] AS [SERIALNO], 
+    [WMS_CYCLECOUNT].[DESCRIPTION] AS [DESCRIPTION], 
+    [WMS_CYCLECOUNT].[UOM] AS [UOM], 
+    [WMS_CYCLECOUNT].[QTY] AS [QTY], 
+    [WMS_CYCLECOUNT].[RECINSERTED] AS [RECINSERTED], 
+    [WMS_CYCLECOUNT].[USERID] AS [USERID], 
+    [WMS_CYCLECOUNT].[USERASSIGNDATE] AS [USERASSIGNDATE], 
+    [WMS_CYCLECOUNT].[ASSIGNSTATUS] AS [ASSIGNSTATUS], 
+    [WMS_CYCLECOUNT].[TRANSDATE] AS [TRANSDATE], 
+    [WMS_CYCLECOUNT].[F_BINNO] AS [F_BINNO], 
+    [WMS_CYCLECOUNT].[F_ZONEID] AS [F_ZONEID], 
+    [WMS_CYCLECOUNT].[T_BINNO] AS [T_BINNO], 
+    [WMS_CYCLECOUNT].[T_ZONEID] AS [T_ZONEID], 
+    [WMS_CYCLECOUNT].[SEDSTATUS] AS [SEDSTATUS], 
+    [WMS_CYCLECOUNT].[CCSTATUS] AS [CCSTATUS], 
+    [WMS_CYCLECOUNT].[ARCHIVE] AS [ARCHIVE]
+    FROM [dbo].[WMS_CYCLECOUNT] AS [WMS_CYCLECOUNT]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="WMS_USER_TOKEN" EntityType="Self.WMS_USER_TOKEN" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [WMS_USER_TOKEN].[SRNO] AS [SRNO], 
@@ -533,12 +929,11 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
     [VW_USER].[SUBCLSNAME] AS [SUBCLSNAME], 
     [VW_USER].[ROLLDESC] AS [ROLLDESC], 
     [VW_USER].[ROLLID] AS [ROLLID], 
-    [VW_USER].[Expr1] AS [Expr1], 
     [VW_USER].[CLSID] AS [CLSID], 
-    [VW_USER].[SUBCLSID] AS [SUBCLSID], 
     [VW_USER].[SUBCLSSTATUS] AS [SUBCLSSTATUS], 
     [VW_USER].[ROLLSTATUS] AS [ROLLSTATUS], 
-    [VW_USER].[USERSTATUS] AS [USERSTATUS]
+    [VW_USER].[USERSTATUS] AS [USERSTATUS], 
+    [VW_USER].[SUBCLASSID] AS [SUBCLASSID]
     FROM [dbo].[VW_USER] AS [VW_USER]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -550,15 +945,109 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
         <ComplexType Name="FN_ListToTable_Result">
           <Property Name="ListValue" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </ComplexType>
+        <EntityType Name="ARCHIVE_CC_REQUEST">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOCDATE" Type="DateTime" Precision="3" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="FDATE" Type="DateTime" Precision="3" />
+          <Property Name="TDATE" Type="DateTime" Precision="3" />
+          <Property Name="REMARKS" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CLOSEDBY" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="ACHIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ARCHIVE_PICKING">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PICKNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="EANCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EANTAG" Type="Int32" />
+          <Property Name="ACTBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACTBARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PNA" Type="Int32" />
+          <Property Name="PICKSTATUS" Type="Int32" />
+          <Property Name="ASSIGNSTATUS" Type="Boolean" />
+          <Property Name="ARCHIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ARCHIVE_PUTAWAY">
+          <Key>
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PUTNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="ARCHIVE" Type="Int32" />
+          <Property Name="PUTSTATUS" Type="Int32" />
+          <Property Name="ASSIGNSTATUS" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="ERRORMGMT_API">
+          <Key>
+            <PropertyRef Name="LOG_NO" />
+          </Key>
+          <Property Name="LOG_NO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPLICATION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="API" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="APITYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONTROLLER" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ERROR_TYPE" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+          <Property Name="ERROR_MESSAGE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ERROR_DETAILS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ERROR_LINE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ERROR_TIME" Type="DateTime" Precision="3" />
+          <Property Name="REMARKS" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="WMS_CC_REQUEST">
           <Key>
-            <PropertyRef Name="DOCNO" />
+            <PropertyRef Name="SRNO" />
           </Key>
-          <Property Name="DOCNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DOCDATE" Type="DateTime" Precision="3" />
-          <Property Name="ZONEID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="BINNO" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="USERID" Type="Int32" />
+          <Property Name="FDATE" Type="DateTime" Precision="3" />
+          <Property Name="TDATE" Type="DateTime" Precision="3" />
+          <Property Name="REMARKS" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CLOSEDBY" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
           <Property Name="ACHIVE" Type="Int32" />
         </EntityType>
         <EntityType Name="WMS_CC_SCAN">
@@ -566,16 +1055,17 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <PropertyRef Name="SRNO" />
           </Key>
           <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ZONEID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="USERID" Type="Int32" />
-          <Property Name="MATCHSTATUS" Type="Int32" />
+          <Property Name="PNA" Type="Int32" />
         </EntityType>
         <EntityType Name="WMS_CLASS_EDITOR">
           <Key>
@@ -585,35 +1075,6 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Property Name="CLSNAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="CLSFLAG" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
           <Property Name="CLSSTATUS" Type="Int32" />
-        </EntityType>
-        <EntityType Name="WMS_CYCLECOUNT">
-          <Key>
-            <PropertyRef Name="BARCODE" />
-          </Key>
-          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ZONEID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="UOM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
-          <Property Name="USERID" Type="Int32" />
-          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
-          <Property Name="ASSIGNSTATUS" Type="Boolean" />
-          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
-          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="T_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="T_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SEDSTATUS" Type="Int32" />
-          <Property Name="CCSTATUS" Type="Int32" />
-          <Property Name="ARCHIVE" Type="Int32" />
         </EntityType>
         <EntityType Name="WMS_DOC_REGISTER">
           <Key>
@@ -627,35 +1088,38 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
         </EntityType>
         <EntityType Name="WMS_MOVE_DETAIL">
           <Key>
-            <PropertyRef Name="SRNO" />
+            <PropertyRef Name="BARCODE" />
           </Key>
           <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FROMBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SUGGBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SUGGZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SCANBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ITEMDESC" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FROMBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUGGBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUGGZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCANBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="Int32" />
+          <Property Name="ITEMDESC" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="USERID" Type="Int32" />
           <Property Name="PICKDATE" Type="DateTime" Precision="3" />
           <Property Name="PUTDATE" Type="DateTime" Precision="3" />
           <Property Name="INTEGRATED" Type="DateTime" Precision="3" />
-          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MOVSTATUS" Type="Int32" />
-          <Property Name="ARCHIVE" Type="Boolean" />
+          <Property Name="DOCSTATUS" Type="Int32" />
+          <Property Name="INTSTATUS" Type="Int32" />
+          <Property Name="ARCHIVE" Type="Int32" />
         </EntityType>
         <EntityType Name="WMS_MOVE_HEAD">
           <Key>
             <PropertyRef Name="SRNO" />
           </Key>
           <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="USERID" Type="Int32" />
           <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
-          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DOCSTATUS" Type="Int32" />
         </EntityType>
         <EntityType Name="WMS_PICKING">
@@ -663,25 +1127,25 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <PropertyRef Name="BARCODE" />
           </Key>
           <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PICKNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="UOM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PICKNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
           <Property Name="USERID" Type="Int32" />
           <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
           <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
-          <Property Name="EANCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EANCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EANTAG" Type="Int32" />
-          <Property Name="ACTBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ACTBARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ACTBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ACTBARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PNA" Type="Int32" />
           <Property Name="PICKSTATUS" Type="Int32" />
           <Property Name="ASSIGNSTATUS" Type="Boolean" />
@@ -692,16 +1156,16 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <PropertyRef Name="BARCODE" />
           </Key>
           <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PUTNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="UOM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PUTNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
           <Property Name="USERID" Type="Int32" />
@@ -807,6 +1271,154 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Property Name="ZONEDESC" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="ZONESTATUS" Type="Int32" />
         </EntityType>
+        <EntityType Name="ARCHIVE_CC_SCAN">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="PNA" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ARCHIVE_CYCLECOUNT">
+          <Key>
+            <PropertyRef Name="SRNO" />
+            <PropertyRef Name="DOCNO" />
+            <PropertyRef Name="CCNO" />
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
+          <Property Name="ASSIGNSTATUS" Type="Boolean" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SEDSTATUS" Type="Int32" />
+          <Property Name="CCSTATUS" Type="Int32" />
+          <Property Name="ARCHIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ARCHIVE_MOVE_DETAIL">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FROMBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUGGBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SUGGZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SCANBINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="Int32" />
+          <Property Name="ITEMDESC" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="PICKDATE" Type="DateTime" Precision="3" />
+          <Property Name="PUTDATE" Type="DateTime" Precision="3" />
+          <Property Name="INTEGRATED" Type="DateTime" Precision="3" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MOVSTATUS" Type="Int32" />
+          <Property Name="DOCSTATUS" Type="Int32" />
+          <Property Name="INTSTATUS" Type="Int32" />
+          <Property Name="ARCHIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ARCHIVE_MOVE_HEAD">
+          <Key>
+            <PropertyRef Name="SRNO" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DOCSTATUS" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CC_TEST">
+          <Key>
+            <PropertyRef Name="SRNO" />
+            <PropertyRef Name="DOCNO" />
+            <PropertyRef Name="CCNO" />
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
+          <Property Name="ASSIGNSTATUS" Type="Boolean" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SEDSTATUS" Type="Int32" />
+          <Property Name="CCSTATUS" Type="Int32" />
+          <Property Name="ARCHIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="WMS_CYCLECOUNT">
+          <Key>
+            <PropertyRef Name="SRNO" />
+            <PropertyRef Name="DOCNO" />
+            <PropertyRef Name="CCNO" />
+            <PropertyRef Name="BARCODE" />
+          </Key>
+          <Property Name="SRNO" Type="Decimal" Precision="18" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DOCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CCNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WAREHOUSENO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ITEMNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SERIALNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="UOM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QTY" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RECINSERTED" Type="DateTime" Precision="3" />
+          <Property Name="USERID" Type="Int32" />
+          <Property Name="USERASSIGNDATE" Type="DateTime" Precision="3" />
+          <Property Name="ASSIGNSTATUS" Type="Boolean" />
+          <Property Name="TRANSDATE" Type="DateTime" Precision="3" />
+          <Property Name="F_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="F_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_BINNO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="T_ZONEID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SEDSTATUS" Type="Int32" />
+          <Property Name="CCSTATUS" Type="Int32" />
+          <Property Name="ARCHIVE" Type="Int32" />
+        </EntityType>
         <EntityType Name="WMS_USER_TOKEN">
           <Key>
             <PropertyRef Name="SRNO" />
@@ -854,27 +1466,28 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Key>
             <PropertyRef Name="USERID" />
             <PropertyRef Name="USERNAME" />
-            <PropertyRef Name="Expr1" />
           </Key>
           <Property Name="USERID" Type="Int32" Nullable="false" />
-          <Property Name="USERNAME" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="USERPASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CLSNAME" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="SUBCLSNAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ROLLDESC" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ROLLID" Type="Int32" />
-          <Property Name="Expr1" Type="Int32" Nullable="false" />
           <Property Name="CLSID" Type="Int32" />
-          <Property Name="SUBCLSID" Type="Int32" />
           <Property Name="SUBCLSSTATUS" Type="Int32" />
           <Property Name="ROLLSTATUS" Type="Int32" />
           <Property Name="USERSTATUS" Type="Int32" />
+          <Property Name="SUBCLASSID" Type="Int32" />
         </EntityType>
         <EntityContainer Name="NAVWMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ARCHIVE_CC_REQUEST" EntityType="Self.ARCHIVE_CC_REQUEST" />
+          <EntitySet Name="ARCHIVE_PICKING" EntityType="Self.ARCHIVE_PICKING" />
+          <EntitySet Name="ARCHIVE_PUTAWAY" EntityType="Self.ARCHIVE_PUTAWAY" />
+          <EntitySet Name="ERRORMGMT_API" EntityType="Self.ERRORMGMT_API" />
           <EntitySet Name="WMS_CC_REQUEST" EntityType="Self.WMS_CC_REQUEST" />
           <EntitySet Name="WMS_CC_SCAN" EntityType="Self.WMS_CC_SCAN" />
           <EntitySet Name="WMS_CLASS_EDITOR" EntityType="Self.WMS_CLASS_EDITOR" />
-          <EntitySet Name="WMS_CYCLECOUNT" EntityType="Self.WMS_CYCLECOUNT" />
           <EntitySet Name="WMS_DOC_REGISTER" EntityType="Self.WMS_DOC_REGISTER" />
           <EntitySet Name="WMS_MOVE_DETAIL" EntityType="Self.WMS_MOVE_DETAIL" />
           <EntitySet Name="WMS_MOVE_HEAD" EntityType="Self.WMS_MOVE_HEAD" />
@@ -888,6 +1501,12 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <EntitySet Name="WMS_USER_EDITOR" EntityType="Self.WMS_USER_EDITOR" />
           <EntitySet Name="WMS_USER_TASKS" EntityType="Self.WMS_USER_TASKS" />
           <EntitySet Name="WMS_ZONE_EDITOR" EntityType="Self.WMS_ZONE_EDITOR" />
+          <EntitySet Name="ARCHIVE_CC_SCAN" EntityType="Self.ARCHIVE_CC_SCAN" />
+          <EntitySet Name="ARCHIVE_CYCLECOUNT" EntityType="Self.ARCHIVE_CYCLECOUNT" />
+          <EntitySet Name="ARCHIVE_MOVE_DETAIL" EntityType="Self.ARCHIVE_MOVE_DETAIL" />
+          <EntitySet Name="ARCHIVE_MOVE_HEAD" EntityType="Self.ARCHIVE_MOVE_HEAD" />
+          <EntitySet Name="CC_TEST" EntityType="Self.CC_TEST" />
+          <EntitySet Name="WMS_CYCLECOUNT" EntityType="Self.WMS_CYCLECOUNT" />
           <EntitySet Name="WMS_USER_TOKEN" EntityType="Self.WMS_USER_TOKEN" />
           <EntitySet Name="VW_CC1_TEMP" EntityType="Self.VW_CC1_TEMP" />
           <EntitySet Name="VW_CLASS_SUBCLASS" EntityType="Self.VW_CLASS_SUBCLASS" />
@@ -906,7 +1525,7 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <Parameter Name="TOKENID" Mode="In" Type="String" />
             <Parameter Name="USERID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="CC_DOCLIST_CONFIRM_1" ReturnType="Collection(NAVWMSModel.CC_DOCLIST_CONFIRM_1_Result)">
+          <FunctionImport Name="CC_DOCLIST_CONFIRM_2" ReturnType="Collection(NAVWMSModel.CC_DOCLIST_CONFIRM_2_Result)">
             <Parameter Name="STATUS" Mode="In" Type="Int32" />
             <Parameter Name="CCNO" Mode="In" Type="String" />
             <Parameter Name="BARCODE" Mode="In" Type="String" />
@@ -934,6 +1553,17 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <Parameter Name="SUBDOCNO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="PIK_DOCLIST_CONFIRM" ReturnType="Collection(NAVWMSModel.PIK_DOCLIST_CONFIRM_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="PICKNO" Mode="In" Type="String" />
+            <Parameter Name="SBCODE" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="ITEMNO" Mode="In" Type="String" />
+            <Parameter Name="BINNO" Mode="In" Type="String" />
+            <Parameter Name="TAG" Mode="In" Type="Int32" />
+            <Parameter Name="TOKENID" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PIK_DOCLIST_CONFIRM_ORIGINAL" ReturnType="Collection(NAVWMSModel.PIK_DOCLIST_CONFIRM_ORIGINAL_Result)">
             <Parameter Name="STATUS" Mode="In" Type="Int32" />
             <Parameter Name="PICKNO" Mode="In" Type="String" />
             <Parameter Name="SBCODE" Mode="In" Type="String" />
@@ -976,6 +1606,10 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <Parameter Name="TOKENEXTEND" Mode="In" Type="String" />
             <Parameter Name="PARAOUT" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="WMS_DBAPART">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="DOCNO" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="WMS_DESKTOP" ReturnType="Collection(NAVWMSModel.WMS_DESKTOP_Result)">
             <Parameter Name="STATUS" Mode="In" Type="Int32" />
             <Parameter Name="DOCNO" Mode="In" Type="String" />
@@ -987,7 +1621,7 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <Parameter Name="DATE2" Mode="In" Type="DateTime" />
             <Parameter Name="WHNO" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="WMS_NAVDATA_PULL">
+          <FunctionImport Name="WMS_NAVDATA_PULL" ReturnType="Collection(String)">
             <Parameter Name="STATUS" Mode="In" Type="Int32" />
             <Parameter Name="WHNO" Mode="In" Type="String" />
             <Parameter Name="DOCNO" Mode="In" Type="String" />
@@ -1001,23 +1635,41 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <Parameter Name="BINNO" Mode="In" Type="String" />
             <Parameter Name="ZONEID" Mode="In" Type="String" />
             <Parameter Name="EANCODE" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="WMS_NAVDATA_PUSH" ReturnType="Collection(NAVWMSModel.WMS_NAVDATA_PUSH_Result)">
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+            <Parameter Name="WHNO" Mode="In" Type="String" />
+            <Parameter Name="DOCNO" Mode="In" Type="String" />
+            <Parameter Name="SUBDOCNO" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="ITEMNO" Mode="In" Type="String" />
+            <Parameter Name="SERAILNO" Mode="In" Type="String" />
+            <Parameter Name="ITEMDESC" Mode="In" Type="String" />
+            <Parameter Name="UOM" Mode="In" Type="String" />
+            <Parameter Name="QTY" Mode="In" Type="String" />
+            <Parameter Name="BINNO" Mode="In" Type="String" />
+            <Parameter Name="ZONEID" Mode="In" Type="String" />
+            <Parameter Name="EANCODE" Mode="In" Type="String" />
+            <Parameter Name="USERID" Mode="In" Type="Int32" />
+            <Parameter Name="REMARKS" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="CC_DOCLIST_CONFIRM_Result">
           <Property Type="String" Name="DOCNO" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CCNO" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ZONEBIN" Nullable="true" MaxLength="61" />
+          <Property Type="String" Name="ZONEBIN" Nullable="true" MaxLength="101" />
           <Property Type="Int32" Name="USERID" Nullable="true" />
-          <Property Type="Double" Name="TOTQTY" Nullable="true" />
+          <Property Type="Int32" Name="TOTQTY" Nullable="true" />
           <Property Type="Int32" Name="CCQTY" Nullable="true" />
           <Property Type="String" Name="QTY" Nullable="true" MaxLength="61" />
           <Property Type="Int32" Name="CCSTATUS" Nullable="true" />
           <Property Type="String" Name="MYACT" Nullable="false" MaxLength="3" />
         </ComplexType>
-        <ComplexType Name="CC_DOCLIST_CONFIRM_1_Result">
+        <ComplexType Name="CC_DOCLIST_CONFIRM_2_Result">
           <Property Type="String" Name="DOCNO" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="CCNO" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ZONEBIN" Nullable="true" MaxLength="61" />
+          <Property Type="String" Name="ZONEBIN" Nullable="true" MaxLength="101" />
           <Property Type="Int32" Name="USERID" Nullable="true" />
           <Property Type="Double" Name="TOTQTY" Nullable="true" />
           <Property Type="Int32" Name="CCQTY" Nullable="true" />
@@ -1041,6 +1693,17 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Property Type="Int32" Name="PICKSTATUS" Nullable="true" />
           <Property Type="String" Name="MYACT" Nullable="false" MaxLength="3" />
         </ComplexType>
+        <ComplexType Name="PIK_DOCLIST_CONFIRM_ORIGINAL_Result">
+          <Property Type="String" Name="DOCNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PICKNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ZONEBIN" Nullable="true" MaxLength="101" />
+          <Property Type="Int32" Name="USERID" Nullable="true" />
+          <Property Type="Double" Name="TOTQTY" Nullable="true" />
+          <Property Type="Double" Name="PICKQTY" Nullable="true" />
+          <Property Type="String" Name="QTY" Nullable="true" MaxLength="61" />
+          <Property Type="Int32" Name="PICKSTATUS" Nullable="true" />
+          <Property Type="String" Name="MYACT" Nullable="false" MaxLength="3" />
+        </ComplexType>
         <ComplexType Name="PTA_DOCLIST_CONFIRM_Result">
           <Property Type="String" Name="DOCNO" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="PUTNO" Nullable="true" MaxLength="50" />
@@ -1054,16 +1717,17 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
         </ComplexType>
         <ComplexType Name="TEST_DOCLIST_Result">
           <Property Type="Decimal" Name="SRNO" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="DateTime" Name="TRANSDATE" Nullable="true" Precision="23" />
           <Property Type="String" Name="WAREHOUSENO" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="DOCNO" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CCNO" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="ZONEID" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="BINNO" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="BARCODE" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="F_ZONEID" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="F_BINNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="T_ZONEID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="T_BINNO" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="USERID" Nullable="true" />
-          <Property Type="Int32" Name="MATCHSTATUS" Nullable="true" />
+          <Property Type="Int32" Name="PNA" Nullable="true" />
         </ComplexType>
         <ComplexType Name="USER_EDITOR_ADDEDIT_Result">
           <Property Type="Int32" Name="USERID" Nullable="false" />
@@ -1091,57 +1755,45 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
           <Property Type="Double" Name="SCANQTY" Nullable="true" />
           <Property Type="String" Name="PUTSTATUS" Nullable="false" MaxLength="10" />
         </ComplexType>
+        <ComplexType Name="WMS_NAVDATA_PUSH_Result">
+          <Property Type="String" Name="DOCNO" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CCNO" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="WAREHOUSENO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BARCODE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ITEMNO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SERIALNO" Nullable="true" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NAVWMSModelStoreContainer" CdmEntityContainer="NAVWMSEntities">
-          <EntitySetMapping Name="WMS_CC_REQUEST">
-            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CC_REQUEST">
-              <MappingFragment StoreEntitySet="WMS_CC_REQUEST">
+          <EntitySetMapping Name="ARCHIVE_CC_REQUEST">
+            <EntityTypeMapping TypeName="NAVWMSModel.ARCHIVE_CC_REQUEST">
+              <MappingFragment StoreEntitySet="ARCHIVE_CC_REQUEST">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
                 <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
                 <ScalarProperty Name="DOCDATE" ColumnName="DOCDATE" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
                 <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
                 <ScalarProperty Name="BINNO" ColumnName="BINNO" />
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="FDATE" ColumnName="FDATE" />
+                <ScalarProperty Name="TDATE" ColumnName="TDATE" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="CLOSEDBY" ColumnName="CLOSEDBY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="ACHIVE" ColumnName="ACHIVE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="WMS_CC_SCAN">
-            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CC_SCAN">
-              <MappingFragment StoreEntitySet="WMS_CC_SCAN">
-                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
-                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
-                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
-                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
-                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
-                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
-                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
-                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
-                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
-                <ScalarProperty Name="USERID" ColumnName="USERID" />
-                <ScalarProperty Name="MATCHSTATUS" ColumnName="MATCHSTATUS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WMS_CLASS_EDITOR">
-            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CLASS_EDITOR">
-              <MappingFragment StoreEntitySet="WMS_CLASS_EDITOR">
-                <ScalarProperty Name="CLASSID" ColumnName="CLASSID" />
-                <ScalarProperty Name="CLSNAME" ColumnName="CLSNAME" />
-                <ScalarProperty Name="CLSFLAG" ColumnName="CLSFLAG" />
-                <ScalarProperty Name="CLSSTATUS" ColumnName="CLSSTATUS" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WMS_CYCLECOUNT">
-            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CYCLECOUNT">
-              <MappingFragment StoreEntitySet="WMS_CYCLECOUNT">
+          <EntitySetMapping Name="ARCHIVE_PICKING">
+            <EntityTypeMapping TypeName="NAVWMSModel.ARCHIVE_PICKING">
+              <MappingFragment StoreEntitySet="ARCHIVE_PICKING">
                 <ScalarProperty Name="SRNO" ColumnName="SRNO" />
                 <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
-                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="PICKNO" ColumnName="PICKNO" />
                 <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
                 <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
                 <ScalarProperty Name="BINNO" ColumnName="BINNO" />
@@ -1154,15 +1806,104 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
                 <ScalarProperty Name="RECINSERTED" ColumnName="RECINSERTED" />
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
                 <ScalarProperty Name="USERASSIGNDATE" ColumnName="USERASSIGNDATE" />
-                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
                 <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
-                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
-                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
-                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
-                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
-                <ScalarProperty Name="SEDSTATUS" ColumnName="SEDSTATUS" />
-                <ScalarProperty Name="CCSTATUS" ColumnName="CCSTATUS" />
+                <ScalarProperty Name="EANCODE" ColumnName="EANCODE" />
+                <ScalarProperty Name="EANTAG" ColumnName="EANTAG" />
+                <ScalarProperty Name="ACTBINNO" ColumnName="ACTBINNO" />
+                <ScalarProperty Name="ACTBARCODE" ColumnName="ACTBARCODE" />
+                <ScalarProperty Name="PNA" ColumnName="PNA" />
+                <ScalarProperty Name="PICKSTATUS" ColumnName="PICKSTATUS" />
+                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
                 <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARCHIVE_PUTAWAY">
+            <EntityTypeMapping TypeName="NAVWMSModel.ARCHIVE_PUTAWAY">
+              <MappingFragment StoreEntitySet="ARCHIVE_PUTAWAY">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="PUTNO" ColumnName="PUTNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="RECINSERTED" ColumnName="RECINSERTED" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERASSIGNDATE" ColumnName="USERASSIGNDATE" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+                <ScalarProperty Name="PUTSTATUS" ColumnName="PUTSTATUS" />
+                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ERRORMGMT_API">
+            <EntityTypeMapping TypeName="NAVWMSModel.ERRORMGMT_API">
+              <MappingFragment StoreEntitySet="ERRORMGMT_API">
+                <ScalarProperty Name="LOG_NO" ColumnName="LOG_NO" />
+                <ScalarProperty Name="APPLICATION" ColumnName="APPLICATION" />
+                <ScalarProperty Name="API" ColumnName="API" />
+                <ScalarProperty Name="APITYPE" ColumnName="APITYPE" />
+                <ScalarProperty Name="CONTROLLER" ColumnName="CONTROLLER" />
+                <ScalarProperty Name="ERROR_TYPE" ColumnName="ERROR_TYPE" />
+                <ScalarProperty Name="ERROR_MESSAGE" ColumnName="ERROR_MESSAGE" />
+                <ScalarProperty Name="ERROR_DETAILS" ColumnName="ERROR_DETAILS" />
+                <ScalarProperty Name="ERROR_LINE" ColumnName="ERROR_LINE" />
+                <ScalarProperty Name="ERROR_TIME" ColumnName="ERROR_TIME" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_CC_REQUEST">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CC_REQUEST">
+              <MappingFragment StoreEntitySet="WMS_CC_REQUEST">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="DOCDATE" ColumnName="DOCDATE" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="FDATE" ColumnName="FDATE" />
+                <ScalarProperty Name="TDATE" ColumnName="TDATE" />
+                <ScalarProperty Name="REMARKS" ColumnName="REMARKS" />
+                <ScalarProperty Name="CLOSEDBY" ColumnName="CLOSEDBY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="ACHIVE" ColumnName="ACHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_CC_SCAN">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CC_SCAN">
+              <MappingFragment StoreEntitySet="WMS_CC_SCAN">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
+                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="PNA" ColumnName="PNA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_CLASS_EDITOR">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CLASS_EDITOR">
+              <MappingFragment StoreEntitySet="WMS_CLASS_EDITOR">
+                <ScalarProperty Name="CLASSID" ColumnName="CLASSID" />
+                <ScalarProperty Name="CLSNAME" ColumnName="CLSNAME" />
+                <ScalarProperty Name="CLSFLAG" ColumnName="CLSFLAG" />
+                <ScalarProperty Name="CLSSTATUS" ColumnName="CLSSTATUS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1189,6 +1930,7 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
                 <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
                 <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
                 <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
                 <ScalarProperty Name="ITEMDESC" ColumnName="ITEMDESC" />
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
                 <ScalarProperty Name="PICKDATE" ColumnName="PICKDATE" />
@@ -1196,6 +1938,8 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
                 <ScalarProperty Name="INTEGRATED" ColumnName="INTEGRATED" />
                 <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
                 <ScalarProperty Name="MOVSTATUS" ColumnName="MOVSTATUS" />
+                <ScalarProperty Name="DOCSTATUS" ColumnName="DOCSTATUS" />
+                <ScalarProperty Name="INTSTATUS" ColumnName="INTSTATUS" />
                 <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1371,6 +2115,151 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ARCHIVE_CC_SCAN">
+            <EntityTypeMapping TypeName="NAVWMSModel.ARCHIVE_CC_SCAN">
+              <MappingFragment StoreEntitySet="ARCHIVE_CC_SCAN">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
+                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="PNA" ColumnName="PNA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARCHIVE_CYCLECOUNT">
+            <EntityTypeMapping TypeName="NAVWMSModel.ARCHIVE_CYCLECOUNT">
+              <MappingFragment StoreEntitySet="ARCHIVE_CYCLECOUNT">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="RECINSERTED" ColumnName="RECINSERTED" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERASSIGNDATE" ColumnName="USERASSIGNDATE" />
+                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
+                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
+                <ScalarProperty Name="SEDSTATUS" ColumnName="SEDSTATUS" />
+                <ScalarProperty Name="CCSTATUS" ColumnName="CCSTATUS" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARCHIVE_MOVE_DETAIL">
+            <EntityTypeMapping TypeName="NAVWMSModel.ARCHIVE_MOVE_DETAIL">
+              <MappingFragment StoreEntitySet="ARCHIVE_MOVE_DETAIL">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="FROMBINNO" ColumnName="FROMBINNO" />
+                <ScalarProperty Name="SUGGBINNO" ColumnName="SUGGBINNO" />
+                <ScalarProperty Name="SUGGZONEID" ColumnName="SUGGZONEID" />
+                <ScalarProperty Name="SCANBINNO" ColumnName="SCANBINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="ITEMDESC" ColumnName="ITEMDESC" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="PICKDATE" ColumnName="PICKDATE" />
+                <ScalarProperty Name="PUTDATE" ColumnName="PUTDATE" />
+                <ScalarProperty Name="INTEGRATED" ColumnName="INTEGRATED" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="MOVSTATUS" ColumnName="MOVSTATUS" />
+                <ScalarProperty Name="DOCSTATUS" ColumnName="DOCSTATUS" />
+                <ScalarProperty Name="INTSTATUS" ColumnName="INTSTATUS" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARCHIVE_MOVE_HEAD">
+            <EntityTypeMapping TypeName="NAVWMSModel.ARCHIVE_MOVE_HEAD">
+              <MappingFragment StoreEntitySet="ARCHIVE_MOVE_HEAD">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="DOCSTATUS" ColumnName="DOCSTATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CC_TEST">
+            <EntityTypeMapping TypeName="NAVWMSModel.CC_TEST">
+              <MappingFragment StoreEntitySet="CC_TEST">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="RECINSERTED" ColumnName="RECINSERTED" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERASSIGNDATE" ColumnName="USERASSIGNDATE" />
+                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
+                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
+                <ScalarProperty Name="SEDSTATUS" ColumnName="SEDSTATUS" />
+                <ScalarProperty Name="CCSTATUS" ColumnName="CCSTATUS" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WMS_CYCLECOUNT">
+            <EntityTypeMapping TypeName="NAVWMSModel.WMS_CYCLECOUNT">
+              <MappingFragment StoreEntitySet="WMS_CYCLECOUNT">
+                <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
+                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="UOM" ColumnName="UOM" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="RECINSERTED" ColumnName="RECINSERTED" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="USERASSIGNDATE" ColumnName="USERASSIGNDATE" />
+                <ScalarProperty Name="ASSIGNSTATUS" ColumnName="ASSIGNSTATUS" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
+                <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
+                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
+                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
+                <ScalarProperty Name="SEDSTATUS" ColumnName="SEDSTATUS" />
+                <ScalarProperty Name="CCSTATUS" ColumnName="CCSTATUS" />
+                <ScalarProperty Name="ARCHIVE" ColumnName="ARCHIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="WMS_USER_TOKEN">
             <EntityTypeMapping TypeName="NAVWMSModel.WMS_USER_TOKEN">
               <MappingFragment StoreEntitySet="WMS_USER_TOKEN">
@@ -1426,12 +2315,11 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
                 <ScalarProperty Name="SUBCLSNAME" ColumnName="SUBCLSNAME" />
                 <ScalarProperty Name="ROLLDESC" ColumnName="ROLLDESC" />
                 <ScalarProperty Name="ROLLID" ColumnName="ROLLID" />
-                <ScalarProperty Name="Expr1" ColumnName="Expr1" />
                 <ScalarProperty Name="CLSID" ColumnName="CLSID" />
-                <ScalarProperty Name="SUBCLSID" ColumnName="SUBCLSID" />
                 <ScalarProperty Name="SUBCLSSTATUS" ColumnName="SUBCLSSTATUS" />
                 <ScalarProperty Name="ROLLSTATUS" ColumnName="ROLLSTATUS" />
                 <ScalarProperty Name="USERSTATUS" ColumnName="USERSTATUS" />
+                <ScalarProperty Name="SUBCLASSID" ColumnName="SUBCLASSID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1457,9 +2345,9 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="CC_DOCLIST_CONFIRM_1" FunctionName="NAVWMSModel.Store.CC_DOCLIST_CONFIRM_1">
+          <FunctionImportMapping FunctionImportName="CC_DOCLIST_CONFIRM_2" FunctionName="NAVWMSModel.Store.CC_DOCLIST_CONFIRM_2">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="NAVWMSModel.CC_DOCLIST_CONFIRM_1_Result">
+              <ComplexTypeMapping TypeName="NAVWMSModel.CC_DOCLIST_CONFIRM_2_Result">
                 <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
                 <ScalarProperty Name="CCNO" ColumnName="CCNO" />
                 <ScalarProperty Name="ZONEBIN" ColumnName="ZONEBIN" />
@@ -1497,6 +2385,21 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PIK_DOCLIST_CONFIRM_ORIGINAL" FunctionName="NAVWMSModel.Store.PIK_DOCLIST_CONFIRM_ORIGINAL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.PIK_DOCLIST_CONFIRM_ORIGINAL_Result">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="PICKNO" ColumnName="PICKNO" />
+                <ScalarProperty Name="ZONEBIN" ColumnName="ZONEBIN" />
+                <ScalarProperty Name="USERID" ColumnName="USERID" />
+                <ScalarProperty Name="TOTQTY" ColumnName="TOTQTY" />
+                <ScalarProperty Name="PICKQTY" ColumnName="PICKQTY" />
+                <ScalarProperty Name="QTY" ColumnName="QTY" />
+                <ScalarProperty Name="PICKSTATUS" ColumnName="PICKSTATUS" />
+                <ScalarProperty Name="MYACT" ColumnName="MYACT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="PTA_DOCLIST_CONFIRM" FunctionName="NAVWMSModel.Store.PTA_DOCLIST_CONFIRM">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NAVWMSModel.PTA_DOCLIST_CONFIRM_Result">
@@ -1516,16 +2419,17 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             <ResultMapping>
               <ComplexTypeMapping TypeName="NAVWMSModel.TEST_DOCLIST_Result">
                 <ScalarProperty Name="SRNO" ColumnName="SRNO" />
+                <ScalarProperty Name="TRANSDATE" ColumnName="TRANSDATE" />
                 <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
                 <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
                 <ScalarProperty Name="CCNO" ColumnName="CCNO" />
-                <ScalarProperty Name="ZONEID" ColumnName="ZONEID" />
-                <ScalarProperty Name="BINNO" ColumnName="BINNO" />
                 <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
                 <ScalarProperty Name="F_ZONEID" ColumnName="F_ZONEID" />
                 <ScalarProperty Name="F_BINNO" ColumnName="F_BINNO" />
+                <ScalarProperty Name="T_ZONEID" ColumnName="T_ZONEID" />
+                <ScalarProperty Name="T_BINNO" ColumnName="T_BINNO" />
                 <ScalarProperty Name="USERID" ColumnName="USERID" />
-                <ScalarProperty Name="MATCHSTATUS" ColumnName="MATCHSTATUS" />
+                <ScalarProperty Name="PNA" ColumnName="PNA" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1556,6 +2460,7 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="USER_TOKEN_CHECK" FunctionName="NAVWMSModel.Store.USER_TOKEN_CHECK" />
+          <FunctionImportMapping FunctionImportName="WMS_DBAPART" FunctionName="NAVWMSModel.Store.WMS_DBAPART" />
           <FunctionImportMapping FunctionImportName="WMS_DESKTOP" FunctionName="NAVWMSModel.Store.WMS_DESKTOP">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NAVWMSModel.WMS_DESKTOP_Result">
@@ -1569,6 +2474,18 @@ warning 6002: The table/view 'NAVWMS.dbo.VW_USER' does not have a primary key de
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="WMS_NAVDATA_PULL" FunctionName="NAVWMSModel.Store.WMS_NAVDATA_PULL" />
+          <FunctionImportMapping FunctionImportName="WMS_NAVDATA_PUSH" FunctionName="NAVWMSModel.Store.WMS_NAVDATA_PUSH">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NAVWMSModel.WMS_NAVDATA_PUSH_Result">
+                <ScalarProperty Name="DOCNO" ColumnName="DOCNO" />
+                <ScalarProperty Name="CCNO" ColumnName="CCNO" />
+                <ScalarProperty Name="WAREHOUSENO" ColumnName="WAREHOUSENO" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="ITEMNO" ColumnName="ITEMNO" />
+                <ScalarProperty Name="SERIALNO" ColumnName="SERIALNO" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

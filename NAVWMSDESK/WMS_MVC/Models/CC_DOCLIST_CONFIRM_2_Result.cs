@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAVWMSDESK.Models
+namespace WMS_MVC.Models
 {
     using System;
     
-    public partial class CC_DOCLIST_CONFIRM_1_Result
+    public partial class CC_DOCLIST_CONFIRM_2_Result
     {
         public string DOCNO { get; set; }
         public string CCNO { get; set; }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAVWMSDESK.Models
+namespace WMS_MVC.Models
 {
     using System;
     using System.Collections.Generic;
@@ -15,15 +15,16 @@ namespace NAVWMSDESK.Models
     public partial class WMS_CC_SCAN
     {
         public decimal SRNO { get; set; }
+        public Nullable<System.DateTime> TRANSDATE { get; set; }
         public string WAREHOUSENO { get; set; }
         public string DOCNO { get; set; }
         public string CCNO { get; set; }
-        public string ZONEID { get; set; }
-        public string BINNO { get; set; }
         public string BARCODE { get; set; }
         public string F_ZONEID { get; set; }
         public string F_BINNO { get; set; }
+        public string T_ZONEID { get; set; }
+        public string T_BINNO { get; set; }
         public Nullable<int> USERID { get; set; }
-        public Nullable<int> MATCHSTATUS { get; set; }
+        public Nullable<int> PNA { get; set; }
     }
 }

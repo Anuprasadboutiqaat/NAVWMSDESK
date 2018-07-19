@@ -31,7 +31,7 @@ function getActualDate() {
     var day = addZero(d.getDate());
     var month = addZero(d.getMonth() + 1);
     var year = addZero(d.getFullYear());
-    return month + "/" + day + "/" + year;
+    return month + "-" + day + "-" + year;
 }
 
 function custgetActualDate(cust) {
@@ -43,7 +43,7 @@ function custgetActualDate(cust) {
     var mm = addZero(someDate.getMonth() + 1);
     var y = addZero(someDate.getFullYear());
 
-    var someFormattedDate = mm + '/' + dd + '/' + y;
+    var someFormattedDate = mm + '-' + dd + '-' + y;
     return someFormattedDate;
 }
 

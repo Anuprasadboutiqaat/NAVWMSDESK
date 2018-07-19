@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAVWMSDESK.Models
+namespace WMS_MVC.Models
 {
     using System;
     using System.Collections.Generic;
@@ -23,6 +23,7 @@ namespace NAVWMSDESK.Models
         public string BARCODE { get; set; }
         public string ITEMNO { get; set; }
         public string SERIALNO { get; set; }
+        public Nullable<int> QTY { get; set; }
         public string ITEMDESC { get; set; }
         public Nullable<int> USERID { get; set; }
         public Nullable<System.DateTime> PICKDATE { get; set; }
@@ -30,6 +31,8 @@ namespace NAVWMSDESK.Models
         public Nullable<System.DateTime> INTEGRATED { get; set; }
         public string WAREHOUSENO { get; set; }
         public Nullable<int> MOVSTATUS { get; set; }
-        public Nullable<bool> ARCHIVE { get; set; }
+        public Nullable<int> DOCSTATUS { get; set; }
+        public Nullable<int> INTSTATUS { get; set; }
+        public Nullable<int> ARCHIVE { get; set; }
     }
 }

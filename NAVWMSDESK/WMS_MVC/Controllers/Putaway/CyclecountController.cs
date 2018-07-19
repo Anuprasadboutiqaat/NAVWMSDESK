@@ -18,6 +18,7 @@ using NAVWMSDESK.ViewModel;
 using NAVWMSDESK.ViewModel.Cyclecount;
 using System.Net;
 using Newtonsoft.Json;
+using WMS_MVC.Models;
 
 namespace NAVWMSDESK.Controllers.Cyclecount
 {
@@ -258,8 +259,8 @@ namespace NAVWMSDESK.Controllers.Cyclecount
                             
                             dt.EXECUTENONQUERY_PROCE_FUNCT(CMD);
                             CMD.Parameters.Clear();
-                            //string SQL = "INSERT INTO WMS_CC_REQUEST (DOCDATE,ZONEID,BINNO,USERID,ACHIVE) VALUES('" + header.DATE1 + "','" + header.ZONEID + "','" + text + "','" + header.USERHOLD + "','0')";
-                            //dt.EXECUTENONQUERY_FUNCT(SQL);
+                            string SQL = "INSERT INTO WMS_CC_REQUEST (DOCDATE,ZONEID,BINNO,USERID,ACHIVE) VALUES('" + header.DATE1 + "','" + header.ZONEID + "','" + text + "','" + header.USERHOLD + "','0')";
+                            dt.EXECUTENONQUERY_FUNCT(SQL);
                             flag = 1;
                         }
                     }
@@ -283,8 +284,8 @@ namespace NAVWMSDESK.Controllers.Cyclecount
 
                             dt.EXECUTENONQUERY_PROCE_FUNCT(CMD);
                             CMD.Parameters.Clear();
-                            //string SQL = "INSERT INTO WMS_CC_REQUEST (DOCDATE,ZONEID,BINNO,USERID,ACHIVE) VALUES('" + header.DATE1 + "','" + text + "','NULL','" + header.USERHOLD + "','0')";
-                            //dt.EXECUTENONQUERY_FUNCT(SQL);
+                            string SQL = "INSERT INTO WMS_CC_REQUEST (DOCDATE,ZONEID,BINNO,USERID,ACHIVE) VALUES('" + header.DATE1 + "','" + text + "','NULL','" + header.USERHOLD + "','0')";
+                            dt.EXECUTENONQUERY_FUNCT(SQL);
                             flag = 2;
                         }
 
@@ -298,7 +299,8 @@ namespace NAVWMSDESK.Controllers.Cyclecount
                     
                     DataTable RESULT1 = dt.EXECUTEDATATABLE_FUNCT("SELECT DOCNO,WAREHOUSENO	FROM WMS_CC_REQUEST WHERE DOCNO='"+ DOCNO + "' and WAREHOUSENO='" + header.WHNO + "' group by DOCNO,WAREHOUSENO");
                     P.REQUESTID = RESULT1.Rows[0]["DOCNO"].ToString();
-                    P.LOCATION = RESULT1.Rows[0]["WAREHOUSENO"].ToString();
+                    //P.LOCATION = RESULT1.Rows[0]["WAREHOUSENO"].ToString();
+                    P.LOCATION = "KW";
                     
                     DataTable RESULTDET = dt.EXECUTEDATATABLE_FUNCT("SELECT ZONEID	FROM WMS_CC_REQUEST WHERE DOCNO='" + DOCNO + "' and WAREHOUSENO='" + header.WHNO + "'");
                     List<lstZONEID> PTDTL = new List<lstZONEID>();

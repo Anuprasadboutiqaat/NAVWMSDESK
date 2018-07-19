@@ -4,28 +4,37 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="77e58f52668f400baabe54997224363a" Name="Diagram1">
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_CC_REQUEST" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_CC_SCAN" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_CLASS_EDITOR" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_CYCLECOUNT" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_DOC_REGISTER" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_MOVE_DETAIL" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_MOVE_HEAD" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_PICKING" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_PUTAWAY" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_ROLL_EDITOR" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_STOCKMOVEMENT" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_STORE_EDITOR" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_SUBCLASS_EDITOR" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_SUBROLL_EDITOR" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_USER_EDITOR" Width="1.5" PointX="4.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_USER_TASKS" Width="1.5" PointX="10.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_ZONE_EDITOR" Width="1.5" PointX="10.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.WMS_USER_TOKEN" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.VW_CC1_TEMP" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.VW_CLASS_SUBCLASS" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NAVWMSModel.VW_USER" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
+      <Diagram DiagramId="601d7457a1d641ff95b63b9f31dd4af4" Name="Diagram1">
+        <EntityTypeShape EntityType="NAVWMSModel.ARCHIVE_CC_REQUEST" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.ARCHIVE_PICKING" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.ARCHIVE_PUTAWAY" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.ERRORMGMT_API" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_CC_REQUEST" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_CC_SCAN" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_CLASS_EDITOR" Width="1.5" PointX="2.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_DOC_REGISTER" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_MOVE_DETAIL" Width="1.5" PointX="8.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_MOVE_HEAD" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_PICKING" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_PUTAWAY" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_ROLL_EDITOR" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_STOCKMOVEMENT" Width="1.5" PointX="10.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_STORE_EDITOR" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_SUBCLASS_EDITOR" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_SUBROLL_EDITOR" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_USER_EDITOR" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_USER_TASKS" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_ZONE_EDITOR" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.ARCHIVE_CC_SCAN" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.ARCHIVE_CYCLECOUNT" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.ARCHIVE_MOVE_DETAIL" Width="1.5" PointX="14.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.ARCHIVE_MOVE_HEAD" Width="1.5" PointX="10.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.CC_TEST" Width="1.5" PointX="12.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_CYCLECOUNT" Width="1.5" PointX="14.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.WMS_USER_TOKEN" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.VW_CC1_TEMP" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.VW_CLASS_SUBCLASS" Width="1.5" PointX="2.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NAVWMSModel.VW_USER" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

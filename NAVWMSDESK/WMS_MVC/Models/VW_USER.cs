@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAVWMSDESK.Models
+namespace WMS_MVC.Models
 {
     using System;
     using System.Collections.Generic;
@@ -21,11 +21,10 @@ namespace NAVWMSDESK.Models
         public string SUBCLSNAME { get; set; }
         public string ROLLDESC { get; set; }
         public Nullable<int> ROLLID { get; set; }
-        public int Expr1 { get; set; }
         public Nullable<int> CLSID { get; set; }
-        public Nullable<int> SUBCLSID { get; set; }
         public Nullable<int> SUBCLSSTATUS { get; set; }
         public Nullable<int> ROLLSTATUS { get; set; }
         public Nullable<int> USERSTATUS { get; set; }
+        public Nullable<int> SUBCLASSID { get; set; }
     }
 }

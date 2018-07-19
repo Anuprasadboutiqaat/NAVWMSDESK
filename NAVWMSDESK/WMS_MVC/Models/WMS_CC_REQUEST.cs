@@ -7,18 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAVWMSDESK.Models
+namespace WMS_MVC.Models
 {
     using System;
     using System.Collections.Generic;
     
     public partial class WMS_CC_REQUEST
     {
-        public decimal DOCNO { get; set; }
+        public decimal SRNO { get; set; }
+        public string DOCNO { get; set; }
         public Nullable<System.DateTime> DOCDATE { get; set; }
+        public string WAREHOUSENO { get; set; }
         public string ZONEID { get; set; }
         public string BINNO { get; set; }
         public Nullable<int> USERID { get; set; }
+        public Nullable<System.DateTime> FDATE { get; set; }
+        public Nullable<System.DateTime> TDATE { get; set; }
+        public string REMARKS { get; set; }
+        public Nullable<int> CLOSEDBY { get; set; }
+        public Nullable<int> STATUS { get; set; }
         public Nullable<int> ACHIVE { get; set; }
     }
 }

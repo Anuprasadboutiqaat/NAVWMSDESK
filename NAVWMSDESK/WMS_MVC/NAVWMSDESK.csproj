@@ -209,10 +209,37 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CC_DOCLIST_CONFIRM_1_Result.cs">
+    <Compile Include="Models\ARCHIVE_CC_REQUEST.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ARCHIVE_CC_SCAN.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ARCHIVE_CYCLECOUNT.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ARCHIVE_MOVE_DETAIL.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ARCHIVE_MOVE_HEAD.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ARCHIVE_PICKING.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ARCHIVE_PUTAWAY.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CC_DOCLIST_CONFIRM_2_Result.cs">
       <DependentUpon>WMS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CC_DOCLIST_CONFIRM_Result.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CC_TEST.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ERRORMGMT_API.cs">
       <DependentUpon>WMS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FN_ListToTable_Result.cs">
@@ -220,6 +247,9 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\NAV_INTEGRATION_Result.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PIK_DOCLIST_CONFIRM_ORIGINAL_Result.cs">
       <DependentUpon>WMS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PIK_DOCLIST_CONFIRM_Result.cs">
@@ -283,6 +313,9 @@
       <DependentUpon>WMS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WMS_MOVE_HEAD.cs">
+      <DependentUpon>WMS.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WMS_NAVDATA_PUSH_Result.cs">
       <DependentUpon>WMS.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WMS_PICKING.cs">

@@ -15,6 +15,8 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using NAVWMSDESK.ViewModel.Movement;
 using NAVWMSDESK.Repository;
+using WMS_MVC.Models;
+
 namespace NAVWMSDESK.Controllers.Movement
 {
     public class MovementController : Controller

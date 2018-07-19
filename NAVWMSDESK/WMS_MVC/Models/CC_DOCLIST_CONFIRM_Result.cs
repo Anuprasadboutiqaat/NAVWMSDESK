@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NAVWMSDESK.Models
+namespace WMS_MVC.Models
 {
     using System;
     
@@ -17,7 +17,7 @@ namespace NAVWMSDESK.Models
         public string CCNO { get; set; }
         public string ZONEBIN { get; set; }
         public Nullable<int> USERID { get; set; }
-        public Nullable<double> TOTQTY { get; set; }
+        public Nullable<int> TOTQTY { get; set; }
         public Nullable<int> CCQTY { get; set; }
         public string QTY { get; set; }
         public Nullable<int> CCSTATUS { get; set; }
